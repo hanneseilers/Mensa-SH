@@ -1,0 +1,15 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Android APK #
+*.apk
+
+# bin folder #
+/bin
+
+# allow libs folder #
+!/libs
