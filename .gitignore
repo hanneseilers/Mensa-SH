@@ -10,3 +10,6 @@
 
 # bin folder #
 /bin
+
+# allow libs folder #
+!/libs
