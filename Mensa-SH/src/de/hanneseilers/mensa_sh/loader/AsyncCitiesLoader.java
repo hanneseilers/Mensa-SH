@@ -34,11 +34,11 @@ public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 	 */
 	@Override
 	protected void onPostExecute(List<String> result) {
-		Menue.adapterCity.clear();
+		ctx.clearCitiesAdapter();
 		for(String c : result){
-			Menue.adapterCity.add( c );
+			ctx.addCity(c);
 		}
-		Menue.adapterCity.notifyDataSetChanged();
+		ctx.notifyCityAdapter();
 		ctx.setLoadingProgress(LoadingProgress.CITIES_LOADED);
 	}
 

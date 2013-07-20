@@ -29,15 +29,15 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 	 */
 	@Override
 	protected void onPostExecute(List<Mensa> result) {
-		Menue.locations = result;
-		int count = Menue.adapterMensa.getCount();
+		ctx.setLocations(result);
+		int count = ctx.countMensenInList();
 		
 		// get mensa names
-		Menue.adapterMensa.clear();
+		ctx.clearMensaAdapter();
 		for(Mensa m : result){
-			Menue.adapterMensa.add( m.getName() );
+			ctx.addMensa( m.getName() );
 		}
-		Menue.adapterMensa.notifyDataSetChanged();
+		ctx.notifyMensaAdapter();
 		ctx.setLoadingProgress(LoadingProgress.MENSEN_LOADED);
 		
 		// check if to programmaticaly load menue

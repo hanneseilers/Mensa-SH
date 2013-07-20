@@ -21,12 +21,12 @@ import android.widget.Spinner;
 
 public class Menue extends Activity implements OnItemSelectedListener {
 	
-	public static ArrayAdapter<String> adapterCity;
-	public static ArrayAdapter<String> adapterMensa;
-	public static WebView webView;
+	private static ArrayAdapter<String> adapterCity;
+	private static ArrayAdapter<String> adapterMensa;
+	private static WebView webView;
 	private static LinearLayout layoutLoading;
 	
-	public static List<Mensa> locations = new ArrayList<Mensa>();
+	private List<Mensa> locations = new ArrayList<Mensa>();
 	
 	private Spinner spinnerCity;
 	private Spinner spinnerMensa;
@@ -72,6 +72,68 @@ public class Menue extends Activity implements OnItemSelectedListener {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menue, menu);
 		return true;
+	}
+	
+	/**
+	 * Addas a city to list
+	 * @param aName
+	 */
+	public void addCity(String aName){
+		adapterCity.add(aName);
+	}
+	
+	/**
+	 * Clears city adapter
+	 */
+	public void clearCitiesAdapter(){
+		adapterCity.clear();
+	}
+	
+	/**
+	 * Notifies city adapter about change
+	 */
+	public void notifyCityAdapter(){
+		adapterCity.notifyDataSetChanged();
+	}
+	
+	
+	/**
+	 * Adds a mensa to list
+	 * @param aName
+	 */
+	public void addMensa(String aName){
+		adapterMensa.add( aName );
+	}
+	
+	/**
+	 * Clears mensa adapter
+	 */
+	public void clearMensaAdapter(){
+		adapterMensa.clear();
+	}
+	
+	/**
+	 * Notifies mensa adapter about a change
+	 */
+	public void notifyMensaAdapter(){
+		adapterMensa.notifyDataSetChanged();
+	}
+	
+	/**
+	 * @return Number of mensen in list
+	 */
+	public int countMensenInList(){
+		return adapterMensa.getCount();
+	}
+	
+	
+	/**
+	 * Loads a website as html plain text string
+	 * @param html
+	 */
+	public void loadWebsiteHtml(String html){
+		webView.loadData(html, "text/html", "UTF-8");
+		webView.reload();
 	}
 	
 	/**
@@ -147,5 +209,21 @@ public class Menue extends Activity implements OnItemSelectedListener {
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {}
+
+
+	/**
+	 * @return the locations
+	 */
+	public List<Mensa> getLocations() {
+		return locations;
+	}
+
+
+	/**
+	 * @param locations the locations to set
+	 */
+	public void setLocations(List<Mensa> locations) {
+		this.locations = locations;
+	}
 
 }

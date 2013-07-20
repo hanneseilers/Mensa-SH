@@ -21,7 +21,7 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 	protected String doInBackground(String... params) {
 		
 		// find mensa with params name
-		for( Mensa m : Menue.locations ){
+		for( Mensa m : ctx.getLocations() ){
 			if( m.getName().equals(params[0]) ){
 				return m.getMenueAsHtml();
 			}
@@ -42,8 +42,7 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 		}
 		
 		// load menue
-		Menue.webView.loadData(result, "text/html", "UTF-8");
-		Menue.webView.reload();
+		ctx.loadWebsiteHtml(result);
 		ctx.setLoadingProgress(LoadingProgress.MENUE_LOADED);
 	}
 	
