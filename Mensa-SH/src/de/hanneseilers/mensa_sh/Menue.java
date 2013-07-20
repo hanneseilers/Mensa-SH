@@ -3,6 +3,7 @@ package de.hanneseilers.mensa_sh;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hanneseilers.mensa_sh.enums.LoadingProgress;
 import de.hanneseilers.mensa_sh.loader.AsyncCitiesLoader;
 import de.hanneseilers.mensa_sh.loader.AsyncMensenLoader;
 import de.hanneseilers.mensa_sh.loader.AsyncMenueLoader;
@@ -15,6 +16,7 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 public class Menue extends Activity implements OnItemSelectedListener {
@@ -22,11 +24,14 @@ public class Menue extends Activity implements OnItemSelectedListener {
 	public static ArrayAdapter<String> adapterCity;
 	public static ArrayAdapter<String> adapterMensa;
 	public static WebView webView;
+	private static LinearLayout layoutLoading;
 	
 	public static List<Mensa> locations = new ArrayList<Mensa>();
 	
 	private Spinner spinnerCity;
 	private Spinner spinnerMensa;
+	
+	private LoadingProgress progress = LoadingProgress.INIT;
 	
 	
 	@Override
@@ -41,6 +46,7 @@ public class Menue extends Activity implements OnItemSelectedListener {
 		webView.getSettings().setLoadWithOverviewMode(true);
 		webView.getSettings().setUseWideViewPort(true);
 		webView.getSettings().setBuiltInZoomControls(true);
+		layoutLoading = (LinearLayout) findViewById(R.id.layout_loading);
 		
 		// add resources to spinnes
 		adapterCity = new ArrayAdapter<String>(
@@ -69,9 +75,25 @@ public class Menue extends Activity implements OnItemSelectedListener {
 	}
 	
 	/**
+	 * Sets the loading progress
+	 * @param aProgress
+	 */
+	public void setLoadingProgress(LoadingProgress aProgress){
+		progress = aProgress;
+		if( progress == LoadingProgress.MENUE_LOADED ){
+			layoutLoading.setVisibility( View.GONE );
+		}
+		else {
+			layoutLoading.setVisibility( View.VISIBLE );
+		}
+	}
+	
+	
+	/**
 	 * Adds cities to spinner list
 	 */
 	private void addCities(){
+		setLoadingProgress(LoadingProgress.INIT);
 		new AsyncCitiesLoader(this).execute();
 	}
 	
@@ -80,6 +102,7 @@ public class Menue extends Activity implements OnItemSelectedListener {
 	 * @param city
 	 */
 	private void addMensen(String city){
+		setLoadingProgress(LoadingProgress.INIT);
 		new AsyncMensenLoader(this).execute(city);
 	}
 	
@@ -88,6 +111,7 @@ public class Menue extends Activity implements OnItemSelectedListener {
 	 * @param mensa
 	 */
 	private void loadMenue(String mensa){
+		setLoadingProgress(LoadingProgress.INIT);
 		new AsyncMenueLoader(this).execute(mensa);
 	}
 	
@@ -96,7 +120,7 @@ public class Menue extends Activity implements OnItemSelectedListener {
 	 */
 	public void loadFirstMensaMenue(){
 		if( spinnerMensa.getCount() > 0 ){
-			System.out.println(">selected first item");
+			setLoadingProgress(LoadingProgress.INIT);
 			spinnerMensa.setSelection(0);
 			loadMenue( spinnerMensa.getItemAtPosition(0).toString() );
 		}

@@ -3,9 +3,8 @@ package de.hanneseilers.mensa_sh.loader;
 import java.util.List;
 
 import de.hanneseilers.mensa_sh.Menue;
+import de.hanneseilers.mensa_sh.enums.LoadingProgress;
 import de.mensa.sh.core.Mensa;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 
 /**
@@ -13,22 +12,13 @@ import android.os.AsyncTask;
  * @author hannes
  *
  */
-public class AsyncCitiesLoader extends AsyncTask<Void, Void, List<String>> {
+public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 	
-	private ProgressDialog progressBar;
-	private Context ctx;
+	private Menue ctx;
 	
-	public AsyncCitiesLoader(Context ctx){
+	public AsyncCitiesLoader(Menue ctx){
 		super();
 		this.ctx = ctx;
-	}
-	
-	@Override
-	protected void onPreExecute() {	
-		progressBar = ProgressDialog.show(ctx, "loading", "Lade verfügbare Städe");
-		progressBar.setCancelable(true);
-				
-        super.onPreExecute();
 	}
 	
 	/**
@@ -36,7 +26,6 @@ public class AsyncCitiesLoader extends AsyncTask<Void, Void, List<String>> {
 	 */
 	@Override
 	protected List<String> doInBackground(Void... params) {
-		System.out.println("load cities");
 		return Mensa.getCities();
 	}
 	
@@ -50,8 +39,7 @@ public class AsyncCitiesLoader extends AsyncTask<Void, Void, List<String>> {
 			Menue.adapterCity.add( c );
 		}
 		Menue.adapterCity.notifyDataSetChanged();
-		
-		progressBar.dismiss();
+		ctx.setLoadingProgress(LoadingProgress.CITIES_LOADED);
 	}
 
 }

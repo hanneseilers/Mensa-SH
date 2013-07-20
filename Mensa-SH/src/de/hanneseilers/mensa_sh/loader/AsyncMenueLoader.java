@@ -1,27 +1,17 @@
 package de.hanneseilers.mensa_sh.loader;
 
 import de.hanneseilers.mensa_sh.Menue;
+import de.hanneseilers.mensa_sh.enums.LoadingProgress;
 import de.mensa.sh.core.Mensa;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 
-public class AsyncMenueLoader extends AsyncTask<String, Void, String> {
+public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 
-	private ProgressDialog progressBar;
-	private Context ctx;
+	private Menue ctx;
 	
-	public AsyncMenueLoader(Context ctx){
+	public AsyncMenueLoader(Menue ctx){
 		super();
 		this.ctx = ctx;
-	}
-	
-	@Override
-	protected void onPreExecute() {	
-		progressBar = ProgressDialog.show(ctx, "loading", "Lade Speiseplan");
-		progressBar.setCancelable(true);
-				
-        super.onPreExecute();
 	}
 	
 	/**
@@ -29,8 +19,6 @@ public class AsyncMenueLoader extends AsyncTask<String, Void, String> {
 	 */
 	@Override
 	protected String doInBackground(String... params) {
-		
-		System.out.println("load menue of mensa " + params[0]);
 		
 		// find mensa with params name
 		for( Mensa m : Menue.locations ){
@@ -56,8 +44,7 @@ public class AsyncMenueLoader extends AsyncTask<String, Void, String> {
 		// load menue
 		Menue.webView.loadData(result, "text/html", "UTF-8");
 		Menue.webView.reload();
-		
-		progressBar.dismiss();
+		ctx.setLoadingProgress(LoadingProgress.MENUE_LOADED);
 	}
 	
 }

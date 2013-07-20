@@ -24,17 +24,21 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000a;
-        public static final int layout_city=0x7f080003;
+        public static final int action_settings=0x7f08000e;
+        public static final int layout_city=0x7f080007;
+        public static final int layout_loading=0x7f080002;
         public static final int layout_main=0x7f080001;
-        public static final int layout_mensa=0x7f080006;
+        public static final int layout_mensa=0x7f08000a;
         public static final int layout_root=0x7f080000;
-        public static final int layout_selection=0x7f080002;
-        public static final int lstCity=0x7f080005;
-        public static final int lstMensa=0x7f080008;
-        public static final int txtCity=0x7f080004;
-        public static final int txtMensa=0x7f080007;
-        public static final int webView=0x7f080009;
+        public static final int layout_selection=0x7f080006;
+        public static final int lstCity=0x7f080009;
+        public static final int lstMensa=0x7f08000c;
+        public static final int pgbLoading=0x7f080003;
+        public static final int spacer=0x7f080004;
+        public static final int textView1=0x7f080005;
+        public static final int txtCity=0x7f080008;
+        public static final int txtMensa=0x7f08000b;
+        public static final int webView=0x7f08000d;
     }
     public static final class layout {
         public static final int activity_menue=0x7f030000;
@@ -46,6 +50,7 @@ public final class R {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int city=0x7f050002;
+        public static final int loading=0x7f050004;
         public static final int mensa=0x7f050003;
     }
     public static final class style {
