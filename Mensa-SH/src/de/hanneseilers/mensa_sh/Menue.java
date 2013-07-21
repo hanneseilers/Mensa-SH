@@ -21,10 +21,10 @@ import android.widget.Spinner;
 
 public class Menue extends Activity implements OnItemSelectedListener {
 	
-	private static ArrayAdapter<String> adapterCity;
-	private static ArrayAdapter<String> adapterMensa;
-	private static WebView webView;
-	private static LinearLayout layoutLoading;
+	private ArrayAdapter<String> adapterCity;
+	private ArrayAdapter<String> adapterMensa;
+	private WebView webView;
+	private LinearLayout layoutLoading;
 	
 	private List<Mensa> locations = new ArrayList<Mensa>();
 	
