@@ -84,6 +84,7 @@ public class Main_Activity extends Activity implements OnItemSelectedListener {
 			startActivity(new Intent(this, SettingsPreferenceActivity.class));
 			break;
 		case R.id.action_info:
+			startActivity( new Intent(this, Info_Activity.class) );
 			break;
         default:
             return super.onOptionsItemSelected(item);

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference android:title="@string/txt_save_last_mensa" android:defaultValue="true" android:key="SAVE_LAST_MENSA"/>
+    <ListPreference android:title="@string/txt_cache_hold_time_title" android:entries="@array/cache_hold_time_entries" android:key="CACHE_HOLD_TIME" android:entryValues="@array/cache_hold_time_values" android:summary="@string/summary_cache_hold_time" android:defaultValue="@string/txt_cache_hold_time_default"/>
+</PreferenceScreen>

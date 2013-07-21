@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="SettingsPreferenceActivity" android:label="@string/txt_settings"></activity>
+        <activity
+            android:name="de.hanneseilers.mensa_sh.SettingsPreferenceActivity"
+            android:label="@string/txt_settings" >
+        </activity>
+        <activity
+            android:name="de.hanneseilers.mensa_sh.Info_Activity"
+            android:label="@string/title_activity_info" >
+        </activity>
     </application>
 
 </manifest>
