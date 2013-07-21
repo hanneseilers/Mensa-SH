@@ -1,16 +1,16 @@
 package de.hanneseilers.mensa_sh.loader;
 
 import de.hanneseilers.mensa_sh.CacheManager;
-import de.hanneseilers.mensa_sh.Menue;
+import de.hanneseilers.mensa_sh.Main_Activity;
 import de.hanneseilers.mensa_sh.enums.LoadingProgress;
 import de.mensa.sh.core.Mensa;
 import android.os.AsyncTask;
 
 public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 
-	private Menue ctx;
+	private Main_Activity ctx;
 	
-	public AsyncMenueLoader(Menue ctx){
+	public AsyncMenueLoader(Main_Activity ctx){
 		super();
 		this.ctx = ctx;
 	}

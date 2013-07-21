@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hanneseilers.mensa_sh.CacheManager;
-import de.hanneseilers.mensa_sh.Menue;
+import de.hanneseilers.mensa_sh.Main_Activity;
 import de.hanneseilers.mensa_sh.enums.LoadingProgress;
 import de.mensa.sh.core.Mensa;
 import android.os.AsyncTask;
 
 public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 
-	private Menue ctx;
+	private Main_Activity ctx;
 	
-	public AsyncMensenLoader(Menue ctx){
+	public AsyncMensenLoader(Main_Activity ctx){
 		super();
 		this.ctx = ctx;
 	}

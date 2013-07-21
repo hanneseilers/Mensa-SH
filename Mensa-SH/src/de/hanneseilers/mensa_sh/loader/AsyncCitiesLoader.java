@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hanneseilers.mensa_sh.CacheManager;
-import de.hanneseilers.mensa_sh.Menue;
+import de.hanneseilers.mensa_sh.Main_Activity;
 import de.hanneseilers.mensa_sh.enums.LoadingProgress;
 import de.mensa.sh.core.Mensa;
 import android.os.AsyncTask;
@@ -16,9 +16,9 @@ import android.os.AsyncTask;
  */
 public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 	
-	private Menue ctx;
+	private Main_Activity ctx;
 	
-	public AsyncCitiesLoader(Menue ctx){
+	public AsyncCitiesLoader(Main_Activity ctx){
 		super();
 		this.ctx = ctx;
 	}

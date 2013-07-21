@@ -8,6 +8,10 @@
 package de.hanneseilers.mensa_sh;
 
 public final class R {
+    public static final class array {
+        public static final int cache_hold_time_entries=0x7f070000;
+        public static final int cache_hold_time_values=0x7f070001;
+    }
     public static final class attr {
     }
     public static final class dimen {
@@ -17,41 +21,47 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000e;
-        public static final int layout_city=0x7f080007;
-        public static final int layout_loading=0x7f080002;
-        public static final int layout_main=0x7f080001;
-        public static final int layout_mensa=0x7f08000a;
-        public static final int layout_root=0x7f080000;
-        public static final int layout_selection=0x7f080006;
-        public static final int lstCity=0x7f080009;
-        public static final int lstMensa=0x7f08000c;
-        public static final int pgbLoading=0x7f080003;
-        public static final int spacer=0x7f080004;
-        public static final int textView1=0x7f080005;
-        public static final int txtCity=0x7f080008;
-        public static final int txtMensa=0x7f08000b;
-        public static final int webView=0x7f08000d;
+        public static final int action_info=0x7f0a000f;
+        public static final int action_settings=0x7f0a000e;
+        public static final int layout_city=0x7f0a0007;
+        public static final int layout_loading=0x7f0a0002;
+        public static final int layout_main=0x7f0a0001;
+        public static final int layout_mensa=0x7f0a000a;
+        public static final int layout_root=0x7f0a0000;
+        public static final int layout_selection=0x7f0a0006;
+        public static final int lstCity=0x7f0a0009;
+        public static final int lstMensa=0x7f0a000c;
+        public static final int pgbLoading=0x7f0a0003;
+        public static final int spacer=0x7f0a0004;
+        public static final int textView1=0x7f0a0005;
+        public static final int txtCity=0x7f0a0008;
+        public static final int txtMensa=0x7f0a000b;
+        public static final int webView=0x7f0a000d;
     }
     public static final class layout {
-        public static final int activity_menue=0x7f030000;
+        public static final int main_activity=0x7f030000;
     }
     public static final class menu {
-        public static final int menue=0x7f070000;
+        public static final int menue=0x7f090000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int app_name=0x7f050000;
-        public static final int city=0x7f050002;
-        public static final int loading=0x7f050004;
-        public static final int mensa=0x7f050003;
+        public static final int app_name=0x7f060000;
+        public static final int summary_cache_hold_time=0x7f060008;
+        public static final int txt_cache_hold_time_default=0x7f060009;
+        public static final int txt_cache_hold_time_title=0x7f060006;
+        public static final int txt_city=0x7f060001;
+        public static final int txt_info=0x7f060007;
+        public static final int txt_loading=0x7f060003;
+        public static final int txt_mensa=0x7f060002;
+        public static final int txt_save_last_mensa=0x7f060004;
+        public static final int txt_settings=0x7f060005;
     }
     public static final class style {
         /** 
@@ -75,10 +85,13 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f080001;
+    }
+    public static final class xml {
+        public static final int preferences=0x7f040000;
     }
 }

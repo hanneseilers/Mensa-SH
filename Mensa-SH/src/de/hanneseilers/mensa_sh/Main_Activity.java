@@ -10,7 +10,9 @@ import de.hanneseilers.mensa_sh.loader.AsyncMenueLoader;
 import de.mensa.sh.core.Mensa;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
@@ -19,7 +21,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-public class Menue extends Activity implements OnItemSelectedListener {
+public class Main_Activity extends Activity implements OnItemSelectedListener {
 	
 	private ArrayAdapter<String> adapterCity;
 	private ArrayAdapter<String> adapterMensa;
@@ -37,7 +39,7 @@ public class Menue extends Activity implements OnItemSelectedListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_menue);
+		setContentView(R.layout.main_activity);
 		
 		// get spinners and webview
 		spinnerCity = (Spinner) findViewById(R.id.lstCity);
@@ -62,7 +64,7 @@ public class Menue extends Activity implements OnItemSelectedListener {
 		addCities();
 		
 		spinnerCity.setOnItemSelectedListener(this);
-		spinnerMensa.setOnItemSelectedListener(this);		
+		spinnerMensa.setOnItemSelectedListener(this);
 		
 	}
 	
@@ -71,6 +73,22 @@ public class Menue extends Activity implements OnItemSelectedListener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menue, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection		
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			startActivity(new Intent(this, SettingsPreferenceActivity.class));
+			break;
+		case R.id.action_info:
+			break;
+        default:
+            return super.onOptionsItemSelected(item);
+		}
+		
 		return true;
 	}
 	

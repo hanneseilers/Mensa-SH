@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Menue" >
+    tools:context=".Main_Activity" >
 
     <LinearLayout
         android:id="@+id/layout_main"
@@ -37,10 +37,10 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/txtInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/loading"
+                android:text="@string/txt_loading"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
@@ -62,7 +62,7 @@
                     android:id="@+id/txtCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/city"
+                    android:text="@string/txt_city"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Spinner
@@ -70,7 +70,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="0dip"
                     android:layout_weight="1"
-                    android:prompt="@string/city" />
+                    android:prompt="@string/txt_city" />
 
             </LinearLayout>
 
@@ -85,7 +85,7 @@
                     android:id="@+id/txtMensa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mensa"
+                    android:text="@string/txt_mensa"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Spinner
@@ -93,7 +93,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="0dip"
                     android:layout_weight="1"
-                    android:prompt="@string/mensa" />
+                    android:prompt="@string/txt_mensa" />
 
             </LinearLayout>
 

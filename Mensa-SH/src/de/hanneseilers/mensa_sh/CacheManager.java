@@ -2,6 +2,7 @@ package de.hanneseilers.mensa_sh;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 /**
  * Manager class for file caching
@@ -24,20 +27,29 @@ public class CacheManager {
 	 */
 	public static String readCachedFile(Context ctx, String filename){
 		try{
+			
+			SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
+			long cacheHoldTime = Long.parseLong(( sharedPref.getString("CACHE_HOLD_TIME", "-1") )) * 60 * 60 * 100;
+			
 			// try to open file
-			FileInputStream fIn = ctx.openFileInput(filename);
-			DataInputStream in = new DataInputStream(fIn);
+			FileInputStream fin = ctx.openFileInput(filename);
+			DataInputStream in = new DataInputStream(fin);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			
+			File f = ctx.getFileStreamPath(filename);
+			Long timeDiff = System.currentTimeMillis() - f.lastModified();
 			
 			// read lines of file
 			String ret = "";
 			String line;
-			if( in != null ){
+			if( (in != null) && (timeDiff < cacheHoldTime) ){
+				System.out.println("> loading cached file " + filename);
 				while( (line = br.readLine()) != null ){
 					ret += line;
 				}
 				return ret;
 			}
+			System.out.println("> not not use cached file " + filename);
 			
 		} catch(Exception e){}
 		return null;
@@ -52,7 +64,7 @@ public class CacheManager {
 		FileOutputStream fos;
 		try {
 			fos = ctx.openFileOutput(filename, Context.MODE_PRIVATE);
-			fos.write(text.getBytes());
+			fos.write(text.getBytes());			
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {}
 	}
