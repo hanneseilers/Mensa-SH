@@ -33,7 +33,7 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 				}
 				
 				// set lunch time
-				ctx.getTxtLunchTime().setText( "Mittagessen: " + m.getLunchTime() );
+				ctx.setLunchTime(m.getLunchTime());
 				return ret;				
 			}
 		}

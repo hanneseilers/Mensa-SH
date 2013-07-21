@@ -177,6 +177,20 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 		}
 	}
 	
+	/**
+	 * Sets the lunchtime
+	 * @param lunchTime
+	 */
+	public void setLunchTime(String aLunchTime){
+		final String lunchTime = aLunchTime;
+		txtLunchTime.post( new Runnable() {			
+			@Override
+			public void run() {
+				txtLunchTime.setText( "Mittagessen: " + lunchTime );				
+			}
+		} );
+	}
+	
 	
 	/**
 	 * Adds cities to spinner list
@@ -300,14 +314,6 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 			CacheManager.writeChachedFile(this, AsyncCitiesLoader.cachedFileName, city);
 			CacheManager.writeChachedFile(this, AsyncMensenLoader.cachedFileName, mensa);
 		}
-	}
-
-
-	/**
-	 * @return the txtLunchTime
-	 */
-	public TextView getTxtLunchTime() {
-		return txtLunchTime;
 	}
 
 }
