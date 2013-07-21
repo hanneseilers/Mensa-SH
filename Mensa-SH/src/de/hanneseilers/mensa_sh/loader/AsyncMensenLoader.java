@@ -28,7 +28,7 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 		List<Mensa> retList = new ArrayList<Mensa>();
 
 				
-		if( (ret = CacheManager.readCachedFile(ctx, "cache_mensen_"+params[0])) != null ){
+		if( (ret = CacheManager.readCachedFile(ctx, "mensen_"+params[0])) != null ){
 			String retArray[] = ret.split(";");
 			for( String mensa : retArray ){
 				
@@ -63,7 +63,7 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 				}
 				ret += "," + m.getMenueURL() + " ;";
 			}
-			CacheManager.writeChachedFile(ctx, "cache_mensen_"+params[0], ret);
+			CacheManager.writeChachedFile(ctx, "mensen_"+params[0], ret);
 		}
 		
 		return retList;

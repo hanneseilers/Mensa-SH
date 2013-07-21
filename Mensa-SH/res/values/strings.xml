@@ -37,5 +37,8 @@
     <string name="txt_info_law_header">Rechtliche Informationen:</string>
     <string name="txt_info_logo">Mensa-SH Logo</string>
     <string name="txt_empty_string">    </string>
+    <string name="txt_clear_cache">Cache löschen</string>
+    <string name="txt_cache">Caching</string>
+    <string name="txt_status">Status</string>
 
 </resources>

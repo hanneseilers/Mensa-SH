@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -21,9 +22,15 @@ import android.preference.PreferenceManager;
 public class CacheManager {
 
 	/**
+	 * Prefix of cached files
+	 */
+	private static String filePrefix = "cache_";
+	
+	/**
 	 * Checks for a cached text file 
+	 * @param ctx
 	 * @param filename
-	 * @return file text or null if file doesn't exsist
+	 * @return File text or null if file doesn't exsist
 	 */
 	public static String readCachedFile(Context ctx, String filename){
 		try{
@@ -32,6 +39,7 @@ public class CacheManager {
 			long cacheHoldTime = Long.parseLong(( sharedPref.getString("CACHE_HOLD_TIME", "-1") )) * 60 * 60 * 100;
 			
 			// try to open file
+			filename = filePrefix + filename;
 			FileInputStream fin = ctx.openFileInput(filename);
 			DataInputStream in = new DataInputStream(fin);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -57,16 +65,51 @@ public class CacheManager {
 	
 	/**
 	 * Writes data to a chached text file
+	 * @param ctx
 	 * @param filename
+	 * @param text
 	 */
 	public static void writeChachedFile(Context ctx, String filename, String text){
 		// write data to file
 		FileOutputStream fos;
 		try {
+			filename = filePrefix + filename;
 			fos = ctx.openFileOutput(filename, Context.MODE_PRIVATE);
 			fos.write(text.getBytes());			
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {}
 	}
+	
+	/**
+	 * Clears all cached files
+	 * @param ctx
+	 */
+	public static void clearAll(Context ctx){
+		// delete files
+		for( File f : getCachedFiles(ctx) ){
+			if( f.delete() )
+				System.out.println( "> deleted cached file " + f.getName() );
+			else
+				System.out.println( "> could not delete file " + f.getName() );
+		}
+	}
+	 
+	/**
+	 * @param ctx
+	 * @return All cached files
+	 */
+	public static File[] getCachedFiles(Context ctx){
+		 // generate filename filter
+		FilenameFilter filter = new FilenameFilter() {			
+			@Override
+			public boolean accept(File dir, String filename) {
+				return filename.startsWith(filePrefix);
+			}
+		};
+		
+		// return files
+		return ctx.getFilesDir().listFiles(filter);
+	}
+	 
 	
 }

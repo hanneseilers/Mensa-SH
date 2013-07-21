@@ -32,7 +32,7 @@ public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 		String ret;
 		List<String> retList = new ArrayList<String>();
 
-		if( (ret = CacheManager.readCachedFile(ctx, "cache_cities")) != null ){
+		if( (ret = CacheManager.readCachedFile(ctx, "cities")) != null ){
 			String retArray[] = ret.split(";");
 			for( String city : retArray ){
 				retList.add(city);
@@ -46,7 +46,7 @@ public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 			for( String city : retList ){
 				ret += city + ";";
 			}
-			CacheManager.writeChachedFile(ctx, "cache_cities", ret);
+			CacheManager.writeChachedFile(ctx, "cities", ret);
 		}
 		
 		return retList;

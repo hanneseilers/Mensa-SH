@@ -65,9 +65,11 @@ public final class R {
         public static final int hello_world=0x7f06000e;
         public static final int summary_cache_hold_time=0x7f060008;
         public static final int title_activity_info=0x7f06000c;
+        public static final int txt_cache=0x7f060013;
         public static final int txt_cache_hold_time_default=0x7f060009;
         public static final int txt_cache_hold_time_title=0x7f060006;
         public static final int txt_city=0x7f060001;
+        public static final int txt_clear_cache=0x7f060012;
         public static final int txt_empty_string=0x7f060011;
         public static final int txt_info=0x7f060007;
         public static final int txt_info_law=0x7f06000b;
@@ -78,6 +80,7 @@ public final class R {
         public static final int txt_mensa=0x7f060002;
         public static final int txt_save_last_mensa=0x7f060004;
         public static final int txt_settings=0x7f060005;
+        public static final int txt_status=0x7f060014;
     }
     public static final class style {
         /** 

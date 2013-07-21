@@ -26,10 +26,11 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 			if( m.getName().equals(params[0]) ){
 				
 				String ret = "";
-				if( (ret = CacheManager.readCachedFile(ctx, "cache_menue_"+m.getCity()+"_"+m.getName()))
+				if( (ret = CacheManager.readCachedFile(ctx, "menue_"+m.getCity()+"_"+m.getName()))
 						== null ){
+					System.out.println("> loading menue>"+m.getMenueURL()+"<");
 					ret = m.getMenueAsHtml();
-					CacheManager.writeChachedFile( ctx, "cache_menue_"+m.getCity()+"_"+m.getName(), ret );
+					CacheManager.writeChachedFile( ctx, "menue_"+m.getCity()+"_"+m.getName(), ret );
 				}
 				
 				return ret;				
