@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hanneseilers.mensa_sh.R;
-import de.hanneseilers.mensa_sh.R.id;
-import de.hanneseilers.mensa_sh.R.layout;
-import de.hanneseilers.mensa_sh.R.menu;
 import de.hanneseilers.mensa_sh.enums.LoadingProgress;
 import de.hanneseilers.mensa_sh.loader.AsyncCitiesLoader;
 import de.hanneseilers.mensa_sh.loader.AsyncMensenLoader;

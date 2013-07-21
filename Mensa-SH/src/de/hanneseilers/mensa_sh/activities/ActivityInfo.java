@@ -1,8 +1,6 @@
 package de.hanneseilers.mensa_sh.activities;
 
 import de.hanneseilers.mensa_sh.R;
-import de.hanneseilers.mensa_sh.R.layout;
-import de.hanneseilers.mensa_sh.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
