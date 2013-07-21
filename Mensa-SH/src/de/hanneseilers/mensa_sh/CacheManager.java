@@ -88,6 +88,21 @@ public class CacheManager {
 			f.delete();
 		}
 	}
+	
+	/**
+	 * @param ctx
+	 * @return Cache size in kB
+	 */
+	public static int getCacheSize(Context ctx){
+		// count file sizes
+		int cacheSize = 0;
+		
+		for( File f : getCachedFiles(ctx)){
+			cacheSize += (f.length()/1024);
+		}
+		
+		return cacheSize;
+	}
 	 
 	/**
 	 * @param ctx
