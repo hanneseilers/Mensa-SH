@@ -1,5 +1,6 @@
 package de.hanneseilers.mensa_sh.loader;
 
+import de.hanneseilers.mensa_sh.CacheManager;
 import de.hanneseilers.mensa_sh.Menue;
 import de.hanneseilers.mensa_sh.enums.LoadingProgress;
 import de.mensa.sh.core.Mensa;
@@ -23,7 +24,15 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 		// find mensa with params name
 		for( Mensa m : ctx.getLocations() ){
 			if( m.getName().equals(params[0]) ){
-				return m.getMenueAsHtml();
+				
+				String ret = "";
+				if( (ret = CacheManager.readCachedFile(ctx, "cache_menue_"+m.getCity()+"_"+m.getName()))
+						== null ){
+					ret = m.getMenueAsHtml();
+					CacheManager.writeChachedFile( ctx, "cache_menue_"+m.getCity()+"_"+m.getName(), ret );
+				}
+				
+				return ret;				
 			}
 		}
 		
