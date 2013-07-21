@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="de.hanneseilers.mensa_sh.Main_Activity"
+            android:name=".activities.ActivityMain"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,14 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="de.hanneseilers.mensa_sh.SettingsPreferenceActivity"
-            android:label="@string/txt_settings" >
-        </activity>
-        <activity
-            android:name="de.hanneseilers.mensa_sh.Info_Activity"
-            android:label="@string/title_activity_info" >
-        </activity>
+        <activity android:name=".activities.ActivityInfo" android:label="@string/txt_info"></activity>
+        <activity android:name=".activities.ActivitySettingsPreference" android:label="@string/txt_settings"></activity>
     </application>
 
 </manifest>

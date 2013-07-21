@@ -1,9 +1,10 @@
-package de.hanneseilers.mensa_sh;
+package de.hanneseilers.mensa_sh.activities;
 
+import de.hanneseilers.mensa_sh.SettingsPreference;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class SettingsPreferenceActivity extends Activity {
+public class ActivitySettingsPreference extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

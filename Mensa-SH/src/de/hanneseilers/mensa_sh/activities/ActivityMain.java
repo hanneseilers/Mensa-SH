@@ -1,8 +1,12 @@
-package de.hanneseilers.mensa_sh;
+package de.hanneseilers.mensa_sh.activities;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hanneseilers.mensa_sh.R;
+import de.hanneseilers.mensa_sh.R.id;
+import de.hanneseilers.mensa_sh.R.layout;
+import de.hanneseilers.mensa_sh.R.menu;
 import de.hanneseilers.mensa_sh.enums.LoadingProgress;
 import de.hanneseilers.mensa_sh.loader.AsyncCitiesLoader;
 import de.hanneseilers.mensa_sh.loader.AsyncMensenLoader;
@@ -21,7 +25,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-public class Main_Activity extends Activity implements OnItemSelectedListener {
+public class ActivityMain extends Activity implements OnItemSelectedListener {
 	
 	private ArrayAdapter<String> adapterCity;
 	private ArrayAdapter<String> adapterMensa;
@@ -39,7 +43,7 @@ public class Main_Activity extends Activity implements OnItemSelectedListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main_activity);
+		setContentView(R.layout.activity_main);
 		
 		// get spinners and webview
 		spinnerCity = (Spinner) findViewById(R.id.lstCity);
@@ -81,10 +85,10 @@ public class Main_Activity extends Activity implements OnItemSelectedListener {
 	    // Handle item selection		
 		switch (item.getItemId()) {
 		case R.id.action_settings:
-			startActivity(new Intent(this, SettingsPreferenceActivity.class));
+			startActivity(new Intent(this, ActivitySettingsPreference.class));
 			break;
 		case R.id.action_info:
-			startActivity( new Intent(this, Info_Activity.class) );
+			startActivity( new Intent(this, ActivityInfo.class) );
 			break;
         default:
             return super.onOptionsItemSelected(item);

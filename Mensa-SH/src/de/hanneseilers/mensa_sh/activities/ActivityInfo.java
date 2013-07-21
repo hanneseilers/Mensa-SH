@@ -1,15 +1,18 @@
-package de.hanneseilers.mensa_sh;
+package de.hanneseilers.mensa_sh.activities;
 
+import de.hanneseilers.mensa_sh.R;
+import de.hanneseilers.mensa_sh.R.layout;
+import de.hanneseilers.mensa_sh.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class Info_Activity extends Activity {
+public class ActivityInfo extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.info_activity);
+		setContentView(R.layout.activity_info);
 	}
 
 	@Override
