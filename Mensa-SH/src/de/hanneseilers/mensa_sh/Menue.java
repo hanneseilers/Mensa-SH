@@ -226,4 +226,20 @@ public class Menue extends Activity implements OnItemSelectedListener {
 		this.locations = locations;
 	}
 
+
+	/**
+	 * @return the spinnerCity
+	 */
+	public Spinner getSpinnerCity() {
+		return spinnerCity;
+	}
+
+
+	/**
+	 * @return the spinnerMensa
+	 */
+	public Spinner getSpinnerMensa() {
+		return spinnerMensa;
+	}
+
 }
