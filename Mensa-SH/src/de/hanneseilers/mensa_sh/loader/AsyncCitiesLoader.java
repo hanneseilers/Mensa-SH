@@ -7,7 +7,9 @@ import de.hanneseilers.mensa_sh.CacheManager;
 import de.hanneseilers.mensa_sh.activities.ActivityMain;
 import de.hanneseilers.mensa_sh.enums.LoadingProgress;
 import de.mensa.sh.core.Mensa;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 
 /**
  * Class for async loading of cities
@@ -17,6 +19,7 @@ import android.os.AsyncTask;
 public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 	
 	private ActivityMain ctx;
+	public static String cachedFileName = "saved_city";
 	
 	public AsyncCitiesLoader(ActivityMain ctx){
 		super();
@@ -62,7 +65,27 @@ public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 			ctx.addCity(c);
 		}
 		ctx.notifyCityAdapter();
+		ctx.getSpinnerCity().setSelection(getSelection(result));
 		ctx.setLoadingProgress(LoadingProgress.CITIES_LOADED);
+	}
+	
+	/**
+	 * Returns the position to select
+	 * @return
+	 */
+	private int getSelection(List<String> result){
+		// get settings
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
+		
+		// check if to load position
+		if( sharedPref.getBoolean("SAVE_LAST_MENSA", false) && ctx.isFirstSelection() ){
+			String city;
+			if( (city = CacheManager.readCachedFile(ctx, cachedFileName)) != null ){
+				return result.indexOf(city);
+			}
+		}
+		
+		return 0;
 	}
 
 }

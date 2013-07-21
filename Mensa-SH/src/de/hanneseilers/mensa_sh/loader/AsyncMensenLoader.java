@@ -7,11 +7,14 @@ import de.hanneseilers.mensa_sh.CacheManager;
 import de.hanneseilers.mensa_sh.activities.ActivityMain;
 import de.hanneseilers.mensa_sh.enums.LoadingProgress;
 import de.mensa.sh.core.Mensa;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 
 public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 
 	private ActivityMain ctx;
+	public static String cachedFileName = "saved_mensa";
 	
 	public AsyncMensenLoader(ActivityMain ctx){
 		super();
@@ -83,12 +86,42 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 			ctx.addMensa( m.getName() );
 		}
 		ctx.notifyMensaAdapter();
+		ctx.getSpinnerMensa().setSelection(getSelection(result));
 		ctx.setLoadingProgress(LoadingProgress.MENSEN_LOADED);
 		
 		// check if to programmaticaly load menue
 		if(count > 0){
 			ctx.loadFirstMensaMenue();
 		}
+	}
+	
+	/**
+	 * Returns the position to select
+	 * @return
+	 */
+	private int getSelection(List<Mensa> result){
+		// get settings
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
+		
+		// check if to load position
+		if( sharedPref.getBoolean("SAVE_LAST_MENSA", false) && ctx.isFirstSelection() ){
+			String mensa;
+			if( (mensa = CacheManager.readCachedFile(ctx, cachedFileName)) != null ){
+				
+				int i;
+				for( i=0; i<result.size(); i++ ){
+					if( result.get(i).getName().equals(mensa) ){
+						break;
+					}
+				}				
+				
+				ctx.setFirstSelection(false);
+				return i;
+				
+			}
+		}
+		
+		return 0;
 	}
 	
 }

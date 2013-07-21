@@ -3,6 +3,7 @@ package de.hanneseilers.mensa_sh.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hanneseilers.mensa_sh.CacheManager;
 import de.hanneseilers.mensa_sh.R;
 import de.hanneseilers.mensa_sh.enums.LoadingProgress;
 import de.hanneseilers.mensa_sh.loader.AsyncCitiesLoader;
@@ -10,8 +11,10 @@ import de.hanneseilers.mensa_sh.loader.AsyncMensenLoader;
 import de.hanneseilers.mensa_sh.loader.AsyncMenueLoader;
 import de.mensa.sh.core.Mensa;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +38,7 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 	private Spinner spinnerMensa;
 	
 	private LoadingProgress progress = LoadingProgress.INIT;
+	private boolean firstSelection = true;
 	
 	
 	@Override
@@ -215,11 +219,9 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 		// check which list was selected
 		switch( parent.getId() ){
 		case R.id.lstCity:
-			System.out.println(">selected city " + parent.getItemAtPosition(pos).toString());
 			addMensen( parent.getItemAtPosition(pos).toString() );
 			break;
 		case R.id.lstMensa:
-			System.out.println(">selected mensa " + parent.getItemAtPosition(pos).toString());
 			loadMenue( parent.getItemAtPosition(pos).toString() );
 			break;
 		default:
@@ -260,6 +262,41 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 	 */
 	public Spinner getSpinnerMensa() {
 		return spinnerMensa;
+	}
+
+
+	/**
+	 * @return the firstSelection
+	 */
+	public boolean isFirstSelection() {
+		return firstSelection;
+	}
+
+
+	/**
+	 * @param firstSelection the firstSelection to set
+	 */
+	public void setFirstSelection(boolean firstSelection) {
+		this.firstSelection = firstSelection;
+	}
+	
+	/**
+	 * Cleanup before activity is destroyed
+	 */
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		// get settings
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		// save selected city and mensa
+		if( sharedPref.getBoolean("SAVE_LAST_MENSA", false) ){
+			String city = spinnerCity.getSelectedItem().toString();
+			String mensa = spinnerMensa.getSelectedItem().toString();
+			
+			CacheManager.writeChachedFile(this, AsyncCitiesLoader.cachedFileName, city);
+			CacheManager.writeChachedFile(this, AsyncMensenLoader.cachedFileName, mensa);
+		}
 	}
 
 }

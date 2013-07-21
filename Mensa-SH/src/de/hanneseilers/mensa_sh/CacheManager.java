@@ -51,13 +51,11 @@ public class CacheManager {
 			String ret = "";
 			String line;
 			if( (in != null) && (timeDiff < cacheHoldTime) ){
-				System.out.println("> loading cached file " + filename);
 				while( (line = br.readLine()) != null ){
 					ret += line;
 				}
 				return ret;
 			}
-			System.out.println("> not not use cached file " + filename);
 			
 		} catch(Exception e){}
 		return null;
@@ -87,10 +85,7 @@ public class CacheManager {
 	public static void clearAll(Context ctx){
 		// delete files
 		for( File f : getCachedFiles(ctx) ){
-			if( f.delete() )
-				System.out.println( "> deleted cached file " + f.getName() );
-			else
-				System.out.println( "> could not delete file " + f.getName() );
+			f.delete();
 		}
 	}
 	 
