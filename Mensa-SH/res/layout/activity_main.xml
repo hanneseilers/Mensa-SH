@@ -99,6 +99,12 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/txtLunchTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
         <WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"

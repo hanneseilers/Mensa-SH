@@ -42,12 +42,12 @@ public final class R {
         public static final int lstMensa=0x7f0a0011;
         public static final int pgbLoading=0x7f0a0008;
         public static final int spacer=0x7f0a0009;
-        public static final int textView1=0x7f0a0003;
         public static final int txtCity=0x7f0a000d;
         public static final int txtInfo=0x7f0a000a;
         public static final int txtInfoLaw=0x7f0a0005;
         public static final int txtInfoLawHeader=0x7f0a0004;
         public static final int txtInfoText=0x7f0a0000;
+        public static final int txtLunchTime=0x7f0a0003;
         public static final int txtMensa=0x7f0a0010;
         public static final int webView=0x7f0a0012;
     }

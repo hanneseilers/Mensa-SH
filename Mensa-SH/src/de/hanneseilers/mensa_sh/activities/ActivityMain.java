@@ -24,12 +24,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class ActivityMain extends Activity implements OnItemSelectedListener {
 	
 	private ArrayAdapter<String> adapterCity;
 	private ArrayAdapter<String> adapterMensa;
 	private WebView webView;
+	private TextView txtLunchTime;
 	private LinearLayout layoutLoading;
 	
 	private List<Mensa> locations = new ArrayList<Mensa>();
@@ -49,6 +51,7 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 		// get spinners and webview
 		spinnerCity = (Spinner) findViewById(R.id.lstCity);
 		spinnerMensa = (Spinner) findViewById(R.id.lstMensa);
+		txtLunchTime = (TextView) findViewById(R.id.txtLunchTime);
 		webView = (WebView) findViewById(R.id.webView);
 		webView.getSettings().setLoadWithOverviewMode(true);
 		webView.getSettings().setUseWideViewPort(true);
@@ -297,6 +300,14 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 			CacheManager.writeChachedFile(this, AsyncCitiesLoader.cachedFileName, city);
 			CacheManager.writeChachedFile(this, AsyncMensenLoader.cachedFileName, mensa);
 		}
+	}
+
+
+	/**
+	 * @return the txtLunchTime
+	 */
+	public TextView getTxtLunchTime() {
+		return txtLunchTime;
 	}
 
 }

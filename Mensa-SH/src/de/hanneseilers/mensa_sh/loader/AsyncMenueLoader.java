@@ -32,6 +32,8 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 					CacheManager.writeChachedFile( ctx, "menue_"+m.getCity()+"_"+m.getName(), ret );
 				}
 				
+				// set lunch time
+				ctx.getTxtLunchTime().setText( "Mittagessen: " + m.getLunchTime() );
 				return ret;				
 			}
 		}
