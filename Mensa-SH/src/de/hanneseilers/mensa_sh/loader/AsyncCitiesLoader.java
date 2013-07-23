@@ -80,7 +80,7 @@ public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 		// check if to load position
 		if( sharedPref.getBoolean("SAVE_LAST_MENSA", false) && ctx.isFirstSelection() ){
 			String city;
-			if( (city = CacheManager.readCachedFile(ctx, cachedFileName)) != null ){
+			if( (city = CacheManager.readCachedFile(ctx, cachedFileName, false)) != null ){
 				return result.indexOf(city);
 			}
 		}

@@ -33,6 +33,18 @@ public class CacheManager {
 	 * @return File text or null if file doesn't exsist
 	 */
 	public static String readCachedFile(Context ctx, String filename){
+		return readCachedFile(ctx, filename, true);
+	}
+	
+	/**
+	 * Checks for a cached text file 
+	 * @param ctx
+	 * @param filename
+	 * @param useCacheHoldeTime If true, cache hold time is consired wheter to read cached file or not
+	 * if false, cached file is always read
+	 * @return File text or null if file doesn't exsist
+	 */
+	public static String readCachedFile(Context ctx, String filename, boolean useCacheHoldTime){
 		try{
 			
 			SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
@@ -50,7 +62,7 @@ public class CacheManager {
 			// read lines of file
 			String ret = "";
 			String line;
-			if( (in != null) && (timeDiff < cacheHoldTime) ){
+			if( in != null && (timeDiff < cacheHoldTime || !useCacheHoldTime) ){
 				while( (line = br.readLine()) != null ){
 					ret += line;
 				}

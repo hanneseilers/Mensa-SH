@@ -106,7 +106,7 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 		// check if to load position
 		if( sharedPref.getBoolean("SAVE_LAST_MENSA", false) && ctx.isFirstSelection() ){
 			String mensa;
-			if( (mensa = CacheManager.readCachedFile(ctx, cachedFileName)) != null ){
+			if( (mensa = CacheManager.readCachedFile(ctx, cachedFileName, false)) != null ){
 				
 				int i;
 				for( i=0; i<result.size(); i++ ){
