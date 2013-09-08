@@ -1,6 +1,6 @@
-package de.hanneseilers.mensa_sh.activities;
+package de.hanneseilers.mensash.activities;
 
-import de.hanneseilers.mensa_sh.SettingsPreference;
+import de.hanneseilers.mensash.SettingsPreference;
 import android.app.Activity;
 import android.os.Bundle;
 

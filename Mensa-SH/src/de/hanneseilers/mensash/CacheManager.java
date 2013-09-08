@@ -1,4 +1,4 @@
-package de.hanneseilers.mensa_sh;
+package de.hanneseilers.mensash;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;

@@ -1,14 +1,14 @@
-package de.hanneseilers.mensa_sh.activities;
+package de.hanneseilers.mensash.activities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hanneseilers.mensa_sh.CacheManager;
-import de.hanneseilers.mensa_sh.R;
-import de.hanneseilers.mensa_sh.enums.LoadingProgress;
-import de.hanneseilers.mensa_sh.loader.AsyncCitiesLoader;
-import de.hanneseilers.mensa_sh.loader.AsyncMensenLoader;
-import de.hanneseilers.mensa_sh.loader.AsyncMenueLoader;
+import de.hanneseilers.mensash.R;
+import de.hanneseilers.mensash.CacheManager;
+import de.hanneseilers.mensash.enums.LoadingProgress;
+import de.hanneseilers.mensash.loader.AsyncCitiesLoader;
+import de.hanneseilers.mensash.loader.AsyncMensenLoader;
+import de.hanneseilers.mensash.loader.AsyncMenueLoader;
 import de.mensa.sh.core.Mensa;
 import android.os.Bundle;
 import android.preference.PreferenceManager;

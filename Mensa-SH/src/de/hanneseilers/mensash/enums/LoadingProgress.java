@@ -1,4 +1,4 @@
-package de.hanneseilers.mensa_sh.enums;
+package de.hanneseilers.mensash.enums;
 
 public enum LoadingProgress {
 

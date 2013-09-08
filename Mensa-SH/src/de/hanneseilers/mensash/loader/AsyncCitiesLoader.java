@@ -1,11 +1,11 @@
-package de.hanneseilers.mensa_sh.loader;
+package de.hanneseilers.mensash.loader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hanneseilers.mensa_sh.CacheManager;
-import de.hanneseilers.mensa_sh.activities.ActivityMain;
-import de.hanneseilers.mensa_sh.enums.LoadingProgress;
+import de.hanneseilers.mensash.CacheManager;
+import de.hanneseilers.mensash.activities.ActivityMain;
+import de.hanneseilers.mensash.enums.LoadingProgress;
 import de.mensa.sh.core.Mensa;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;

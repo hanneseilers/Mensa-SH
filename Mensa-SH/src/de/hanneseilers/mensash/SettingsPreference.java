@@ -1,5 +1,6 @@
-package de.hanneseilers.mensa_sh;
+package de.hanneseilers.mensash;
 
+import de.hanneseilers.mensash.R;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
