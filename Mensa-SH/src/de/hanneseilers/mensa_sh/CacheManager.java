@@ -48,7 +48,7 @@ public class CacheManager {
 		try{
 			
 			SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
-			long cacheHoldTime = Long.parseLong(( sharedPref.getString("CACHE_HOLD_TIME", "-1") )) * 60 * 60 * 100;
+			long cacheHoldTime = Long.parseLong(( sharedPref.getString("CACHE_HOLD_TIME", "-1") )) * 60 * 60 * 1000;
 			
 			// try to open file
 			filename = filePrefix + filename;
@@ -62,6 +62,7 @@ public class CacheManager {
 			// read lines of file
 			String ret = "";
 			String line;
+			System.out.println( ">Time diff:" + timeDiff + " cache hold time:" + cacheHoldTime );
 			if( in != null && (timeDiff < cacheHoldTime || !useCacheHoldTime) ){
 				while( (line = br.readLine()) != null ){
 					ret += line;
