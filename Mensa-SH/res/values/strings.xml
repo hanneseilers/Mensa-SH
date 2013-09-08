@@ -5,7 +5,7 @@
     <string name="txt_city">Stadt</string>
     <string name="txt_mensa">Mensa</string>
     <string name="txt_loading">Loading &#8230;</string>
-    <string name="txt_save_last_mensa">Letze besuchte Mensa merken</string>
+    <string name="txt_save_last_mensa">Letzte besuchte Mensa merken</string>
     <string name="txt_settings">Einstellungen</string>
     <string name="txt_cache_hold_time_title">Cache Vorhaltezeit</string>
 
@@ -36,7 +36,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="txt_info_law_header">Rechtliche Informationen:</string>
     <string name="txt_info_logo">Mensa-SH Logo</string>
-    <string name="txt_empty_string">    </string>
+    <string name="txt_empty_string"></string>
     <string name="txt_clear_cache">Cache löschen</string>
     <string name="txt_cache">Caching</string>
     <string name="txt_status">Status</string>
