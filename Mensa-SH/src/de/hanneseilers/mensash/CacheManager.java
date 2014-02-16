@@ -62,7 +62,6 @@ public class CacheManager {
 			// read lines of file
 			String ret = "";
 			String line;
-			System.out.println( ">Time diff:" + timeDiff + " cache hold time:" + cacheHoldTime );
 			if( in != null && (timeDiff < cacheHoldTime || !useCacheHoldTime) ){
 				while( (line = br.readLine()) != null ){
 					ret += line;

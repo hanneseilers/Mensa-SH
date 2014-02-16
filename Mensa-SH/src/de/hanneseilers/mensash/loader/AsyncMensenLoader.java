@@ -28,7 +28,7 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 	protected List<Mensa> doInBackground(String... params) {
 		// check if data is cache
 		String ret;
-		List<Mensa> retList = new ArrayList<Mensa>();
+		List<Mensa> mensaList = new ArrayList<Mensa>();
 
 				
 		if( (ret = CacheManager.readCachedFile(ctx, "mensen_"+params[0])) != null ){
@@ -44,7 +44,7 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 						offers.add(o);
 					}
 					
-					retList.add(
+					mensaList.add(
 							new Mensa( params[0],
 							mensaData[0],
 							mensaData[1],
@@ -54,11 +54,11 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 			}
 		}
 		
-		if( retList.size() == 0 ){
+		if( mensaList.size() == 0 ){
 			// cache file
-			retList = Mensa.getLocations(params[0]);
+			mensaList = Mensa.getLocations(params[0]);
 			ret = "";
-			for( Mensa m : retList ){
+			for( Mensa m : mensaList ){
 				ret += m.getName() + ","
 						+ m.getLunchTime() + ",";
 				for( String o : m.getOffers() ){
@@ -69,7 +69,7 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 			CacheManager.writeChachedFile(ctx, "mensen_"+params[0], ret);
 		}
 		
-		return retList;
+		return mensaList;
 	}
 	
 	/**

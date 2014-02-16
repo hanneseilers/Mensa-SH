@@ -9,15 +9,20 @@ import de.hanneseilers.mensash.enums.LoadingProgress;
 import de.hanneseilers.mensash.loader.AsyncCitiesLoader;
 import de.hanneseilers.mensash.loader.AsyncMensenLoader;
 import de.hanneseilers.mensash.loader.AsyncMenueLoader;
+import de.mensa.sh.core.Meal;
 import de.mensa.sh.core.Mensa;
+import de.mensa.sh.core.Settings;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,12 +30,14 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ActivityMain extends Activity implements OnItemSelectedListener {
 	
 	private ArrayAdapter<String> adapterCity;
 	private ArrayAdapter<String> adapterMensa;
 	private WebView webView;
+	private WebSettings webSettings;
 	private TextView txtLunchTime;
 	private LinearLayout layoutLoading;
 	
@@ -43,9 +50,14 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 	private boolean firstSelection = true;
 	
 	
+	@SuppressLint("SetJavaScriptEnabled")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// set url for mensa-sh-parser
+		Settings.sh_mensa_meal_db_api_url = "http://mensash.private-factory.de/api.php";
+		
 		setContentView(R.layout.activity_main);
 		
 		// get spinners and webview
@@ -56,6 +68,9 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 		webView.getSettings().setLoadWithOverviewMode(true);
 		webView.getSettings().setUseWideViewPort(true);
 		webView.getSettings().setBuiltInZoomControls(true);
+		webSettings = webView.getSettings();
+		webSettings.setJavaScriptEnabled(true);
+		webView.addJavascriptInterface(this, "Android");
 		layoutLoading = (LinearLayout) findViewById(R.id.layout_loading);
 		
 		// add resources to spinnes
@@ -75,6 +90,48 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 		spinnerMensa.setOnItemSelectedListener(this);
 		
 	}
+	
+	
+	/**
+	 * Adds rating for a meal
+	 * @param aMensa
+	 * @param aMeal
+	 */
+    @JavascriptInterface
+    public void addMealRating(String aMensa, String aMeal) {
+        
+    	Toast toasta = Toast.makeText(this, "Rating called", Toast.LENGTH_LONG);
+		toasta.show();
+    	
+    	// get mensa and meal from serialzed objects
+		Mensa mensa = Mensa.unserialize(aMensa);
+		Meal meal = Meal.unserialize(aMeal);
+		
+		// add rating 		
+		mensa.addRating( meal, 3, "", getUniqueDeviceHash() );
+		
+		// Show toast
+		Toast toast = Toast.makeText(this, "Bewertung hinzugefügt", Toast.LENGTH_SHORT);
+		toast.show();
+    	
+    }
+    
+    /**
+     * @return Unique id for device
+     */
+    public String getUniqueDeviceHash(){
+    	/*
+    	 * Getting device ID is not used due to using android id.
+    	 * But still available for fallbacks.
+    	 */
+//    	String hash = "";
+//    	TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+//    	return telephonyManager.getDeviceId();
+    	
+    	return android.provider.Settings.Secure.getString(getContentResolver(), 
+    			android.provider.Settings.Secure.ANDROID_ID); 
+
+    }
 	
 
 	@Override

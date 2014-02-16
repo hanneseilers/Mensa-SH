@@ -1,8 +1,12 @@
 package de.hanneseilers.mensash.loader;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import de.hanneseilers.mensash.CacheManager;
 import de.hanneseilers.mensash.activities.ActivityMain;
 import de.hanneseilers.mensash.enums.LoadingProgress;
+import de.mensa.sh.core.Meal;
 import de.mensa.sh.core.Mensa;
 import android.os.AsyncTask;
 
@@ -22,19 +26,23 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 	protected String doInBackground(String... params) {
 		
 		// find mensa with params name
-		for( Mensa m : ctx.getLocations() ){
-			if( m.getName().equals(params[0]) ){
+		for( Mensa mensa : ctx.getLocations() ){
+			if( mensa.getName().equals(params[0]) ){
 				
-				String ret = "";
-				if( (ret = CacheManager.readCachedFile(ctx, "menue_"+m.getCity()+"_"+m.getName()))
+				String html = "";
+				if( (html = CacheManager.readCachedFile(ctx, "menue_"+mensa.getCity()+"_"+mensa.getName()))
 						== null ){
-					ret = m.getMenueAsHtml();
-					CacheManager.writeChachedFile( ctx, "menue_"+m.getCity()+"_"+m.getName(), ret );
+					html = mensa.getMenueAsHtml();
+					CacheManager.writeChachedFile( ctx, "menue_"+mensa.getCity()+"_"+mensa.getName(), html );
 				}
 				
 				// set lunch time
-				ctx.setLunchTime(m.getLunchTime());
-				return ret;				
+				ctx.setLunchTime(mensa.getLunchTime());
+				
+				// insert ratings into html
+				html = addRatingsToHTML(mensa, html);
+				
+				return html;				
 			}
 		}
 		
@@ -56,5 +64,60 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 		ctx.loadWebsiteHtml(result);
 		ctx.setLoadingProgress(LoadingProgress.MENUE_LOADED);
 	}
+	
+	/**
+	 * Adds ratings from ratings database to html
+	 * @param mensa
+	 * @param html
+	 * @return
+	 */
+	private String addRatingsToHTML(Mensa mensa, String html){
+		
+		// parse html to document
+		html = html.replace("&#x20ac;", "EUR");
+		Document doc;
+		
+		for( Meal meal : mensa.getMeals() ){
+			
+			doc = Jsoup.parse( html );
+			
+			// defining querys
+			String query1 = "td:contains(" + meal.getMealName() + ")";
+			String query2 = ".mensa-sh-rating";
+			
+			// select elements
+			Element td =  doc.select(query1).not(query2).first();
+			
+			
+			if( td != null ){
+				// set vertical top alignment, class and link to rating function				
+				td.attr("valign", "top")
+					.attr("onClick", "Android.addMealRating('" + Mensa.serialize(mensa) + "', '" + Meal.serialize(meal) + "');")
+					.attr("class", td.attr("class") + " mensa-sh-rating");
+				
+				
+				// generate rating
+				String ratingTxt = "";
+				int rating = mensa.getRating(meal);;
+				if( rating < 0 ){
+					// not rated
+					ratingTxt = "Noch keine Bewertung";
+				}
+				else{
+					ratingTxt = "Bewertung: " + Integer.toString(rating) + "/5";
+				}
+				
+				// set rating
+				td.prepend( ratingTxt + "<br />" );
+				
+				System.out.println(td.outerHtml());
+
+				html = doc.outerHtml();
+			}
+		}
+		
+		return html;
+	}
+		
 	
 }

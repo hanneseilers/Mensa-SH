@@ -33,26 +33,26 @@ public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 	protected List<String> doInBackground(Void... params) {		
 		// check if data is cache
 		String ret;
-		List<String> retList = new ArrayList<String>();
+		List<String> citiesList = new ArrayList<String>();
 
 		if( (ret = CacheManager.readCachedFile(ctx, "cities")) != null ){
 			String retArray[] = ret.split(";");
 			for( String city : retArray ){
-				retList.add(city);
+				citiesList.add(city);
 			}
 		}
 		
-		if( retList.size() == 0 ){			
+		if( citiesList.size() == 0 ){			
 			// cache file
-			retList = Mensa.getCities();
+			citiesList = Mensa.getCities();
 			ret = "";
-			for( String city : retList ){
+			for( String city : citiesList ){
 				ret += city + ";";
 			}
 			CacheManager.writeChachedFile(ctx, "cities", ret);
 		}
 		
-		return retList;
+		return citiesList;
 	}
 	
 	/**
