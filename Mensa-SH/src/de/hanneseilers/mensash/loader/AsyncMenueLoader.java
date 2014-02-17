@@ -1,5 +1,8 @@
 package de.hanneseilers.mensash.loader;
 
+import java.util.Hashtable;
+import java.util.List;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -78,7 +81,11 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 		html = html.replace("&#x20ac;", "EUR");
 		Document doc;
 		
-		for( Meal meal : mensa.getMeals() ){
+		List<Meal> meals = mensa.getMeals();
+		Hashtable<String, Integer> ratings = mensa.getRatings(meals);
+		System.out.println("ratings: " + ratings.size());
+		
+		for( Meal meal : meals ){
 			
 			doc = Jsoup.parse( html );
 			
@@ -97,9 +104,14 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 					.attr("class", td.attr("class") + " mensa-sh-rating");
 				
 				
-				// generate rating
+				// get rating
 				String ratingTxt = "";
-				int rating = mensa.getRating(meal);;
+				String key = meal.getKey();
+				int rating = -1;
+				if( ratings.containsKey(key) )
+					rating = ratings.get(key);
+				
+				// gerenate rating html
 				if( rating > -1){
 					for( int i=0; i<5; i++ ){
 						if( i < rating ){
@@ -114,7 +126,7 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 					ratingTxt += "<br />";
 				}
 				
-				// set rating
+				// set rating html
 				td.prepend( ratingTxt );
 				html = doc.outerHtml();
 			}
