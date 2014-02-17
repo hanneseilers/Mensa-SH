@@ -108,7 +108,7 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 		Meal meal = Meal.unserialize(aMeal);
 		
 		// show rating dialog	
-		RatingDialog dialog = new RatingDialog(mensa, meal);
+		RatingDialog dialog = new RatingDialog(mensa, meal, this);
 		dialog.show( getFragmentManager(), "Test" );    
     }
     
@@ -266,7 +266,7 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 	 * Loads a menue of a mensa
 	 * @param mensa
 	 */
-	private void loadMenue(String mensa){
+	public void loadMenue(String mensa){
 		setLoadingProgress(LoadingProgress.INIT);
 		new AsyncMenueLoader(this).execute(mensa);
 	}

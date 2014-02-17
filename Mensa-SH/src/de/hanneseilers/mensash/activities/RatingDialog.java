@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
@@ -27,10 +28,18 @@ public class RatingDialog extends DialogFragment {
 	
 	private Mensa mensa = null;
 	private Meal meal = null;
+	private ActivityMain mainActivity = null;
 	
-	public RatingDialog(Mensa mensa, Meal meal){
-		setMensa(mensa);
-		setMeal(meal);
+			/**
+			 * Constructor
+			 * @param mensa
+			 * @param meal
+			 * @param activity
+			 */
+	public RatingDialog(Mensa mensa, Meal meal, ActivityMain activity){
+		this.mensa = mensa;
+		this.meal = meal;
+		this.mainActivity = activity;
 	}
 	
 	/**
@@ -48,7 +57,7 @@ public class RatingDialog extends DialogFragment {
 		
 		builder.setView( view );
 		builder.setTitle(meal.getMealName());
-        builder.setPositiveButton( getString(R.string.txtSend), new addRatingListener(view) )
+        builder.setPositiveButton( getString(R.string.txtSend), new addRatingListener(view, mainActivity) )
         .setNegativeButton( getString(R.string.txtCancel), new DialogInterface.OnClickListener() {
         	
             public void onClick(DialogInterface dialog, int id) {
@@ -62,34 +71,6 @@ public class RatingDialog extends DialogFragment {
 		
 		return builder.create();		
 	}
-
-	/**
-	 * @return the mensa
-	 */
-	public Mensa getMensa() {
-		return mensa;
-	}
-
-	/**
-	 * @param mensa the mensa to set
-	 */
-	public void setMensa(Mensa mensa) {
-		this.mensa = mensa;
-	}
-
-	/**
-	 * @return the meal
-	 */
-	public Meal getMeal() {
-		return meal;
-	}
-
-	/**
-	 * @param meal the meal to set
-	 */
-	public void setMeal(Meal meal) {
-		this.meal = meal;
-	}
 	
 	/**
 	 * AsyncTask to send rating to database
@@ -99,6 +80,12 @@ public class RatingDialog extends DialogFragment {
 	private class sendRatingTask extends AsyncTask<Object, Void, Boolean>{
 
 		private View view = null;
+		private ActivityMain mainActivity = null;
+		
+		public sendRatingTask(ActivityMain activity) {
+			super();
+			this.mainActivity = activity;
+		}
 		
 		@Override
 		protected Boolean doInBackground(Object... params) {			
@@ -126,6 +113,9 @@ public class RatingDialog extends DialogFragment {
 			// Send rating
     		Toast toast = Toast.makeText( view.getContext(), msg, Toast.LENGTH_SHORT );
     		toast.show();
+    		
+    		String mensa = ((Spinner) mainActivity.findViewById(R.id.lstMensa)).getSelectedItem().toString();
+    		mainActivity.loadMenue(mensa);
 		}
 		
 	}
@@ -138,10 +128,12 @@ public class RatingDialog extends DialogFragment {
 	private class addRatingListener implements OnClickListener{
 
 		private View view = null;
+		private ActivityMain mainActivity = null;
 		
-		public addRatingListener(View view){
+		public addRatingListener(View view, ActivityMain activity){
 			super();
 			this.view = view;
+			this.mainActivity = activity;
 		}
 
 		@Override
@@ -150,7 +142,7 @@ public class RatingDialog extends DialogFragment {
 			RatingBar pgbRating = (RatingBar) view.findViewById(R.id.pgbRating);
     		int rating = (int) pgbRating.getRating();  
     		
-    		(new sendRatingTask()).execute( new Object[]{mensa, meal, rating, view} );    		
+    		(new sendRatingTask(mainActivity)).execute( new Object[]{mensa, meal, rating, view} );    		
     		
 		}
 		
