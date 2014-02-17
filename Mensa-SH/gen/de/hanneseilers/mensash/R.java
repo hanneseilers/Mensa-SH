@@ -30,17 +30,19 @@ public final class R {
     }
     public static final class id {
         public static final int TextView01=0x7f0a0001;
-        public static final int action_info=0x7f0a0014;
-        public static final int action_settings=0x7f0a0013;
+        public static final int action_info=0x7f0a0016;
+        public static final int action_settings=0x7f0a0015;
         public static final int imageView1=0x7f0a0002;
         public static final int layout_city=0x7f0a000c;
         public static final int layout_loading=0x7f0a0007;
         public static final int layout_mensa=0x7f0a000f;
         public static final int layout_root=0x7f0a0006;
         public static final int layout_selection=0x7f0a000b;
+        public static final int lblRating=0x7f0a0014;
         public static final int lstCity=0x7f0a000e;
         public static final int lstMensa=0x7f0a0011;
         public static final int pgbLoading=0x7f0a0008;
+        public static final int pgbRating=0x7f0a0013;
         public static final int spacer=0x7f0a0009;
         public static final int txtCity=0x7f0a000d;
         public static final int txtInfo=0x7f0a000a;
@@ -54,6 +56,7 @@ public final class R {
     public static final class layout {
         public static final int activity_info=0x7f030000;
         public static final int activity_main=0x7f030001;
+        public static final int dialog_rating=0x7f030002;
     }
     public static final class menu {
         public static final int menue=0x7f090000;
@@ -63,7 +66,10 @@ public final class R {
         public static final int app_name=0x7f060000;
         public static final int hello_world=0x7f06000e;
         public static final int summary_cache_hold_time=0x7f060008;
+        public static final int title_activity_activity_rating=0x7f060017;
         public static final int title_activity_info=0x7f06000c;
+        public static final int txtCancel=0x7f060016;
+        public static final int txtSend=0x7f060015;
         public static final int txt_cache=0x7f060013;
         public static final int txt_cache_hold_time_default=0x7f060009;
         public static final int txt_cache_hold_time_title=0x7f060006;

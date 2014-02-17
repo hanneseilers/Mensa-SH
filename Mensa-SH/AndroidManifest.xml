@@ -32,6 +32,10 @@
             android:name="de.hanneseilers.mensash.activities.ActivitySettingsPreference"
             android:label="@string/txt_settings" >
         </activity>
+        <activity
+            android:name="de.hanneseilers.mensash.ActivityRating"
+            android:label="@string/title_activity_activity_rating" >
+        </activity>
     </application>
 
 </manifest>

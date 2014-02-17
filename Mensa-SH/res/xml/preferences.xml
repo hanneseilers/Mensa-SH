@@ -1,11 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:key="PREF_SCREEN">
-    <PreferenceCategory android:title="@string/txt_cache" android:key="CACHE">
-        <CheckBoxPreference android:title="@string/txt_save_last_mensa" android:defaultValue="true" android:key="SAVE_LAST_MENSA"/>
-    	<ListPreference android:title="@string/txt_cache_hold_time_title" android:entries="@array/cache_hold_time_entries" android:key="CACHE_HOLD_TIME" android:entryValues="@array/cache_hold_time_values" android:summary="@string/summary_cache_hold_time" android:defaultValue="@string/txt_cache_hold_time_default"/>  
-    </PreferenceCategory>
-    <PreferenceCategory android:key="STATUS" android:title="@string/txt_status">
-        <Preference android:key="PREF_STATUS" android:enabled="false" android:title="@string/txt_cache"/>
-        <Preference android:key="CMD_CLEAR_CACHE" android:title="@string/txt_clear_cache"/>  
-    </PreferenceCategory>
-</PreferenceScreen>
+<?xml version="1.0" encoding="utf-8"?><PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"    android:key="PREF_SCREEN" >    <PreferenceCategory        android:key="CACHE"        android:title="@string/txt_cache" >        <CheckBoxPreference            android:defaultValue="true"            android:key="SAVE_LAST_MENSA"            android:title="@string/txt_save_last_mensa" />        <ListPreference            android:defaultValue="@string/txt_cache_hold_time_default"            android:entries="@array/cache_hold_time_entries"            android:entryValues="@array/cache_hold_time_values"            android:key="CACHE_HOLD_TIME"            android:summary="@string/summary_cache_hold_time"            android:title="@string/txt_cache_hold_time_title" />    </PreferenceCategory>    <PreferenceCategory        android:key="STATUS"        android:title="@string/txt_status" >        <Preference            android:enabled="false"            android:key="PREF_STATUS"            android:title="@string/txt_cache" />        <Preference            android:key="CMD_CLEAR_CACHE"            android:title="@string/txt_clear_cache" />    </PreferenceCategory></PreferenceScreen>

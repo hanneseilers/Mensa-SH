@@ -8,6 +8,7 @@ import de.hanneseilers.mensash.activities.ActivityMain;
 import de.hanneseilers.mensash.enums.LoadingProgress;
 import de.mensa.sh.core.Meal;
 import de.mensa.sh.core.Mensa;
+import de.mensa.sh.core.Settings;
 import android.os.AsyncTask;
 
 public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
@@ -99,19 +100,22 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 				// generate rating
 				String ratingTxt = "";
 				int rating = mensa.getRating(meal);;
-				if( rating < 0 ){
-					// not rated
-					ratingTxt = "Noch keine Bewertung";
-				}
-				else{
-					ratingTxt = "Bewertung: " + Integer.toString(rating) + "/5";
+				if( rating > -1){
+					for( int i=0; i<5; i++ ){
+						if( i < rating ){
+							ratingTxt += "<img src='" + Settings.sh_mensa_rating_ico_full_url
+									+ "' width='" + Settings.sh_mensa_rating_ico_size + "' />";
+						}
+						else{
+							ratingTxt += "<img src='" + Settings.sh_mensa_rating_ico_empty_url
+									+ "' width='" + Settings.sh_mensa_rating_ico_size + "' />";
+						}
+					}
+					ratingTxt += "<br />";
 				}
 				
 				// set rating
-				td.prepend( ratingTxt + "<br />" );
-				
-				System.out.println(td.outerHtml());
-
+				td.prepend( ratingTxt );
 				html = doc.outerHtml();
 			}
 		}

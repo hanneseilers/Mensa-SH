@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
@@ -30,7 +31,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ActivityMain extends Activity implements OnItemSelectedListener {
 	
@@ -55,8 +55,12 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		// set url for mensa-sh-parser
-		Settings.sh_mensa_meal_db_api_url = "http://mensash.private-factory.de/api.php";
+		// set urls for mensa-sh-parser
+		Settings.sh_mensa_db_api_url = "http://mensash.private-factory.de/api.php";
+		Settings.sh_mensa_rating_ico_full_url = "http://mensash.private-factory.de/img/star.png";
+		Settings.sh_mensa_rating_ico_half_url = "http://mensash.private-factory.de/img/star_half.png";
+		Settings.sh_mensa_rating_ico_empty_url = "http://mensash.private-factory.de/img/star_empty.png";
+		Settings.sh_mensa_rating_ico_size = "16px";
 		
 		setContentView(R.layout.activity_main);
 		
@@ -98,28 +102,20 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 	 * @param aMeal
 	 */
     @JavascriptInterface
-    public void addMealRating(String aMensa, String aMeal) {
-        
-    	Toast toasta = Toast.makeText(this, "Rating called", Toast.LENGTH_LONG);
-		toasta.show();
-    	
+    public void addMealRating(String aMensa, String aMeal) {    	
     	// get mensa and meal from serialzed objects
 		Mensa mensa = Mensa.unserialize(aMensa);
 		Meal meal = Meal.unserialize(aMeal);
 		
-		// add rating 		
-		mensa.addRating( meal, 3, "", getUniqueDeviceHash() );
-		
-		// Show toast
-		Toast toast = Toast.makeText(this, "Bewertung hinzugefügt", Toast.LENGTH_SHORT);
-		toast.show();
-    	
+		// show rating dialog	
+		RatingDialog dialog = new RatingDialog(mensa, meal);
+		dialog.show( getFragmentManager(), "Test" );    
     }
     
     /**
      * @return Unique id for device
      */
-    public String getUniqueDeviceHash(){
+    public static String getUniqueDeviceHash(Context context){
     	/*
     	 * Getting device ID is not used due to using android id.
     	 * But still available for fallbacks.
@@ -128,7 +124,7 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 //    	TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 //    	return telephonyManager.getDeviceId();
     	
-    	return android.provider.Settings.Secure.getString(getContentResolver(), 
+    	return android.provider.Settings.Secure.getString( context.getContentResolver(), 
     			android.provider.Settings.Secure.ANDROID_ID); 
 
     }

@@ -40,5 +40,8 @@
     <string name="txt_clear_cache">Cache löschen</string>
     <string name="txt_cache">Caching</string>
     <string name="txt_status">Status</string>
+    <string name="txtSend">Senden</string>
+    <string name="txtCancel">Abbrechen</string>
+    <string name="title_activity_activity_rating">ActivityRating</string>
 
 </resources>
