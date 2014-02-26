@@ -83,7 +83,6 @@ public class AsyncRatingsLoader extends AsyncTask<String, Void, String> {
 		
 		List<Meal> meals = mensa.getMeals();
 		Hashtable<String, Integer> ratings = mensa.getRatings(meals);
-		System.out.println("ratings: " + ratings.size());
 		
 		for( Meal meal : meals ){
 			

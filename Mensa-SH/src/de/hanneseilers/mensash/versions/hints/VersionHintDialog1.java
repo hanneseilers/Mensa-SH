@@ -25,7 +25,7 @@ public class VersionHintDialog1 extends Hint {
     	String text = "Mit dem Update auf Version 2.0.0 wurde eine Bewertungsfunktion eingeführt.\n\n"
     			+ "Mit ihr kannst du Gerichte deiner Mensa bewerten."
     			+ " Durch das Aktivieren der Funktion werden jedoch mehr Daten aus dem Internet geladen."
-    			+ " Ohne Internet-Daten-Flatrate wird vom Aktivieren der Bewertungsfunktion abgeraten."
+    			+ " Ohne Internet-Daten-Flatrate solltest du die Bewertungsfunktion deaktivieren."
     			+ " Du kannst die Funktion auch nachträglich in den Einstellungen aktivieren oder deaktivieren.\n\n"
     			+ "Möchtest du die Bewertungsfunktion aktivieren?";
     	
@@ -47,6 +47,7 @@ public class VersionHintDialog1 extends Hint {
                 	   SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
                 	   sharedPref.edit().putBoolean( "SHOW_RATING" , false ).commit();
                 	   sharedPref.edit().putBoolean( "SHOW_VERSION_HINTS", false ).commit();
+                	   sharedPref.edit().apply();
                 	   setInactive();
                    }
                });

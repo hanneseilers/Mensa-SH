@@ -3,6 +3,7 @@ package de.hanneseilers.mensash;
 import de.hanneseilers.mensash.R;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 
@@ -21,6 +22,9 @@ public class SettingsPreference extends PreferenceFragment {
 		addPreferencesFromResource(R.xml.preferences);
 		Preference cmdClearCache = findPreference("CMD_CLEAR_CACHE");
 		
+		// hide some preferences
+		hidePreferences();
+		
 		// add listener for clearing cache
 		updateCachedFiles();
 		cmdClearCache.setOnPreferenceClickListener( new OnPreferenceClickListener() {
@@ -32,6 +36,14 @@ public class SettingsPreference extends PreferenceFragment {
 				return false;
 			}
 		} );
+	}
+	
+	/**
+	 * Hides hidden preference category
+	 */
+	private void hidePreferences(){
+		PreferenceScreen preferenceScreen = getPreferenceScreen();
+		preferenceScreen.removePreference( findPreference("HIDDEN") );
 	}
 	
 	/**

@@ -20,13 +20,16 @@ public class Disclaimer extends Hint {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// Set disclaimer text
     	String title = "Datenschutzerklärung";
-    	String text = "Du hast die Bewertungsfunktion aktiviert."
-    			+ " Diese sendet zum Schutz vor Missbrauch neben deiner Bewertung die Android-ID deines Mobilgerätes an den Mensa-SH-Bewertungsserver."
-    			+ " Die Android-ID ist beim ersten Start deines Gerätes automatisch generiert worden und enthält keinerlei persönliche Informationen.\n\n"
-    			+ " Auf dem Mensa-SH-Bewertungsserver wird deine Android-ID mit einer Einwegverschlüsselung verschlüsselt und gespeichert."
-    			+ " So kann deine Android-ID nicht mehr nachträglich ermittelt werden."
-    			+ " Die gespeicherten Bewertungen werden nicht personen- oder Android-ID-bezogen ausgewertet und die einzelnen Datensätze werden zu keinem Zeitpunkt and Dritte weitergegeben.\n\n"
-    			+ "Bist du mit dieser Datenschutzerklärung einverstanden?";
+    	String text = "Die Mensa-SH Applikation bietet die Möglichkeit Bewertungen von Mahlzeiten einer Mensa abzugeben."
+    			+ " Die Bewertungen werden auf externern Servern gespeichert."
+    			+ " Zur Abgabe einer Bewertung werden Informationen über die Mahlzeit, die Mensa, sowie eine gerätespezifische Identifikationsnnummer (ID) zum Schutz vor Missbrauch übertragen."
+    			+ " Die übertragenen Daten werden für einen unbestimmten Zeitraum gespeichert."
+    			+ " Die gerätespezifische ID wird ausschließlich mit einer Einwegverschlüsselung verschlüsselt gespeichert und enthält keine persönlichen Daten."
+    			+ " Der Betrieber der Mensa-SH Applikation garantiert, dass die ID nur zur Sicherstellung des Bewertungsservice gespeichert wird."
+    			+ " Abgegebene Bewertungen werden nicht auf Basis der gerätespezifischen ID ausgewertet."
+    			+ " Die Bewertungen werden ggf. nur in allgemein ausgewerteter Form an Dritte weitergegeben."
+    			+ " Ist der Benutzer der Mensa-SH-Applikation mit der Datenschutzerklärung nicht einverstanden, ist die Nutzung der Bewertungsfunktion ausgeschlossen.\n\n"
+    			+ "Sind Sie mit dieser Datenschutzerklärung einverstanden?";
     	
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

@@ -1,10 +1,15 @@
 package de.hanneseilers.mensash.versions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.hanneseilers.mensash.versions.hints.Disclaimer;
 import de.hanneseilers.mensash.versions.hints.Hint;
 import de.hanneseilers.mensash.versions.hints.VersionHintDialog1;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 
 /**
  * Class for showing version hints
@@ -13,25 +18,49 @@ import android.os.AsyncTask;
  */
 public final class VersionHints{
 	
+	private static List<Hint> hintlist = new ArrayList<Hint>();
+	
+	/**
+	 * Initates hintlist if empty
+	 * @param activity
+	 */
+	private static void initHintList(Activity activity){
+		if( hintlist.size() == 0 ){
+			// add all hints to list
+			hintlist.add( new VersionHintDialog1(activity) );
+			hintlist.add( new Disclaimer(activity) );
+		}
+	}
+	
 	/**
 	 * Shows all hints
 	 * @param activity
 	 */
-	public static void showAllHints(Activity activity){		
+	public static void showAllHints(Activity activity){	
+		// init hintlist
+		initHintList(activity);
+		
 		new AsyncTask<Activity, Void, Void>(){
 
 			@Override
 			protected Void doInBackground(Activity... params) {
 				Activity activity = params[0];
+				SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
 				
 				// generate all hints
-				Hint hint1 = new VersionHintDialog1(activity);
-				Hint disclaimer = new Disclaimer(activity);
-				
-				// show hints
-				showHint(hint1, activity);
-				
-				showHint(disclaimer, activity);
+				while( hintlist.size() > 0 ){
+					// get next hint in list
+					Hint hint = hintlist.get(0);
+					
+					// check for disclaimer
+					if( !hint.name.equals("disclaimer")
+							|| sharedPref.getBoolean("SHOW_RATING", false) ){
+						showHint(hint, activity);
+					}					
+					
+					// remove hint from list
+					hintlist.remove(0);
+				}
 				
 				return null;
 			}
@@ -44,25 +73,9 @@ public final class VersionHints{
 	 * @param hint
 	 * @param activity
 	 */
-	public static void showHint(Hint hint, Activity activity){
-		
-		// show hint using async task
-		new AsyncTask<Object, Void, Void>(){
-
-			@Override
-			protected Void doInBackground(Object... params) {
-				if( params.length > 1 ){
-					Hint hint = (Hint) params[0];
-					Activity activity = (Activity) params[1];
-					
-					// show hint
-					hint.show( activity.getFragmentManager(), hint.name );
-					waitForHint(hint);
-				}
-				return null;
-			}
-			
-		}.execute( new Object[]{hint, activity} );
+	public static void showHint(Hint hint, Activity activity){		
+		hint.show( activity.getFragmentManager(), hint.name );
+		waitForHint(hint);
 	}
 	
 	/**
@@ -82,13 +95,13 @@ public final class VersionHints{
 
 			@Override
 			protected Void doInBackground(Activity... params) {
-				Activity activity = params[0];				
-				Hint disclaimer = new Disclaimer(activity);
-				showHint(disclaimer, activity);				
+				Activity activity = params[0];
+				showHint(new Disclaimer(activity), activity);				
 				return null;
 			}
 			
-		}.execute(activity);		
+		}.execute(activity);
+			
 	}
 	
 }

@@ -20,6 +20,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,10 +59,13 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		
+		
 		// check if to show version hints
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-		boolean showRating = sharedPref.getBoolean("SHOW_VERSION_HINTS", false);
-		if( showRating ){
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);	
+		boolean showHints = sharedPref.getBoolean("SHOW_VERSION_HINTS", false);
+		
+		if( showHints || checkIfUpdated() ){
 			VersionHints.showAllHints(this);
 		}
 		
@@ -104,6 +109,36 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 		spinnerMensa.setOnItemSelectedListener(this);
 		
 	}
+	
+	/**
+	 * @return True if app was updated
+	 */
+	private boolean checkIfUpdated(){		
+		
+		try {
+			
+			SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+			PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+			
+			// get manifest version code and preferences version code
+			int prefVersion = sharedPref.getInt("APP_VERSION_CODE", -1);		
+			int version = pInfo.versionCode;
+			
+			if( version != prefVersion ){
+				// update version code in preferences
+				sharedPref.edit().putInt( "APP_VERSION_CODE", version ).commit();
+				return true;
+			}
+		
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return false;
+	}
+	
 	
 	
 	/**
