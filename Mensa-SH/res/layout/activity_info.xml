@@ -10,52 +10,51 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ActivityInfo" >
 
-        <TextView
-            android:id="@+id/txtInfoText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/txt_info_text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtInfoText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/txt_info_text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/TextView01"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text=" "
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:contentDescription="@string/txt_info_logo"
-            android:scaleType="fitCenter"
-            android:src="@drawable/mensashlogo" />
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:contentDescription="@string/txt_info_logo"
+        android:scaleType="fitCenter"
+        android:src="@drawable/mensashlogo" />
 
-        <TextView
-            android:id="@+id/txtLunchTime"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/txtLunchTime"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/txtInfoLawHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_info_law_header"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtInfoLawHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_info_law_header"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txtInfoLaw"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_info_law"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/txtInfoLaw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_info_law"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    </LinearLayout>
+</LinearLayout>

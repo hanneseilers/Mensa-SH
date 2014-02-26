@@ -9,6 +9,7 @@ import de.hanneseilers.mensash.enums.LoadingProgress;
 import de.hanneseilers.mensash.loader.AsyncCitiesLoader;
 import de.hanneseilers.mensash.loader.AsyncMensenLoader;
 import de.hanneseilers.mensash.loader.AsyncMenueLoader;
+import de.hanneseilers.mensash.versions.VersionHints;
 import de.mensa.sh.core.Meal;
 import de.mensa.sh.core.Mensa;
 import de.mensa.sh.core.Settings;
@@ -54,6 +55,13 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// check if to show version hints
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean showRating = sharedPref.getBoolean("SHOW_VERSION_HINTS", false);
+		if( showRating ){
+			VersionHints.showAllHints(this);
+		}
 		
 		// set urls for mensa-sh-parser
 		Settings.sh_mensa_db_api_url = "http://mensash.private-factory.de/api.php";
@@ -102,14 +110,21 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 	 * @param aMeal
 	 */
     @JavascriptInterface
-    public void addMealRating(String aMensa, String aMeal) {    	
-    	// get mensa and meal from serialzed objects
-		Mensa mensa = Mensa.unserialize(aMensa);
-		Meal meal = Meal.unserialize(aMeal);
+    public void addMealRating(String aMensa, String aMeal) { 
+    	
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean showRating = sharedPref.getBoolean("SHOW_RATING", false);
 		
-		// show rating dialog	
-		RatingDialog dialog = new RatingDialog(mensa, meal, this);
-		dialog.show( getFragmentManager(), "Test" );    
+		if( showRating ){
+	    	// get mensa and meal from serialzed objects
+			Mensa mensa = Mensa.unserialize(aMensa);
+			Meal meal = Meal.unserialize(aMeal);
+			
+			// show rating dialog	
+			RatingDialog dialog = new RatingDialog(mensa, meal, this);
+			dialog.show( getFragmentManager(), "Test" ); 
+		}
+		
     }
     
     /**
@@ -146,6 +161,9 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 			break;
 		case R.id.action_info:
 			startActivity( new Intent(this, ActivityInfo.class) );
+			break;
+		case R.id.disclaimer:
+			VersionHints.showDisclaimer(this);
 			break;
         default:
             return super.onOptionsItemSelected(item);

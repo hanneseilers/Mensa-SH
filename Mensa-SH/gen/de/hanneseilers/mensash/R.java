@@ -32,6 +32,7 @@ public final class R {
         public static final int TextView01=0x7f0a0001;
         public static final int action_info=0x7f0a0016;
         public static final int action_settings=0x7f0a0015;
+        public static final int disclaimer=0x7f0a0017;
         public static final int imageView1=0x7f0a0002;
         public static final int layout_city=0x7f0a000c;
         public static final int layout_loading=0x7f0a0007;
@@ -70,11 +71,13 @@ public final class R {
         public static final int title_activity_info=0x7f06000c;
         public static final int txtCancel=0x7f060016;
         public static final int txtSend=0x7f060015;
+        public static final int txt_ack_disclaimer=0x7f06001a;
         public static final int txt_cache=0x7f060013;
         public static final int txt_cache_hold_time_default=0x7f060009;
         public static final int txt_cache_hold_time_title=0x7f060006;
         public static final int txt_city=0x7f060001;
         public static final int txt_clear_cache=0x7f060012;
+        public static final int txt_disclaimer=0x7f06001b;
         public static final int txt_empty_string=0x7f060011;
         public static final int txt_info=0x7f060007;
         public static final int txt_info_law=0x7f06000b;
@@ -85,6 +88,8 @@ public final class R {
         public static final int txt_mensa=0x7f060002;
         public static final int txt_save_last_mensa=0x7f060004;
         public static final int txt_settings=0x7f060005;
+        public static final int txt_show_ratings=0x7f060018;
+        public static final int txt_show_version_hints=0x7f060019;
         public static final int txt_status=0x7f060014;
     }
     public static final class style {

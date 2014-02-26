@@ -9,5 +9,9 @@
         android:id="@+id/action_info"
         android:title="@string/txt_info">
     </item>
+    <item
+        android:id="@+id/disclaimer"
+        android:title="@string/txt_disclaimer">
+    </item>
 
 </menu>

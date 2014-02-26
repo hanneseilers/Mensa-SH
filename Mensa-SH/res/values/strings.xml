@@ -43,5 +43,9 @@
     <string name="txtSend">Senden</string>
     <string name="txtCancel">Abbrechen</string>
     <string name="title_activity_activity_rating">ActivityRating</string>
+    <string name="txt_show_ratings">Bewertungen anzeigen</string>
+    <string name="txt_show_version_hints">Versionshinweise anzeigen</string>
+    <string name="txt_ack_disclaimer">Datenschutzerlärung angenommen</string>
+    <string name="txt_disclaimer">Datenschutz</string>
 
 </resources>

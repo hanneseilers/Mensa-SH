@@ -12,7 +12,9 @@ import de.hanneseilers.mensash.enums.LoadingProgress;
 import de.mensa.sh.core.Meal;
 import de.mensa.sh.core.Mensa;
 import de.mensa.sh.core.Settings;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 
 public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 
@@ -44,7 +46,12 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 				ctx.setLunchTime(mensa.getLunchTime());
 				
 				// insert ratings into html
-				html = addRatingsToHTML(mensa, html);
+				SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
+				boolean showRating = sharedPref.getBoolean("SHOW_RATING", false);
+				boolean ackDisclaimer = sharedPref.getBoolean("ACK_DISCLAIMER", false);
+				if( ackDisclaimer && showRating ){
+					html = addRatingsToHTML(mensa, html);
+				}
 				
 				return html;				
 			}
