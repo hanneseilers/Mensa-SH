@@ -41,6 +41,7 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 	private WebSettings webSettings;
 	private TextView txtLunchTime;
 	private LinearLayout layoutLoading;
+	private TextView txtInfo;
 	
 	private List<Mensa> locations = new ArrayList<Mensa>();
 	
@@ -84,6 +85,7 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 		webSettings.setJavaScriptEnabled(true);
 		webView.addJavascriptInterface(this, "Android");
 		layoutLoading = (LinearLayout) findViewById(R.id.layout_loading);
+		txtInfo = (TextView) findViewById(R.id.txtInfo);
 		
 		// add resources to spinnes
 		adapterCity = new ArrayAdapter<String>(
@@ -239,7 +241,17 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 	 * @param aProgress
 	 */
 	public void setLoadingProgress(LoadingProgress aProgress){
+		setLoadingProgress(aProgress, "loading...");
+	}
+	
+	/**
+	 * Sets the loading progress
+	 * @param aProgress
+	 * @param message
+	 */
+	public void setLoadingProgress(LoadingProgress aProgress, String message){
 		progress = aProgress;
+		txtInfo.setText(message);
 		if( progress == LoadingProgress.MENUE_LOADED ){
 			layoutLoading.setVisibility( View.GONE );
 		}
