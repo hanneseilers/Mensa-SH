@@ -44,8 +44,8 @@ public class AsyncRatingsLoader extends AsyncTask<String, Void, String> {
 			if( mensa.getName().equals(params[0]) ){
 				// check if to add ratings
 				if( ackDisclaimer && showRating ){
-					html = addRatingsToHTML(mensa, html);
-				}				
+					return addRatingsToHTML(mensa, html);
+				}
 				break;
 			}
 		}		
@@ -89,7 +89,12 @@ public class AsyncRatingsLoader extends AsyncTask<String, Void, String> {
 			doc = Jsoup.parse( html );
 			
 			// defining querys
-			String query1 = "td:contains(" + meal.getMealName() + ")";
+			String mealname = meal.getMealName()
+					.replace("(", "\\(")
+					.replace(")", "\\)")
+					.replace(";", "\\;")
+					.replace("&", "\\&");
+			String query1 = "td:contains(" + mealname + ")";
 			String query2 = ".mensa-sh-rating";
 			
 			// select elements

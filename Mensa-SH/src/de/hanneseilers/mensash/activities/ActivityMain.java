@@ -266,9 +266,10 @@ public class ActivityMain extends Activity implements OnItemSelectedListener {
 	 * Loads a website as html plain text string
 	 * @param html
 	 */
+	@SuppressLint("SetJavaScriptEnabled")
 	public void loadWebsiteHtml(String html){
+		webView.clearView();
 		webView.loadData(html, "text/html", "UTF-8");
-		webView.reload();
 	}
 	
 	/**
