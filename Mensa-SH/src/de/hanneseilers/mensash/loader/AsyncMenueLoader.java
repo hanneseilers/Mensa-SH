@@ -61,7 +61,11 @@ public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
 		// load ratings
 		if( AsyncRatingsLoader.task != null ){
 			AsyncRatingsLoader.task.cancel(true);
-			while( AsyncRatingsLoader.task.isCancelled() );
+			long t1 = System.currentTimeMillis();
+			
+			// wait until task is finished or timeout
+			while( !AsyncRatingsLoader.task.isCancelled()
+					&& (System.currentTimeMillis()-t1) < AsyncRatingsLoader.taskTimeout );
 			AsyncRatingsLoader.task = null;
 		}
 		ctx.setLoadingProgress( LoadingProgress.INIT, "loading ratings..." );

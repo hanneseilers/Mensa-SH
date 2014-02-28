@@ -21,8 +21,8 @@ public class VersionHintDialog1 extends Hint {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
     	// Set version info
-    	String title = "UPDATE TO VERSION 2.0.0";
-    	String text = "Mit dem Update auf Version 2.0.0 wurde eine Bewertungsfunktion eingeführt.\n\n"
+    	String title = "UPDATE TO VERSION 2.0.1";
+    	String text = "Mit dem Update auf Version 2.0.1 wurde eine Bewertungsfunktion eingeführt.\n\n"
     			+ "Mit ihr kannst du Gerichte deiner Mensa bewerten."
     			+ " Durch das Aktivieren der Funktion werden jedoch mehr Daten aus dem Internet geladen."
     			+ " Ohne Internet-Daten-Flatrate solltest du die Bewertungsfunktion deaktivieren."
@@ -51,6 +51,7 @@ public class VersionHintDialog1 extends Hint {
                 	   setInactive();
                    }
                });
+        
         // Create the AlertDialog object and return it
         return builder.create();
     }

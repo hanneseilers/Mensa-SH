@@ -6,6 +6,7 @@ import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import de.hanneseilers.mensash.activities.ActivityMain;
 import de.hanneseilers.mensash.enums.LoadingProgress;
@@ -19,7 +20,9 @@ import android.preference.PreferenceManager;
 public class AsyncRatingsLoader extends AsyncTask<String, Void, String> {
 
 	private ActivityMain ctx;
+	
 	public static AsyncTask<String, Void, String> task = null;
+	public static final int taskTimeout = 1000;
 	
 	public AsyncRatingsLoader(ActivityMain ctx){
 		super();
@@ -76,7 +79,7 @@ public class AsyncRatingsLoader extends AsyncTask<String, Void, String> {
 	 * @return
 	 */
 	private String addRatingsToHTML(Mensa mensa, String html){
-		
+				
 		// parse html to document
 		html = html.replace("&#x20ac;", "EUR");
 		Document doc;
@@ -98,8 +101,8 @@ public class AsyncRatingsLoader extends AsyncTask<String, Void, String> {
 			String query2 = ".mensa-sh-rating";
 			
 			// select elements
-			Element td =  doc.select(query1).not(query2).first();
-			
+			Elements tds =  doc.select(query1);
+			Element td = tds.not(query2).first();
 			
 			if( td != null ){
 				// set vertical top alignment, class and link to rating function				
