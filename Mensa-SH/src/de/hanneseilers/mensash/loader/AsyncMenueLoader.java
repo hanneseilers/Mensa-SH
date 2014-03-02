@@ -1,75 +1,65 @@
 package de.hanneseilers.mensash.loader;
 
+import java.util.Hashtable;
+import java.util.List;
+
 import de.hanneseilers.mensash.CacheManager;
 import de.hanneseilers.mensash.activities.ActivityMain;
 import de.hanneseilers.mensash.enums.LoadingProgress;
+import de.mensa.sh.core.Meal;
 import de.mensa.sh.core.Mensa;
 import android.os.AsyncTask;
 
-public class AsyncMenueLoader extends AsyncTask<String, Integer, String> {
+public class AsyncMenueLoader extends AsyncTask<Mensa, Integer, List<Meal>> {
 
 	private ActivityMain ctx;
-	private Mensa mensa = null;
+	private Mensa selectedMensa;
 	
 	public AsyncMenueLoader(ActivityMain ctx){
 		super();
 		this.ctx = ctx;
 	}
 	
+	@Override
+	protected void onPreExecute() {
+		ctx.setLoadingProgress(LoadingProgress.INIT);
+	}
+	
 	/**
 	 * Gets cities
 	 */
 	@Override
-	protected String doInBackground(String... params) {
+	protected List<Meal> doInBackground(Mensa... params) {
 		
-		// find mensa with params name
-		for( Mensa mensa : ctx.getLocations() ){
-			if( mensa.getName().equals(params[0]) ){
-				
-				this.mensa = mensa;
-				
-				String html = "";
-				if( (html = CacheManager.readCachedFile(ctx, "menue_"+mensa.getCity()+"_"+mensa.getName()))
-						== null ){
-					html = mensa.getMenueAsHtml();
-					CacheManager.writeChachedFile( ctx, "menue_"+mensa.getCity()+"_"+mensa.getName(), html );
-				}
-
-				return html;				
+		List<Meal> meals = params[0].getMeals();
+		Hashtable<String, Integer> ratings = params[0].getRatings(meals);
+		for(Meal meal:meals) {
+			String key = meal.getKey();
+			int rating = -1;
+			if( ratings.containsKey(key) ){
+				rating = ratings.get(key);						
 			}
+			meal.setRating(rating);
 		}
-		
-		return "Kein Speiseplan gefunden!";
+		return meals;				
 	}
 	
 	/**
 	 * Adds cities to list
 	 */
 	@Override
-	protected void onPostExecute(String result) {
+	protected void onPostExecute(List<Meal> result) {
 		
 		// check if result is empty
-		if( result == "" ){
-			result = "<b>Kein Speiseplan gefunden!</b>";
+		if( result == null ){
+			ctx.setErrorMealList();
 		}
 		
 		// load menue
-		// set lunch time
-		ctx.setLunchTime(mensa.getLunchTime());
-		ctx.loadWebsiteHtml(result);
-		
-		// load ratings
-		if( AsyncRatingsLoader.task != null ){
-			AsyncRatingsLoader.task.cancel(true);
-			long t1 = System.currentTimeMillis();
-			
-			// wait until task is finished or timeout
-			while( !AsyncRatingsLoader.task.isCancelled()
-					&& (System.currentTimeMillis()-t1) < AsyncRatingsLoader.taskTimeout );
-			AsyncRatingsLoader.task = null;
-		}
-		ctx.setLoadingProgress( LoadingProgress.INIT, "loading ratings..." );
-		new AsyncRatingsLoader(ctx).execute( new String[]{mensa.getName(), result} );
-	}		
+		//ctx.selectDrawerItem(ctx.locations.indexOf(selectedMensa));
+		ctx.setMealList(result);
+		ctx.setLoadingProgress(LoadingProgress.MENUE_LOADED);
+
+	}
 	
 }

@@ -1,7 +1,8 @@
 package de.hanneseilers.mensash.activities;
 
+import org.holoeverywhere.app.Activity;
+
 import de.hanneseilers.mensash.SettingsPreference;
-import android.app.Activity;
 import android.os.Bundle;
 
 public class ActivitySettingsPreference extends Activity {
@@ -11,7 +12,7 @@ public class ActivitySettingsPreference extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		// add preferences
-		getFragmentManager().beginTransaction().replace(android.R.id.content,
+		getSupportFragmentManager().beginTransaction().replace(android.R.id.content,
                 new SettingsPreference()).commit();
 	}
 	

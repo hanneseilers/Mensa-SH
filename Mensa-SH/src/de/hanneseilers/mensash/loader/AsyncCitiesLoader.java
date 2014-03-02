@@ -33,26 +33,26 @@ public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 	protected List<String> doInBackground(Void... params) {		
 		// check if data is cache
 		String ret;
-		List<String> citiesList = new ArrayList<String>();
+		List<String> retList = new ArrayList<String>();
 
 		if( (ret = CacheManager.readCachedFile(ctx, "cities")) != null ){
 			String retArray[] = ret.split(";");
 			for( String city : retArray ){
-				citiesList.add(city);
+				retList.add(city);
 			}
 		}
 		
-		if( citiesList.size() == 0 ){			
+		if( retList.size() == 0 ){			
 			// cache file
-			citiesList = Mensa.getCities();
+			retList = Mensa.getCities();
 			ret = "";
-			for( String city : citiesList ){
+			for( String city : retList ){
 				ret += city + ";";
 			}
 			CacheManager.writeChachedFile(ctx, "cities", ret);
 		}
 		
-		return citiesList;
+		return retList;
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 			ctx.addCity(c);
 		}
 		ctx.notifyCityAdapter();
-		ctx.getSpinnerCity().setSelection(getSelection(result));
+		//ctx.getSpinnerCity().setSelection(getSelection(result));
 		ctx.setLoadingProgress(LoadingProgress.CITIES_LOADED);
 	}
 	

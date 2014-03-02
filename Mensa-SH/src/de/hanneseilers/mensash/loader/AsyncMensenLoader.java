@@ -10,6 +10,7 @@ import de.mensa.sh.core.Mensa;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 
@@ -28,7 +29,7 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 	protected List<Mensa> doInBackground(String... params) {
 		// check if data is cache
 		String ret;
-		List<Mensa> mensaList = new ArrayList<Mensa>();
+		List<Mensa> retList = new ArrayList<Mensa>();
 
 				
 		if( (ret = CacheManager.readCachedFile(ctx, "mensen_"+params[0])) != null ){
@@ -44,7 +45,7 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 						offers.add(o);
 					}
 					
-					mensaList.add(
+					retList.add(
 							new Mensa( params[0],
 							mensaData[0],
 							mensaData[1],
@@ -54,11 +55,11 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 			}
 		}
 		
-		if( mensaList.size() == 0 ){
+		if( retList.size() == 0 ){
 			// cache file
-			mensaList = Mensa.getLocations(params[0]);
+			retList = Mensa.getLocations(params[0]);
 			ret = "";
-			for( Mensa m : mensaList ){
+			for( Mensa m : retList ){
 				ret += m.getName() + ","
 						+ m.getLunchTime() + ",";
 				for( String o : m.getOffers() ){
@@ -69,7 +70,7 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 			CacheManager.writeChachedFile(ctx, "mensen_"+params[0], ret);
 		}
 		
-		return mensaList;
+		return retList;
 	}
 	
 	/**
@@ -78,18 +79,19 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 	@Override
 	protected void onPostExecute(List<Mensa> result) {
 		ctx.setLocations(result);
-		int count = ctx.countMensenInList();
 		
 		// get mensa names
 		ctx.clearMensaAdapter();
 		for(Mensa m : result){
-			ctx.addMensa( m.getName() );
+			ctx.addMensa( m.getName(), m.getLunchTime() );
 		}
 		ctx.notifyMensaAdapter();
-		ctx.getSpinnerMensa().setSelection(getSelection(result));
+		int count = ctx.countMensenInList();
+		ctx.getSpinnerMensa().setItemChecked(getSelection(result), true);
 		ctx.setLoadingProgress(LoadingProgress.MENSEN_LOADED);
 		
 		// check if to programmaticaly load menue
+		Log.d("Mensa", "count: " + count);
 		if(count > 0){
 			ctx.loadFirstMensaMenue();
 		}
