@@ -13,3 +13,4 @@
 
 # allow libs folder #
 !/libs
+/gen
