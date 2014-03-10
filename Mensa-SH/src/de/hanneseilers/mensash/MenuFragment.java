@@ -1,7 +1,6 @@
 package de.hanneseilers.mensash;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.holoeverywhere.LayoutInflater;
@@ -18,14 +17,12 @@ import com.nineoldandroids.view.ViewPropertyAnimator;
 import de.hanneseilers.mensash.activities.ActivityMain;
 import de.mensa.sh.core.Meal;
 
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.SimpleAdapter;
 
 
 

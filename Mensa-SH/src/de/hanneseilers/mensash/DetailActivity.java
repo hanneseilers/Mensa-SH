@@ -21,7 +21,6 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.support.v4.app.NavUtils;
-import android.annotation.TargetApi;
 import android.os.Build;
 
 public class DetailActivity extends Activity {
@@ -157,7 +156,7 @@ public class DetailActivity extends Activity {
 		
 		@Override
 		protected void onPostExecute(Boolean result) {
-			String msg = "Bewertung nicht möglich!";
+			String msg = "Bewertung nicht mï¿½glich!";
 			if(result){
 				msg  = "Bewertung gesendet.";
 			}
