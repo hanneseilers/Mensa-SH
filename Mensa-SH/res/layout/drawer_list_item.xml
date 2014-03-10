@@ -15,14 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:text="Mensa X"
         android:textAppearance="?android:attr/textAppearance" />
 
     <TextView
         android:id="@+id/txtInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </org.holoeverywhere.widget.LinearLayout>

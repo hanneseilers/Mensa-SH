@@ -43,7 +43,7 @@
     <string name="txt_clear_cache">Cache löschen</string>
     <string name="txt_cache">Caching</string>
     <string name="txt_status">Status</string>
-    <string name="txtSend">Senden</string>
+    <string name="txtSend">Bewertung senden</string>
     <string name="txtCancel">Abbrechen</string>
     <string name="title_activity_activity_rating">ActivityRating</string>
     <string name="txt_show_ratings">Bewertungen anzeigen</string>
@@ -62,4 +62,7 @@
         <item>Osterrönfeld</item>
         <item>Wedel</item>
     </string-array>
+
+    <string name="img_description">image</string>
+
 </resources>
