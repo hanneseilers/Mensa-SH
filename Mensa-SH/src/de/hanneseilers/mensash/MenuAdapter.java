@@ -22,14 +22,7 @@ import de.mensa.sh.core.Mensa;
 public class MenuAdapter extends ArrayAdapter<Meal> {
 	  private final Context context;
 	  private final List<Meal> values;
-	  private Mensa mensa;
 	  private boolean showRating;
-
-//	  public MenuAdapter(Context context, Meal[] values) {
-//	    super(context, R.layout.menu_list_item, values);
-//	    this.context = context;
-//	    this.values = values;
-//	  }
 	  
 	  public MenuAdapter(Context context, List<Meal> values) {
 		    super(context, R.layout.menu_list_item, values);
@@ -80,7 +73,4 @@ public class MenuAdapter extends ArrayAdapter<Meal> {
 		  return values.size();
 	  }
 	  
-	  public void setMensa(Mensa mensa) {
-		  this.mensa = mensa;
-	  }
 	} 

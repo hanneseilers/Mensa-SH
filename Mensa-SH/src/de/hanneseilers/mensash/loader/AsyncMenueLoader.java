@@ -3,7 +3,6 @@ package de.hanneseilers.mensash.loader;
 import java.util.Hashtable;
 import java.util.List;
 
-import de.hanneseilers.mensash.CacheManager;
 import de.hanneseilers.mensash.activities.ActivityMain;
 import de.hanneseilers.mensash.enums.LoadingProgress;
 import de.mensa.sh.core.Meal;

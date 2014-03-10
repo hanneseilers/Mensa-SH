@@ -35,7 +35,6 @@ import de.hanneseilers.mensash.loader.AsyncMenueLoader;
 import de.hanneseilers.mensash.versions.VersionHints;
 import de.mensa.sh.core.Meal;
 import de.mensa.sh.core.Mensa;
-import android.net.Uri;
 import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
@@ -62,7 +61,6 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
 	
 	public List<Mensa> locations = new ArrayList<Mensa>();
 	
-	private LoadingProgress progress = LoadingProgress.INIT;
 	private boolean firstSelection = true;
 	
 	private ArrayList<MenuFragment> menuFragments;
@@ -305,11 +303,6 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
 			Log.d("Mensa", String.valueOf(meal.getRating()));
 		}
 		for(MenuFragment fragment:menuFragments) {
-			if(mDrawerList.getSelectedItemPosition() == -1){
-				fragment.adapterMeals.setMensa(locations.get(0));
-			} else {
-				fragment.adapterMeals.setMensa(locations.get(mDrawerList.getSelectedItemPosition()));
-			}
 			fragment.adapterMeals.notifyDataSetChanged();
 		}
 		mMenueFragmentPagerAdapter.notifyDataSetChanged();
@@ -450,7 +443,7 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
 	
 	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    @Override
-	    public void onItemClick(android.widget.AdapterView parent, View view, int position, long id) {
+	    public void onItemClick(android.widget.AdapterView<?> parent, View view, int position, long id) {
 			loadMenue( locations.get(position) );
 	    	selectDrawerItem(position);
 		    mDrawerLayout.closeDrawer(mDrawer);
@@ -488,7 +481,6 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
     }
 
 	public void setLoadingProgress(LoadingProgress mensenLoaded) {
-		progress = mensenLoaded;
 		if (mensenLoaded == LoadingProgress.MENUE_LOADED) {
 			for (MenuFragment fragment:menuFragments) {
 				fragment.setProgressBar(false);
