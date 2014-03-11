@@ -33,6 +33,7 @@ import de.hanneseilers.mensash.loader.AsyncMenueLoader;
 import de.hanneseilers.mensash.versions.VersionHints;
 import de.mensa.sh.core.Meal;
 import de.mensa.sh.core.Mensa;
+import de.mensa.sh.core.Settings;
 import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
@@ -78,6 +79,9 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// set url for mensa-sh-parser
+		Settings.sh_mensa_db_api_url = "http://mensash.private-factory.de/api.php";
 		
 		// check if to show version hints
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);	
