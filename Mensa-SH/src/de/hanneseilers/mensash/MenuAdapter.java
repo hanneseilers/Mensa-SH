@@ -55,11 +55,17 @@ public class MenuAdapter extends ArrayAdapter<Meal> {
 	    imgVegetarian.setVisibility(values.get(position).isVegetarian() ? View.VISIBLE : View.GONE);
 	    imgVegan.setVisibility(values.get(position).isVegan() ? View.VISIBLE : View.GONE);
 	    
-	    if(values.get(position).getRating() < 0 || !showRating) {
+	    if(!showRating) {
 	    	rating.setVisibility(View.INVISIBLE);
 	    } else {
 	    	rating.setVisibility(View.VISIBLE);
-	    	rating.setRating(values.get(position).getRating());
+	    	if (values.get(position).getRating() < 0) {
+	    		rating.setEnabled(false);
+	    		rating.setRating(0);
+	    	} else {
+	    		rating.setEnabled(true);
+	    		rating.setRating(values.get(position).getRating());
+	    	}
 	    }
 
 	    return rowView;
