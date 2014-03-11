@@ -10,7 +10,6 @@ import de.mensa.sh.core.Mensa;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 
@@ -87,13 +86,11 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 		}
 		ctx.notifyMensaAdapter();
 		int count = ctx.countMensenInList();
-		ctx.getSpinnerMensa().setItemChecked(getSelection(result), true);
 		ctx.setLoadingProgress(LoadingProgress.MENSEN_LOADED);
 		
 		// check if to programmaticaly load menue
-		Log.d("Mensa", "count: " + count);
 		if(count > 0){
-			ctx.loadFirstMensaMenue();
+			ctx.selectDrawerItem(getSelection(result));
 		}
 	}
 	
@@ -109,7 +106,6 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 		if( sharedPref.getBoolean("SAVE_LAST_MENSA", false) && ctx.isFirstSelection() ){
 			String mensa;
 			if( (mensa = CacheManager.readCachedFile(ctx, cachedFileName, false)) != null ){
-				
 				int i;
 				for( i=0; i<result.size(); i++ ){
 					if( result.get(i).getName().equals(mensa) ){

@@ -19,8 +19,6 @@ import org.holoeverywhere.widget.ViewPager;
 import com.astuetz.PagerSlidingTabStrip;
 import com.google.gson.Gson;
 
-
-
 import de.hanneseilers.mensash.MenuAdapter;
 import de.hanneseilers.mensash.MenuFragment;
 import de.hanneseilers.mensash.MenuFragment.OnFragmentInteractionListener;
@@ -42,10 +40,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 
-
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.util.Log;
-
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -296,11 +291,9 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
 		}
 
 		int day = -1;
-		if (meals == null) { Log.d("Mensa", "meals==null"); }
 		for (Meal meal:meals) {
 			day = meal.getDay();
 			menuFragments.get(day).listMeals.add(meal);
-			Log.d("Mensa", String.valueOf(meal.getRating()));
 		}
 		for(MenuFragment fragment:menuFragments) {
 			fragment.adapterMeals.notifyDataSetChanged();
@@ -336,9 +329,7 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
 	 * Loads the menue of the first mensa
 	 */
 	public void loadFirstMensaMenue(){
-		Log.d("Mensa", "loading First Mensa Menue");
 		if( mDrawerList.getCount() > 0 ){
-			Log.d("Mensa", drawerItemsList.get(0).get("txtName"));
 			selectDrawerItem(0);
 			loadMenue( locations.get(0) );
 		}
@@ -425,7 +416,7 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
 			CacheManager.writeChachedFile(this, AsyncCitiesLoader.cachedFileName, city);
 			
 			if(mDrawerList.getCheckedItemPosition() < mDrawerList.getCount()) {
-				String mensa = mDrawerList.getItemAtPosition(mDrawerList.getCheckedItemPosition()).toString();
+				String mensa = locations.get(mDrawerList.getCheckedItemPosition()).getName();
 				CacheManager.writeChachedFile(this, AsyncMensenLoader.cachedFileName, mensa);
 			}	
 		}
@@ -444,7 +435,6 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
 	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    @Override
 	    public void onItemClick(android.widget.AdapterView<?> parent, View view, int position, long id) {
-			loadMenue( locations.get(position) );
 	    	selectDrawerItem(position);
 		    mDrawerLayout.closeDrawer(mDrawer);
 	    }
@@ -454,6 +444,7 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
 	    // Highlight the selected item, update the title, and close the drawer
 	    mDrawerList.setItemChecked(position, true);
 	    setTitle(drawerItemsList.get(position).get("txtName"));
+	    loadMenue( locations.get(position) );
 	}
 
 	@Override
