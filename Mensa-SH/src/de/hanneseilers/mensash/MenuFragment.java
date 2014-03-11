@@ -43,7 +43,7 @@ public class MenuFragment extends Fragment {
 	
 	public List<Meal> listMeals = new ArrayList<Meal>();
 
-	private OnFragmentInteractionListener mListener;
+	private Callback mListener;
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -67,12 +67,6 @@ public class MenuFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		if (savedInstanceState != null) {
-//			ArrayList<ParcelableHashMap> list = savedInstanceState.getParcelableArrayList("listMeals");
-//			for (ParcelableHashMap phm:list) {
-//				listMeals.add(phm.data_map);
-//			}
-//		}
 	}
 
 	@Override
@@ -87,7 +81,7 @@ public class MenuFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
 				if (mListener != null) {
-					mListener.onFragmentInteraction(listMeals.get(position));
+					mListener.showDetails(listMeals.get(position));
 				}
 			}
 		});
@@ -95,18 +89,13 @@ public class MenuFragment extends Fragment {
 		setProgressBar(progressBarVisible);
 		return view;
 	}
-	
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		activity = (ActivityMain) activity;
 		try {
-			mListener = (OnFragmentInteractionListener) activity;
+			mListener = (Callback) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
 					+ " must implement OnFragmentInteractionListener");
@@ -128,8 +117,8 @@ public class MenuFragment extends Fragment {
 	 * "http://developer.android.com/training/basics/fragments/communicating.html"
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
-	public interface OnFragmentInteractionListener {
-		public void onFragmentInteraction(Meal meal);
+	public interface Callback {
+		public void showDetails(Meal meal);
 	}
 	
 	public void setProgressBar(Boolean visible) {

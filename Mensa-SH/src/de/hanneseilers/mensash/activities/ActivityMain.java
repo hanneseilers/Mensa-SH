@@ -8,8 +8,6 @@ import java.util.List;
 import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
-import org.holoeverywhere.widget.AdapterView;
-import org.holoeverywhere.widget.AdapterView.OnItemSelectedListener;
 import org.holoeverywhere.widget.ArrayAdapter;
 import org.holoeverywhere.widget.DrawerLayout;
 import org.holoeverywhere.widget.LinearLayout;
@@ -21,7 +19,6 @@ import com.google.gson.Gson;
 
 import de.hanneseilers.mensash.MenuAdapter;
 import de.hanneseilers.mensash.MenuFragment;
-import de.hanneseilers.mensash.MenuFragment.OnFragmentInteractionListener;
 import de.hanneseilers.mensash.DetailActivity;
 import de.hanneseilers.mensash.MenueFragmentPagerAdapter;
 import de.hanneseilers.mensash.R;
@@ -50,7 +47,7 @@ import android.view.View;
 import android.widget.SimpleAdapter;
 
 
-public class ActivityMain extends Activity implements OnItemSelectedListener, OnFragmentInteractionListener {
+public class ActivityMain extends Activity implements MenuFragment.Callback {
 	
 	private ArrayAdapter<String> adapterCity;
 	private SimpleAdapter adapterMensa;
@@ -334,20 +331,6 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
 		}
 	}
 
-	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int pos,
-			long id) {
-		
-		// check which list was selected
-		switch( parent.getId() ){
-		default:
-			break;
-		}
-	}
-
-	@Override
-	public void onNothingSelected(AdapterView<?> arg0) {}
-
 
 	/**
 	 * @return the locations
@@ -423,7 +406,7 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
 
 
 	@Override
-	public void onFragmentInteraction(Meal meal) {
+	public void showDetails(Meal meal) {
 		Gson gson = new Gson();
 		Intent i = new Intent(this,DetailActivity.class);
 		i.putExtra("Meal", gson.toJson(meal));
