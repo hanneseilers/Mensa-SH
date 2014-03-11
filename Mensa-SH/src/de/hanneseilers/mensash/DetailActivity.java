@@ -11,6 +11,7 @@ import de.hanneseilers.mensash.activities.ActivityMain;
 import de.mensa.sh.core.Meal;
 import de.mensa.sh.core.Mensa;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -88,14 +89,9 @@ public class DetailActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			NavUtils.navigateUpFromSameTask(this);
+			Intent intent = this.getIntent();
+			this.setResult(RESULT_CANCELED, intent);
+			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -165,7 +161,11 @@ public class DetailActivity extends Activity {
     		Toast toast = Toast.makeText( view.getContext(), msg, Toast.LENGTH_SHORT );
     		toast.show();
     		
-    		view.setEnabled(true);
+    		if(result) {
+				Intent intent = DetailActivity.this.getIntent();
+				DetailActivity.this.setResult(RESULT_OK, intent);
+				finish();
+    		}
 		}
 		
 	}

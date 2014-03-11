@@ -40,6 +40,7 @@ import android.content.res.Configuration;
 
 import android.support.v4.app.ActionBarDrawerToggle;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,6 +50,7 @@ import android.widget.SimpleAdapter;
 
 public class ActivityMain extends Activity implements MenuFragment.Callback {
 	
+	private static final int RATING_RESULT_CODE = 0;
 	private ArrayAdapter<String> adapterCity;
 	private SimpleAdapter adapterMensa;
 	
@@ -404,15 +406,24 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 		}
 	}
 
-
 	@Override
 	public void showDetails(Meal meal) {
 		Gson gson = new Gson();
 		Intent i = new Intent(this,DetailActivity.class);
 		i.putExtra("Meal", gson.toJson(meal));
 		i.putExtra("Mensa", gson.toJson(selectedMensa));
-		startActivity(i);
+		startActivityForResult(i, RATING_RESULT_CODE);
 	}
+	
+	protected void onActivityResult(int requestCode, int resultCode,
+            Intent data) {
+        if (requestCode == RATING_RESULT_CODE) {
+            if (resultCode == RESULT_OK) {
+            	Mensa mensa = new Gson().fromJson(data.getExtras().getString("Mensa"), Mensa.class);
+            	new AsyncMenueLoader(this).execute(mensa);
+            }
+        }
+    }
 	
 	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    @Override
