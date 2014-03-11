@@ -163,13 +163,8 @@ public class ActivityMain extends Activity implements OnItemSelectedListener, On
 			getSupportActionBar().setTitle(mTitle);
 		}
 		
-	}
-	
-	@Override
-	protected void onResume(){
-		super.onResume();
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);        
 		addMensen(sharedPref.getString("city", "Kiel"));
+		
 	}
 	
 	@Override

@@ -10,14 +10,12 @@ import org.holoeverywhere.widget.TextView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
 import de.mensa.sh.core.Meal;
-import de.mensa.sh.core.Mensa;
 
 public class MenuAdapter extends ArrayAdapter<Meal> {
 	  private final Context context;
@@ -63,7 +61,6 @@ public class MenuAdapter extends ArrayAdapter<Meal> {
 	    	rating.setVisibility(View.VISIBLE);
 	    	rating.setRating(values.get(position).getRating());
 	    }
-		Log.d("Mensa", "rating "+ String.valueOf(values.get(position).getRating()));
 
 	    return rowView;
 	  }
