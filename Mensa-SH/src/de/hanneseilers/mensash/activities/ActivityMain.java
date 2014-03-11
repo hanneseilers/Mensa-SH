@@ -40,7 +40,6 @@ import android.content.res.Configuration;
 
 import android.support.v4.app.ActionBarDrawerToggle;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;

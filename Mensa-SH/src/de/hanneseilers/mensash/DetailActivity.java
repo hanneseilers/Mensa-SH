@@ -21,7 +21,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.support.v4.app.NavUtils;
 import android.os.Build;
 
 public class DetailActivity extends Activity {
