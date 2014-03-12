@@ -3,24 +3,6 @@
     android:key="PREF_SCREEN" >
 
     <PreferenceCategory
-        android:key="CITIES"
-        android:title="@string/txt_city" >
-        <Preference
-            android:defaultValue="Kiel"
-            android:key="city" />
-
-        <!--
-             <ListPreference
-            android:defaultValue="Kiel"
-            android:entries="@array/cities"
-            android:entryValues="@array/cities"
-            android:key="city"
-            android:summary="@string/summary_cities"
-            android:title="@string/txt_city" />
-        -->
-
-    </PreferenceCategory>
-    <PreferenceCategory
         android:key="CACHE"
         android:title="@string/txt_cache" >
         <CheckBoxPreference
