@@ -196,6 +196,7 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
         
         // Bind the widget to the adapter
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabs.setIndicatorColorResource(R.color.orange);
         tabs.setViewPager(mViewPager);
 		
 		for (MenuFragment frag : menuFragments) {
