@@ -53,12 +53,10 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	private ArrayAdapter<String> adapterCity;
 	private SimpleAdapter adapterMensa;
 	
-	public List<Mensa> locations = new ArrayList<Mensa>();
-	
+	public List<Mensa> locations = new ArrayList<Mensa>();	
 	private boolean firstSelection = true;
 	
-	private ArrayList<MenuFragment> menuFragments;
-	
+	private ArrayList<MenuFragment> menuFragments;	
 	private DrawerLayout mDrawerLayout;
 	private LinearLayout mDrawer;
     public ListView mDrawerList;
@@ -433,7 +431,12 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	}
 
 	public void selectDrawerItem(int position) {
-	    // Highlight the selected item, update the title, and close the drawer
+	    // check if position is out of bounds
+		if( drawerItemsList.size()-1 < position ){
+			position = drawerItemsList.size()-1;
+		}
+		
+		// Highlight the selected item, update the title, and close the drawer
 	    mDrawerList.setItemChecked(position, true);
 	    setTitle(drawerItemsList.get(position).get("txtName"));
 	    loadMenue( locations.get(position) );
@@ -449,7 +452,7 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawer);
+//        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawer);
         //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }

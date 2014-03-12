@@ -46,7 +46,7 @@ public class MenuAdapter extends ArrayAdapter<Meal> {
 	    ImageView imgVegan = (ImageView) rowView.findViewById(R.id.imgVegan);
 	    RatingBar rating = (RatingBar) rowView.findViewById(R.id.ratingBar);
 	    
-	    txtName.setText(values.get(position).getDate() + values.get(position).getMealName());
+	    txtName.setText(values.get(position).getMealName());
 	    txtInfo.setText(values.get(position).getPrice());
 
 	    imgAlcohol.setVisibility(values.get(position).isAlc() ? View.VISIBLE : View.GONE);

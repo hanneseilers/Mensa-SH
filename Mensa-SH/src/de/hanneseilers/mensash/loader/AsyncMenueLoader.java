@@ -12,7 +12,6 @@ import android.os.AsyncTask;
 public class AsyncMenueLoader extends AsyncTask<Mensa, Integer, List<Meal>> {
 
 	private ActivityMain ctx;
-	private Mensa selectedMensa;
 	
 	public AsyncMenueLoader(ActivityMain ctx){
 		super();

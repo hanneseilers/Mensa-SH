@@ -52,7 +52,7 @@ public class DetailActivity extends Activity {
 	    rating = (RatingBar) findViewById(R.id.ratingBar);
 	    Button sendButton = (Button) findViewById(R.id.sendButton);
 	    
-	    txtName.setText(meal.getDate() + meal.getMealName());
+	    txtName.setText(meal.getMealName());
 	    txtInfo.setText(meal.getPrice());
 
 	    imgAlcohol.setVisibility(meal.isAlc() ? View.VISIBLE : View.GONE);
