@@ -1,4 +1,4 @@
-package de.hanneseilers.mensash;
+package de.hanneseilers.mensash.activities;
 
 import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.widget.Button;
@@ -7,7 +7,7 @@ import org.holoeverywhere.widget.Toast;
 
 import com.google.gson.Gson;
 
-import de.hanneseilers.mensash.activities.ActivityMain;
+import de.hanneseilers.mensash.R;
 import de.mensa.sh.core.Meal;
 import de.mensa.sh.core.Mensa;
 
@@ -28,6 +28,7 @@ public class DetailActivity extends Activity {
 	private Mensa mensa;
 	private Meal meal;
 	
+	private final String TAG = DetailActivity.class.getName();
 	private RatingBar rating;
 	
 	@Override
@@ -104,14 +105,10 @@ public class DetailActivity extends Activity {
 	private class addRatingListener implements OnClickListener{
 
 		@Override
-		public void onClick(View view) {
-			
-			view.setEnabled(false);
-			
-    		int ratingInt = (int) rating.getRating();  
-    		
-    		(new sendRatingTask()).execute( mensa, meal, ratingInt, view );    		
-    		
+		public void onClick(View view) {			
+			view.setEnabled(false);			
+    		int ratingInt = (int) rating.getRating(); 
+    		(new sendRatingTask()).execute( mensa, meal, ratingInt, view );
 		}
 		
 	}
@@ -136,13 +133,17 @@ public class DetailActivity extends Activity {
 				view = (View) params[3];
 				
 				String hash = ActivityMain.getUniqueDeviceHash(view.getContext());
-				if(mensa==null) Log.d("Mensa", "mensa==null");
-				if(hash==null) Log.d("Mensa", "hash==null");
-				if(meal==null) Log.d("Mensa", "meal==null");
+//				if(mensa==null) Log.d(TAG, "mensa==null");
+//				if(hash==null) Log.d(TAG, "hash==null");
+//				if(meal==null) Log.d(TAG, "meal==null");
 				try{
-				ret = mensa.addRating( meal, ratingInt, "", hash ); 
+					ret = mensa.addRating( meal, ratingInt, "", hash ); 
 				}catch(NullPointerException e){
-					
+					String msg = e.getMessage();
+					for( StackTraceElement el : e.getStackTrace() ){
+						msg += "\n" + el.toString();
+					}
+					Log.e(TAG, msg);
 				}
 			}
 			

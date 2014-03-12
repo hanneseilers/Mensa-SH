@@ -34,7 +34,7 @@
             android:label="@string/txt_settings" >
         </activity>
         <activity
-            android:name="de.hanneseilers.mensash.DetailActivity"
+            android:name="de.hanneseilers.mensash.activities.DetailActivity"
             android:label="@string/title_activity_detail"
             android:parentActivityName="de.hanneseilers.mensash.activities.ActivityMain" >
             <meta-data

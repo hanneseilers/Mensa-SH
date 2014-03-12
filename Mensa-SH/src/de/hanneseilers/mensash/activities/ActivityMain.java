@@ -19,7 +19,6 @@ import com.google.gson.Gson;
 
 import de.hanneseilers.mensash.MenuAdapter;
 import de.hanneseilers.mensash.MenuFragment;
-import de.hanneseilers.mensash.DetailActivity;
 import de.hanneseilers.mensash.MenueFragmentPagerAdapter;
 import de.hanneseilers.mensash.R;
 import de.hanneseilers.mensash.CacheManager;
