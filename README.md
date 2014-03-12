@@ -3,6 +3,10 @@ Mensa-SH
 
 Android app for all cafertias of Studentenwerk Schleswig-Holstein.
 
+Install on Android device
+-------------------------
+Visit https://play.google.com/store/apps/details?id=de.hanneseilers.mensash&hl=de and install the android application on your android device.
+
 Installation using Eclipse
 --------------------------
 - Import Mensa-SH and libraries submodules as android projects into eclipse.
