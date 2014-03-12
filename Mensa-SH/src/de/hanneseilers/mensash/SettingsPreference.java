@@ -45,7 +45,7 @@ public class SettingsPreference extends PreferenceFragment {
 		// get numbe rof cached files and preference
 		int cachedFiles = CacheManager.getCachedFiles(getActivity()).length;
 		int cacheSize = CacheManager.getCacheSize(getActivity());
-		Preference prefStat = findPreference("PREF_STATUS");
+		Preference prefStat = findPreference("PREF_CHACHE_STATUS");
 		
 		// set text to preference
 		prefStat.setSummary( cachedFiles + " cached files (" + cacheSize + "kB)" );

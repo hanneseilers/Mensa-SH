@@ -29,22 +29,21 @@
             android:summary="@string/summary_cache_hold_time"
             android:title="@string/txt_cache_hold_time_title" />
 
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="SHOW_RATING"
-            android:title="@string/txt_show_ratings" />
-    </PreferenceCategory>
-    <PreferenceCategory
-        android:key="STATUS"
-        android:title="@string/txt_status" >
         <Preference
             android:enabled="false"
-            android:key="PREF_STATUS"
+            android:key="PREF_CHACHE_STATUS"
             android:title="@string/txt_cache" />
         <Preference
             android:key="CMD_CLEAR_CACHE"
             android:title="@string/txt_clear_cache" />
-
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="STATUS"
+        android:title="@string/txt_status" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="SHOW_RATING"
+            android:title="@string/txt_show_ratings" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="SHOW_VERSION_HINTS"
