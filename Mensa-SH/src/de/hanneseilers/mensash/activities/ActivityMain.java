@@ -8,10 +8,10 @@ import java.util.List;
 import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
-import org.holoeverywhere.widget.ArrayAdapter;
 import org.holoeverywhere.widget.DrawerLayout;
 import org.holoeverywhere.widget.LinearLayout;
 import org.holoeverywhere.widget.ListView;
+import org.holoeverywhere.widget.TextView;
 import org.holoeverywhere.widget.ViewPager;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -50,20 +50,29 @@ import android.widget.SimpleAdapter;
 public class ActivityMain extends Activity implements MenuFragment.Callback {
 	
 	private static final int RATING_RESULT_CODE = 0;
-	private ArrayAdapter<String> adapterCity;
+	private SimpleAdapter adapterCity;
 	private SimpleAdapter adapterMensa;
 	
-	public List<Mensa> locations = new ArrayList<Mensa>();	
+	private List<String> cities = new ArrayList<String>();
+	private List<Mensa> mensen = new ArrayList<Mensa>();
+	
 	private boolean firstSelection = true;
 	
 	private ArrayList<MenuFragment> menuFragments;	
 	private DrawerLayout mDrawerLayout;
 	private LinearLayout mDrawer;
-    public ListView mDrawerList;
+    private ListView mDrawerMensaList;
+    private ListView mDrawerCitiesList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private TextView txtMenuCity;
+    private TextView txtMenuMensa;
+    
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    private ArrayList<HashMap<String,String>> drawerItemsList = new ArrayList<HashMap<String,String>>();
+    
+    private ArrayList<HashMap<String,String>> drawerMensaItemsList = new ArrayList<HashMap<String,String>>();
+    private ArrayList<HashMap<String,String>> drawerCitiesItemsList = new ArrayList<HashMap<String,String>>();
+    
     private Mensa selectedMensa;
 	
 	// When requested, this adapter returns a DemoObjectFragment,
@@ -92,21 +101,56 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 		// get drawer
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawer = (LinearLayout) findViewById(R.id.left_drawer);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
+		mDrawerCitiesList = (ListView) findViewById(R.id.left_city_drawer_list);
+        mDrawerMensaList = (ListView) findViewById(R.id.left_mensa_drawer_list);  
+        
+        // get menu heads
+ 		txtMenuCity = (TextView) findViewById(R.id.txtMenuCity);
+ 		txtMenuMensa = (TextView) findViewById(R.id.txtMenuMensa);
+ 		
+ 		// add listeners to menu headers
+ 		txtMenuCity.setOnClickListener( new View.OnClickListener() {			
+ 			@Override
+ 			public void onClick(View v) {
+ 				if( mDrawerCitiesList.getVisibility() == View.VISIBLE ){
+ 					mDrawerCitiesList.setVisibility(View.GONE);
+ 				}
+ 				else{
+ 					mDrawerCitiesList.setVisibility(View.VISIBLE);
+ 				}
+ 			}
+ 		} );
+ 		
+ 		txtMenuMensa.setOnClickListener( new View.OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				if( mDrawerMensaList.getVisibility() == View.VISIBLE ){
+					mDrawerMensaList.setVisibility(View.GONE);
+ 				}
+ 				else{
+ 					mDrawerMensaList.setVisibility(View.VISIBLE);
+ 				}
+			}
+		} );
 		
-		// add resources to spinners
-		adapterCity = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_item,
-				new ArrayList<String>());
+		// add resources to adapters
+		adapterCity = new SimpleAdapter(
+				this, drawerCitiesItemsList, R.layout.drawer_list_city_item,
+				new String[] { "txtName" },
+				new int[] { R.id.txtName } );
+				
 		adapterMensa = new SimpleAdapter(
-				this, drawerItemsList, R.layout.drawer_list_item,
+				this, drawerMensaItemsList, R.layout.drawer_list_mensa_item,
 				new String[] { "txtName","txtInfo" },
 				new int[] { R.id.txtName, R.id.txtInfo } );
 		
-		// Set the adapter for the drawer list view
-        mDrawerList.setAdapter(adapterMensa);
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+		// Set the adapter for the drawer list views
+		mDrawerCitiesList.setAdapter(adapterCity);
+        mDrawerMensaList.setAdapter(adapterMensa);
+        
+        // Set the list's click listeners
+        mDrawerCitiesList.setOnItemClickListener( new DrawerCityItemClickListener() );
+        mDrawerMensaList.setOnItemClickListener( new DrawerMensaItemClickListener() );
         
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
@@ -133,7 +177,7 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 		
-		// setup tabs
+		// Setup tabs
 		// ViewPager and its adapters use support library
         // fragments, so use getSupportFragmentManager.
         mMenueFragmentPagerAdapter =
@@ -144,9 +188,9 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
         
         menuFragments = new ArrayList<MenuFragment>();
         
-        int i;
-        for (i = 0; i <= 4; i++) {
-        	menuFragments.add((MenuFragment) mMenueFragmentPagerAdapter.addItem());
+        // adding menu fragments
+        for( int i = 0; i <= 4; i++) {
+        	menuFragments.add( (MenuFragment) mMenueFragmentPagerAdapter.addItem() );
     		menuFragments.get(i).adapterMeals = new MenuAdapter(this, menuFragments.get(i).listMeals );
         }
         
@@ -154,7 +198,7 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setViewPager(mViewPager);
 		
-		for (MenuFragment frag:menuFragments) {
+		for (MenuFragment frag : menuFragments) {
 			frag.adapterMeals.notifyDataSetChanged();
 		}
 		
@@ -163,7 +207,9 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 			getSupportActionBar().setTitle(mTitle);
 		}
 		
-		addMensen(sharedPref.getString("city", "Kiel"));
+		// load cities	
+		new AsyncCitiesLoader(this).execute();
+//		addMensen( sharedPref.getString("city", "Kiel") );
 		
 	}
 	
@@ -218,14 +264,18 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	 * @param aName
 	 */
 	public void addCity(String aName){
-		adapterCity.add(aName);
+		HashMap<String, String> hm = new HashMap<String, String>();
+		hm.put("txtName", aName);
+		drawerCitiesItemsList.add(hm);
+		adapterCity.notifyDataSetChanged();
 	}
 	
 	/**
 	 * Clears city adapter
 	 */
 	public void clearCitiesAdapter(){
-		adapterCity.clear();
+		drawerCitiesItemsList.clear();
+		notifyCityAdapter();
 	}
 	
 	/**
@@ -244,16 +294,16 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 		HashMap<String, String> hm = new HashMap<String, String>();
 		hm.put("txtName", aName);
 		hm.put("txtInfo", info);
-		drawerItemsList.add(hm);
-		adapterMensa.notifyDataSetChanged();
+		drawerMensaItemsList.add(hm);
+		notifyMensaAdapter();
 	}
 	
 	/**
 	 * Clears mensa adapter
 	 */
 	public void clearMensaAdapter(){
-		drawerItemsList.clear();
-		adapterMensa.notifyDataSetChanged();
+		drawerMensaItemsList.clear();
+		notifyMensaAdapter();
 	}
 	
 	/**
@@ -268,6 +318,13 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	 */
 	public int countMensenInList(){
 		return adapterMensa.getCount();
+	}
+	
+	/**
+	 * @return Number of cities in list
+	 */
+	public int countCitiesInList(){
+		return adapterCity.getCount();
 	}
 	
 	public void setErrorMealList() {
@@ -301,7 +358,6 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	 * @param city
 	 */
 	private void addMensen(String city){
-		//setLoadingProgress(LoadingProgress.INIT);
 		new AsyncMensenLoader(this).execute(city);
 	}
 	
@@ -324,26 +380,40 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	 * Loads the menue of the first mensa
 	 */
 	public void loadFirstMensaMenue(){
-		if( mDrawerList.getCount() > 0 ){
-			selectDrawerItem(0);
-			loadMenue( locations.get(0) );
+		if( mDrawerMensaList.getCount() > 0 ){
+			selectMensaDrawerItem(0);
+			loadMenue( mensen.get(0) );
 		}
 	}
 
 
 	/**
-	 * @return the locations
+	 * @return the mensen
 	 */
-	public List<Mensa> getLocations() {
-		return locations;
+	public List<Mensa> getMensen() {
+		return mensen;
 	}
 
 
 	/**
-	 * @param locations the locations to set
+	 * @param mensen the mensen to set
 	 */
-	public void setLocations(List<Mensa> locations) {
-		this.locations = locations;
+	public void setMensen(List<Mensa> mensen) {
+		this.mensen = mensen;
+	}
+	
+	/**
+	 * @return the cities
+	 */
+	public List<String> getCities(){
+		return cities;
+	}
+	
+	/**
+	 * @param cities the cities to set
+	 */
+	public void setCities(List<String> cities){
+		this.cities = cities;
 	}
 
 
@@ -351,7 +421,7 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	 * @return the spinnerMensa
 	 */
 	public ListView getSpinnerMensa() {
-		return mDrawerList;
+		return mDrawerMensaList;
 	}
 
 
@@ -396,20 +466,25 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 			String city = sharedPref.getString("city", "Kiel");	
 			CacheManager.writeChachedFile(this, AsyncCitiesLoader.cachedFileName, city);
 			
-			if(mDrawerList.getCheckedItemPosition() < mDrawerList.getCount()) {
-				String mensa = locations.get(mDrawerList.getCheckedItemPosition()).getName();
+			if(mDrawerMensaList.getCheckedItemPosition() < mDrawerMensaList.getCount()) {
+				String mensa = mensen.get(mDrawerMensaList.getCheckedItemPosition()).getName();
 				CacheManager.writeChachedFile(this, AsyncMensenLoader.cachedFileName, mensa);
 			}	
 		}
 	}
 
 	@Override
-	public void showDetails(Meal meal) {
+	public void showMealDetails(Meal meal) {
 		Gson gson = new Gson();
 		Intent i = new Intent(this,DetailActivity.class);
 		i.putExtra("Meal", gson.toJson(meal));
 		i.putExtra("Mensa", gson.toJson(selectedMensa));
 		startActivityForResult(i, RATING_RESULT_CODE);
+	}
+	
+	@Override
+	public void showCityDetails(String city) {
+		
 	}
 	
 	protected void onActivityResult(int requestCode, int resultCode,
@@ -422,24 +497,57 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
         }
     }
 	
-	private class DrawerItemClickListener implements ListView.OnItemClickListener {
+	/**
+	 * Class for handling click on mensa menu item
+	 */
+	private class DrawerMensaItemClickListener implements ListView.OnItemClickListener {
 	    @Override
 	    public void onItemClick(android.widget.AdapterView<?> parent, View view, int position, long id) {
-	    	selectDrawerItem(position);
+	    	selectMensaDrawerItem(position);
 		    mDrawerLayout.closeDrawer(mDrawer);
 	    }
 	}
+	
+	/**
+	 * Class for handling click on city menu item
+	 */
+	private class DrawerCityItemClickListener implements ListView.OnItemClickListener {
+	    @Override
+	    public void onItemClick(android.widget.AdapterView<?> parent, View view, int position, long id) {
+	    	selectCitiyDrawerItem(position);
+	    }
+	}
 
-	public void selectDrawerItem(int position) {
+	/**
+	 * Selects mensa menu item
+	 * @param position
+	 */
+	public void selectMensaDrawerItem(int position) {
 	    // check if position is out of bounds
-		if( drawerItemsList.size()-1 < position ){
-			position = drawerItemsList.size()-1;
+		if( drawerMensaItemsList.size()-1 < position ){
+			position = drawerMensaItemsList.size()-1;
 		}
 		
 		// Highlight the selected item, update the title, and close the drawer
-	    mDrawerList.setItemChecked(position, true);
-	    setTitle(drawerItemsList.get(position).get("txtName"));
-	    loadMenue( locations.get(position) );
+	    mDrawerMensaList.setItemChecked(position, true);
+	    setTitle(drawerMensaItemsList.get(position).get("txtName"));
+	    loadMenue( mensen.get(position) );
+	}
+	
+	/**
+	 * Selects city menu iem
+	 * @param position
+	 */
+	public void selectCitiyDrawerItem(int position){
+		if( drawerCitiesItemsList.size()-1 < position ){
+			position = drawerCitiesItemsList.size()-1;
+		}
+		
+		// Highlight the selected item, update the title, and close the drawer
+	    mDrawerCitiesList.setItemChecked(position, true);
+	    setTitle(drawerCitiesItemsList.get(position).get("txtName"));
+	    clearMensaAdapter();
+	    addMensen( cities.get(position) );
 	}
 
 	@Override

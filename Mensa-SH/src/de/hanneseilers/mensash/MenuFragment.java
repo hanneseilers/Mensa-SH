@@ -39,9 +39,11 @@ public class MenuFragment extends Fragment {
 	private ListView mealList;
 	private ProgressBar progressBar;
 	private Boolean progressBarVisible = false;
+	
 	public MenuAdapter adapterMeals;
 	
 	public List<Meal> listMeals = new ArrayList<Meal>();
+	public List<String> listCities = new ArrayList<String>();
 
 	private Callback mListener;
 
@@ -72,19 +74,27 @@ public class MenuFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_menu, container, false);
+		
+		// get the list for cities and meals
 		mealList = (ListView) view.findViewById(R.id.mealList);
+		
+		// Set adapters and listeners for lists
 		mealList.setAdapter(adapterMeals);
-		mealList.setOnItemClickListener(new OnItemClickListener(){
+		mealList.setOnItemClickListener(new OnItemClickListener(){			
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
 				if (mListener != null) {
-					mListener.showDetails(listMeals.get(position));
+					mListener.showMealDetails(listMeals.get(position));
 				}
 			}
+			
 		});
+		
+		
 		progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 		setProgressBar(progressBarVisible);
 		return view;
@@ -118,7 +128,10 @@ public class MenuFragment extends Fragment {
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface Callback {
-		public void showDetails(Meal meal);
+		
+		public void showMealDetails(Meal meal);
+		public void showCityDetails(String city);
+		
 	}
 	
 	public void setProgressBar(Boolean visible) {

@@ -3,6 +3,7 @@ package de.hanneseilers.mensash;
 import org.holoeverywhere.preference.Preference;
 import org.holoeverywhere.preference.Preference.OnPreferenceClickListener;
 import org.holoeverywhere.preference.PreferenceFragment;
+import org.holoeverywhere.preference.PreferenceScreen;
 
 import de.hanneseilers.mensash.R;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ public class SettingsPreference extends PreferenceFragment {
 		// load preferences from rescoure
 		addPreferencesFromResource(R.xml.preferences);
 		Preference cmdClearCache = findPreference("CMD_CLEAR_CACHE");
+		
+		// hide section HIDDEN
+		hideHiddenSection();
 		
 		// add listener for clearing cache
 		updateCachedFiles();
@@ -49,6 +53,14 @@ public class SettingsPreference extends PreferenceFragment {
 		
 		// set text to preference
 		prefStat.setSummary( cachedFiles + " cached files (" + cacheSize + "kB)" );
+	}
+	
+	/**
+	 * Hides the section name HIDDEN
+	 */
+	private void hideHiddenSection(){
+		PreferenceScreen prefScreen = getPreferenceScreen();
+		prefScreen.removePreference( findPreference("HIDDEN") );
 	}
 	
 }

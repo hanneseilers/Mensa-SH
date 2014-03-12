@@ -53,16 +53,6 @@
     <string name="drawer_open">Navigation öffnen</string>
     <string name="drawer_close">Navigation schließen</string>
     <string name="title_activity_detail">Details</string>
-
-    <string-array name="cities">
-        <item>Flensburg</item>
-        <item>Heide</item>
-        <item>Kiel</item>
-        <item>Lübeck</item>
-        <item>Osterrönfeld</item>
-        <item>Wedel</item>
-    </string-array>
-
     <string name="img_description">image</string>
 
 </resources>

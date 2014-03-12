@@ -5,22 +5,12 @@
     android:layout_height="wrap_content"
     android:background="@drawable/activated_background_holo"
     android:orientation="vertical"
-    android:paddingBottom="8dp"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:paddingTop="8dp" >
+    android:padding="@dimen/list_item_padding" >
 
     <TextView
         android:id="@+id/txtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:textAppearance="?android:attr/textAppearance" />
-
-    <TextView
-        android:id="@+id/txtInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </org.holoeverywhere.widget.LinearLayout>

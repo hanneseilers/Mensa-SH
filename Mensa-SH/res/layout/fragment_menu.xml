@@ -5,12 +5,6 @@
     tools:context=".MenuFragment" >
 
     <ListView
-        android:id="@+id/citiesList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
-
-    <ListView
         android:id="@+id/mealList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >

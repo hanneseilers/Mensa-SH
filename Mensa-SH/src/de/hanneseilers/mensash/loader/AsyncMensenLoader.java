@@ -77,7 +77,7 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 	 */
 	@Override
 	protected void onPostExecute(List<Mensa> result) {
-		ctx.setLocations(result);
+		ctx.setMensen(result);
 		
 		// get mensa names
 		ctx.clearMensaAdapter();
@@ -85,12 +85,11 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 			ctx.addMensa( m.getName(), m.getLunchTime() );
 		}
 		ctx.notifyMensaAdapter();
-		int count = ctx.countMensenInList();
 		ctx.setLoadingProgress(LoadingProgress.MENSEN_LOADED);
 		
 		// check if to programmaticaly load menue
-		if(count > 0){
-			ctx.selectDrawerItem(getSelection(result));
+		if(ctx.countMensenInList() > 0){
+			ctx.selectMensaDrawerItem(getSelection(result));
 		}
 	}
 	

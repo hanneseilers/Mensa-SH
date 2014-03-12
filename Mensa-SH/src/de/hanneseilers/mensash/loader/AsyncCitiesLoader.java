@@ -60,12 +60,20 @@ public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 	 */
 	@Override
 	protected void onPostExecute(List<String> result) {
+		ctx.setCities(result);
+		
+		// get cities names
 		ctx.clearCitiesAdapter();
-		for(String c : result){
-			ctx.addCity(c);
+		for( String city : result ){
+			ctx.addCity(city);
 		}
 		ctx.notifyCityAdapter();
 		ctx.setLoadingProgress(LoadingProgress.CITIES_LOADED);
+		
+		// check if to programmaticaly load menue
+		if(ctx.countCitiesInList() > 0){
+			ctx.selectCitiyDrawerItem(getSelection(result));
+		}
 	}
 	
 	/**
