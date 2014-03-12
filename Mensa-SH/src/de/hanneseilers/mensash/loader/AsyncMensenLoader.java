@@ -101,21 +101,24 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 		// get settings
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
 		
-		// check if to load position
-		if( sharedPref.getBoolean("SAVE_LAST_MENSA", false) && ctx.isFirstSelection() ){
-			String mensa;
-			if( (mensa = CacheManager.readCachedFile(ctx, cachedFileName, false)) != null ){
-				int i;
-				for( i=0; i<result.size(); i++ ){
+		String city = ctx.getSelectedCity();
+		String savedCity = sharedPref.getString(ActivityMain.preferenceLastCity, null);
+		boolean savelastMensa = sharedPref.getBoolean(ActivityMain.preferenceSaveLastMensa, false);
+		
+		// load saved mensa on first load
+		if( (ctx.isFirstSelection() && savelastMensa  )
+				|| (savelastMensa && city != null && savedCity != null && city.equals(savedCity)) ){
+			
+			// load last saved mensa
+			String mensa = sharedPref.getString(ActivityMain.preferenceLastMensa, null);
+			if( mensa != null ){				
+				for( int i=0; i<result.size(); i++ ){
 					if( result.get(i).getName().equals(mensa) ){
-						break;
+						return i;
 					}
 				}				
-				
-				ctx.setFirstSelection(false);
-				return i;
-				
 			}
+			
 		}
 		
 		return 0;

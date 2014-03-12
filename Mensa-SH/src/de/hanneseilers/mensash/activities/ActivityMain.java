@@ -21,7 +21,6 @@ import de.hanneseilers.mensash.MenuAdapter;
 import de.hanneseilers.mensash.MenuFragment;
 import de.hanneseilers.mensash.MenueFragmentPagerAdapter;
 import de.hanneseilers.mensash.R;
-import de.hanneseilers.mensash.CacheManager;
 import de.hanneseilers.mensash.enums.LoadingProgress;
 import de.hanneseilers.mensash.loader.AsyncCitiesLoader;
 import de.hanneseilers.mensash.loader.AsyncMensenLoader;
@@ -49,6 +48,10 @@ import android.widget.SimpleAdapter;
 public class ActivityMain extends Activity implements MenuFragment.Callback {
 	
 	private static final int RATING_RESULT_CODE = 0;
+	public static final String preferenceSaveLastMensa = "SAVE_LAST_MENSA";
+	public static final String preferenceLastMensa = "LAST_MENSA";
+	public static final String preferenceLastCity = "LAST_CITY";
+	
 	private SimpleAdapter adapterCity;
 	private SimpleAdapter adapterMensa;
 	
@@ -94,6 +97,7 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 		if( showHints || checkIfUpdated() ){
 			VersionHints.showAllHints(this);
 		}
+		updateAppRevision();
 		
 		setContentView(R.layout.activity_main);
 		
@@ -366,7 +370,8 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	 * @param mensa
 	 */
 	private void loadMenue(Mensa mensa){
-		selectedMensa = mensa;
+		setSelectedMensa(mensa);
+		
 		Calendar c = Calendar.getInstance(); 
 		int today = c.get(Calendar.DAY_OF_WEEK)-2;
 		if (today < 0 || today > 4) { //Weekend
@@ -461,16 +466,44 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 		// get settings
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		// save selected city and mensa
-		if( sharedPref.getBoolean("SAVE_LAST_MENSA", false) ){      
-			String city = sharedPref.getString("city", "Kiel");	
-			CacheManager.writeChachedFile(this, AsyncCitiesLoader.cachedFileName, city);
+		// save last mensa
+		if( sharedPref.getBoolean(ActivityMain.preferenceSaveLastMensa, false) ){
 			
-			if(mDrawerMensaList.getCheckedItemPosition() < mDrawerMensaList.getCount()) {
-				String mensa = mensen.get(mDrawerMensaList.getCheckedItemPosition()).getName();
-				CacheManager.writeChachedFile(this, AsyncMensenLoader.cachedFileName, mensa);
-			}	
+			Mensa mensa = getSelectedMensa();
+			String city = getSelectedCity();
+			
+			if( city != null && mensa != null ){
+				sharedPref.edit().putString(preferenceLastMensa, mensa.getName()).commit();
+				sharedPref.edit().putString(preferenceLastCity, city).commit();
+			}
+			
 		}
+	}
+	
+	/**
+	 * @return Currently selected city or {@code null} if no city selected
+	 */
+	public String getSelectedCity(){
+		if( getSelectedMensa() != null ){
+			return getSelectedMensa().getCity();
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * @return Currently selected mensa or {@code null} if no mensa selected
+	 */
+	public Mensa getSelectedMensa(){
+		return selectedMensa;
+	}
+	
+	/**
+	 * Sets the selected mensa
+	 * @param mensa
+	 */
+	private void setSelectedMensa(Mensa mensa){
+		selectedMensa = mensa;
 	}
 
 	@Override
@@ -480,11 +513,6 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 		i.putExtra("Meal", gson.toJson(meal));
 		i.putExtra("Mensa", gson.toJson(selectedMensa));
 		startActivityForResult(i, RATING_RESULT_CODE);
-	}
-	
-	@Override
-	public void showCityDetails(String city) {
-		
 	}
 	
 	protected void onActivityResult(int requestCode, int resultCode,
@@ -515,6 +543,7 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	    @Override
 	    public void onItemClick(android.widget.AdapterView<?> parent, View view, int position, long id) {
 	    	selectCitiyDrawerItem(position);
+	    	mDrawerCitiesList.setVisibility(View.GONE);
 	    }
 	}
 
@@ -522,7 +551,7 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	 * Selects mensa menu item
 	 * @param position
 	 */
-	public void selectMensaDrawerItem(int position) {
+	public void selectMensaDrawerItem(int position) {				
 	    // check if position is out of bounds
 		if( drawerMensaItemsList.size()-1 < position ){
 			position = drawerMensaItemsList.size()-1;
@@ -546,6 +575,8 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 		// Highlight the selected item, update the title, and close the drawer
 	    mDrawerCitiesList.setItemChecked(position, true);
 	    setTitle(drawerCitiesItemsList.get(position).get("txtName"));
+	    
+	    // show mensen of city
 	    clearMensaAdapter();
 	    addMensen( cities.get(position) );
 	}
@@ -617,18 +648,33 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 			int prefVersion = sharedPref.getInt("APP_VERSION_CODE", -1);		
 			int version = pInfo.versionCode;
 
-			if( version != prefVersion ){
-				// update version code in preferences
-				sharedPref.edit().putInt( "APP_VERSION_CODE", version ).commit();
-				return true;
-			}
-
+			return( version != prefVersion );
+			
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
 
-
-
 		return false;
 	}
+	
+	/**
+	 * Updates saved app revision in prefrences to revision of app package
+	 */
+	private void updateAppRevision(){
+		try{
+			
+			SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+			PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+	
+			// get manifest version code and preferences version code
+			int version = pInfo.versionCode;		
+			
+			// update version code in preferences
+			sharedPref.edit().putInt( "APP_VERSION_CODE", version ).commit();
+			
+		} catch (NameNotFoundException e){
+			e.printStackTrace();
+		}
+	}
+	
 }

@@ -130,7 +130,6 @@ public class MenuFragment extends Fragment {
 	public interface Callback {
 		
 		public void showMealDetails(Meal meal);
-		public void showCityDetails(String city);
 		
 	}
 	
