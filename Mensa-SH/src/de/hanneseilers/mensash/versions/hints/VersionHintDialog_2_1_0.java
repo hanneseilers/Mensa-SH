@@ -8,26 +8,24 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
-public class VersionHintDialog1 extends Hint {
+public class VersionHintDialog_2_1_0 extends Hint {
 	
-	public VersionHintDialog1(Activity activity) {
+	public VersionHintDialog_2_1_0(Activity activity) {
 		super();
-		name = "versionDialog1";
-		VersionHintDialog1.activity = activity;
+		name = getClass().getName();
+		revision = 6;
+		VersionHintDialog_2_1_0.activity = activity;
 	}
-	
-	
-	
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
     	// Set version info
-    	String title = "UPDATE TO VERSION 2.0.1";
-    	String text = "Mit dem Update auf Version 2.0.1 wurde eine Bewertungsfunktion eingeführt.\n\n"
-    			+ "Mit ihr kannst du Gerichte deiner Mensa bewerten."
-    			+ " Durch das Aktivieren der Funktion werden jedoch mehr Daten aus dem Internet geladen."
-    			+ " Ohne Internet-Daten-Flatrate solltest du die Bewertungsfunktion deaktivieren."
-    			+ " Du kannst die Funktion auch nachträglich in den Einstellungen aktivieren oder deaktivieren.\n\n"
-    			+ "Möchtest du die Bewertungsfunktion aktivieren?";
+    	String title = "UPDATE TO VERSION 2.1.0";
+    	String text = "In dieser Version wurde die Oberfläche grundlegend verändert."
+    			+ " Die Auswahl deiner Stadt sowie deiner Mensa erfolgt jetzt über das Seitenmenü.\n\n"
+    			+ "Die Bewertungen wurden optimiert und werden jetzt schneller angezeigt."
+    			+ " Wenn du über eine Daten-Flatrate verfügst kannst du die Bewertungen ohne Bedenken einschalten."
+    			+ " Das kannst du selbstverständlich auch jederzeit in den Einstellungen ändern.\n\n"
+    			+ "Möchtest du die Bewertungen aktivieren?";
     	
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -38,7 +36,6 @@ public class VersionHintDialog1 extends Hint {
                 	   // OK
                 	   SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
                 	   sharedPref.edit().putBoolean( "SHOW_RATING" , true ).commit();
-                	   sharedPref.edit().putBoolean( "SHOW_VERSION_HINTS", false ).commit();
                 	   setInactive();
                    }
                })
@@ -46,7 +43,6 @@ public class VersionHintDialog1 extends Hint {
                    public void onClick(DialogInterface dialog, int id) {
                 	   SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
                 	   sharedPref.edit().putBoolean( "SHOW_RATING" , false ).commit();
-                	   sharedPref.edit().putBoolean( "SHOW_VERSION_HINTS", false ).commit();
                 	   sharedPref.edit().apply();
                 	   setInactive();
                    }
@@ -55,4 +51,5 @@ public class VersionHintDialog1 extends Hint {
         // Create the AlertDialog object and return it
         return builder.create();
     }
+	
 }

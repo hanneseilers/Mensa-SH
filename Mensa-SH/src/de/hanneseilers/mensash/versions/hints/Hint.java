@@ -9,6 +9,12 @@ public abstract class Hint extends DialogFragment {
 	public boolean active = true;
 	public String name = "hint";
 	
+	/**
+	 * Set {@code revision} to specifiy the revision the hint was added to application
+	 * Use {@code -1} to show hint on every revesion
+	 */
+	public int revision = 0;
+	
 	public Hint(Activity activity){}
 	
 	public Hint() {

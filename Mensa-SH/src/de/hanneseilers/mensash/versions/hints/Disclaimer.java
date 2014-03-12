@@ -13,6 +13,7 @@ public class Disclaimer extends Hint {
 	public Disclaimer(Activity activity) {
 		super();
 		name = "disclaimer";
+		revision = -1;
 		Disclaimer.activity = activity;
 	}
 	
