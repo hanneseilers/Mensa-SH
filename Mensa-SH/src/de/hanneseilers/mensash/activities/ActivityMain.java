@@ -264,6 +264,13 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	}
 	
 	/**
+	 * Closes menu
+	 */
+	public void closeMenu(){
+		mDrawerLayout.closeDrawer(mDrawer);
+	}
+	
+	/**
 	 * Addas a city to list
 	 * @param aName
 	 */
@@ -550,7 +557,7 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	    @Override
 	    public void onItemClick(android.widget.AdapterView<?> parent, View view, int position, long id) {
 	    	selectMensaDrawerItem(position);
-		    mDrawerLayout.closeDrawer(mDrawer);
+	    	closeMenu();
 	    }
 	}
 	
