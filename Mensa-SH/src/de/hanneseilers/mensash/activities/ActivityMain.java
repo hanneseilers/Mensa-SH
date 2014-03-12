@@ -331,26 +331,44 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 		return adapterCity.getCount();
 	}
 	
+	/**
+	 * Create meal with error message
+	 */
 	public void setErrorMealList() {
 		for (MenuFragment fragment:menuFragments) {
 			fragment.listMeals.clear();
-			Meal error = new Meal();
-			error.setMealName("Fehler");
-			fragment.listMeals.add(error);
 			fragment.adapterMeals.notifyDataSetChanged();
+			fragment.setMessage( getResources().getString(R.string.info_error_meals) );
 		}
 	}
 	
+	public void setNoMealList() {
+		for (MenuFragment fragment:menuFragments) {
+			fragment.listMeals.clear();
+			fragment.adapterMeals.notifyDataSetChanged();
+			fragment.setMessage( getResources().getString(R.string.info_no_meals) );
+		}
+	}
+	
+	/**
+	 * Add meals
+	 * @param meals
+	 */
 	public void setMealList(List<Meal> meals) {
+		// clear menu
 		for(MenuFragment fragment:menuFragments) {
 			fragment.listMeals.clear();
 		}
 
+		// add meals
 		int day = -1;
 		for (Meal meal:meals) {
 			day = meal.getDay();
+			menuFragments.get(day).setMessage(null);
 			menuFragments.get(day).listMeals.add(meal);
 		}
+		
+		// notify adapters about changes
 		for(MenuFragment fragment:menuFragments) {
 			fragment.adapterMeals.notifyDataSetChanged();
 		}

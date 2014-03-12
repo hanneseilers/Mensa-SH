@@ -10,6 +10,14 @@
         android:layout_height="wrap_content" >
     </ListView>
 
+    <TextView
+        android:id="@+id/txtMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:visibility="gone" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/MensaProgressBarStyle"

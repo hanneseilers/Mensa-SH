@@ -98,6 +98,12 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 	 * @return
 	 */
 	private int getSelection(List<Mensa> result){
+		// check if there only one mensa
+		System.out.println("results: " + result.size());
+		if( result.size() == 1 ){
+			return 0;
+		}
+		
 		// get settings
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
 		
