@@ -33,7 +33,7 @@
     <string name="txt_info_text">Mensa-SH ist eine kostenfreie Android App zur Anzeige der Mensa-Daten und -Speisepläne des Studentenwerks Schleswig-Holstein.</string>
     <string name="txt_info_law">Die App liest die Daten von der Website des Studentenwerks Schleswig-Holstein ein. Das Studentenwerk Schleswig-Holstein ist nicht Eigentümer dieser App und für deren Inhalte nicht verantwortlich. Der Eigentümer übernimmt keinerlei Gewährleistung für die Korrektheit der dargestellten Daten oder durch die App entstandene Schäden.</string>
     <string name="txt_open_source">Die App nutzt die folgenden Open-Source-Grafiken und -Bibliotheken: NineOldAndroids (Jake Wharton, Apache License 2.0), HoloEverywhere (Sergey Shatunov, MIT License), PagerSlidingTabStrip (Andreas Stütz, Apache License 2.0), Vegetarian Icon, (Cody Foss, The Noun Project), Bottle Icon (Anton Hakanson, The Noun Project), Pig Icon (Sascha Elmers, The Noun Project).</string>
-    <string name="txt_copyright">©2013 Hannes Eilers, Johan v. Forstner</string>
+    <string name="txt_copyright">©2014 Hannes Eilers, Johan v. Forstner</string>
     <string name="title_activity_info">Info_Activity</string>
     <string name="action_settings">Settings</string>
     <string name="txt_info_law_header">Rechtliche Informationen:</string>
