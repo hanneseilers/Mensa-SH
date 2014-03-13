@@ -54,14 +54,29 @@
             android:layout_height="1dp"
             android:background="@android:drawable/divider_horizontal_bright" />
 
-        <TextView
-            android:id="@+id/txtMenuCity"
+        <LinearLayout
+            android:id="@+id/layoutMenuCity"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/expandable_list_item_bg"
+            android:layout_height="wrap_content"   
             android:padding="@dimen/list_item_padding"
-            android:text="@string/txt_city"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:background="@drawable/expandable_list_item_bg"
+            android:orientation="horizontal"
+            android:clickable="true">
+	        <TextView
+	            android:id="@+id/txtMenuCity"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" 
+	            android:text="@string/txt_city"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />
+	        <ImageView
+	            android:id="@+id/imgExpandCity"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:src="@drawable/ic_expand"  
+	            android:layout_gravity="center_vertical"
+	            android:contentDescription="@string/expand" />
+	    </LinearLayout>
 
         <ListView
             android:id="@+id/left_city_drawer_list"
@@ -72,15 +87,30 @@
             android:dividerHeight="1dp"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/txtMenuMensa"
+        <LinearLayout
+            android:id="@+id/layoutMenuMensa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/list_item_padding"
-            android:background="@drawable/expandable_list_item_bg"
+            android:background="@drawable/expandable_list_item_bg"    
             android:padding="@dimen/list_item_padding"
-            android:text="@string/txt_mensa"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:orientation="horizontal"
+            android:clickable="true">
+	        <TextView
+	            android:id="@+id/txtMenuMensa"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"           	                    
+	            android:text="@string/txt_mensa"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />
+	        <ImageView
+	            android:id="@+id/imgExpandMensa"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:src="@drawable/ic_expand"  
+	            android:layout_gravity="center_vertical"
+	            android:contentDescription="@string/expand" />
+	    </LinearLayout>
 
         <ListView
             android:id="@+id/left_mensa_drawer_list"

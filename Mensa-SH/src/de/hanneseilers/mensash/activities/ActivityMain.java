@@ -11,7 +11,6 @@ import org.holoeverywhere.preference.SharedPreferences;
 import org.holoeverywhere.widget.DrawerLayout;
 import org.holoeverywhere.widget.LinearLayout;
 import org.holoeverywhere.widget.ListView;
-import org.holoeverywhere.widget.TextView;
 import org.holoeverywhere.widget.ViewPager;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -42,6 +41,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 
 
@@ -66,8 +66,10 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
     private ListView mDrawerMensaList;
     private ListView mDrawerCitiesList;
     private ActionBarDrawerToggle mDrawerToggle;
-    private TextView txtMenuCity;
-    private TextView txtMenuMensa;
+    private LinearLayout layoutMenuCity;
+    private LinearLayout layoutMenuMensa;
+    private ImageView imgExpandCity;
+    private ImageView imgExpandMensa;
     
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -108,30 +110,36 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
         mDrawerMensaList = (ListView) findViewById(R.id.left_mensa_drawer_list);  
         
         // get menu heads
- 		txtMenuCity = (TextView) findViewById(R.id.txtMenuCity);
- 		txtMenuMensa = (TextView) findViewById(R.id.txtMenuMensa);
+ 		layoutMenuCity = (LinearLayout) findViewById(R.id.layoutMenuCity);
+ 		layoutMenuMensa = (LinearLayout) findViewById(R.id.layoutMenuMensa);
+ 		imgExpandCity = (ImageView) layoutMenuCity.findViewById(R.id.imgExpandCity);
+ 		imgExpandMensa = (ImageView) layoutMenuMensa.findViewById(R.id.imgExpandMensa);
  		
  		// add listeners to menu headers
- 		txtMenuCity.setOnClickListener( new View.OnClickListener() {			
+ 		layoutMenuCity.setOnClickListener( new View.OnClickListener() {			
  			@Override
  			public void onClick(View v) {
  				if( mDrawerCitiesList.getVisibility() == View.VISIBLE ){
  					mDrawerCitiesList.setVisibility(View.GONE);
+ 					imgExpandCity.setImageResource(R.drawable.ic_close);
  				}
  				else{
  					mDrawerCitiesList.setVisibility(View.VISIBLE);
+ 					imgExpandCity.setImageResource(R.drawable.ic_expand);
  				}
  			}
  		} );
  		
- 		txtMenuMensa.setOnClickListener( new View.OnClickListener() {			
+ 		layoutMenuMensa.setOnClickListener( new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				if( mDrawerMensaList.getVisibility() == View.VISIBLE ){
 					mDrawerMensaList.setVisibility(View.GONE);
+					imgExpandMensa.setImageResource(R.drawable.ic_close);
  				}
  				else{
  					mDrawerMensaList.setVisibility(View.VISIBLE);
+ 					imgExpandMensa.setImageResource(R.drawable.ic_expand);
  				}
 			}
 		} );

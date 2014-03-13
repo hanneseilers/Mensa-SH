@@ -55,5 +55,6 @@
     <string name="img_description">image</string>
     <string name="info_no_meals">Keine Mahlzeiten gefunden.</string>
     <string name="info_error_meals">Fehler beim Abrufen der Mahlzeiten.</string>
+    <string name="expand">öffnen</string>
 
 </resources>
