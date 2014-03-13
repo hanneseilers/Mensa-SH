@@ -387,7 +387,12 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 		for(MenuFragment fragment:menuFragments) {
 			fragment.adapterMeals.notifyDataSetChanged();
 		}
-		mMenueFragmentPagerAdapter.notifyDataSetChanged();
+		
+		try{
+			mMenueFragmentPagerAdapter.notifyDataSetChanged();
+		}catch (IllegalStateException e){
+			e.printStackTrace();
+		}
 	}
 	
 	/**

@@ -9,6 +9,8 @@ import de.hanneseilers.mensash.versions.hints.VersionHintDialog_2_0_1;
 import de.hanneseilers.mensash.versions.hints.VersionHintDialog_2_1_0;
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
@@ -51,6 +53,16 @@ public final class VersionHints{
 				SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
 				int version = sharedPref.getInt("APP_VERSION_CODE", -1);
 				
+				// check for first install
+				try{
+					if( version < 0 ){
+						PackageInfo pInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
+						version = pInfo.versionCode;
+					}
+				}catch (NameNotFoundException e){
+					e.printStackTrace();
+				}
+				
 				// generate all hints
 				while( hintlist.size() > 0 ){
 					// get next hint in list
@@ -58,7 +70,7 @@ public final class VersionHints{
 					boolean hintAlreadyShown = sharedPref.getBoolean(hint.name, false);
 					
 					// check for disclaimer
-					if( !hintAlreadyShown || hint.revision < 0
+					if( (!hintAlreadyShown && hint.revision >= version) || hint.revision < 0
 							|| (sharedPref.getBoolean("SHOW_VERSION_HINTS", true) && hint.revision >= version) ){
 						showHint(hint, activity);
 						sharedPref.edit().putBoolean(hint.name, true).commit();
