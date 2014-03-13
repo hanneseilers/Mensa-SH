@@ -58,7 +58,7 @@
             android:id="@+id/txtMenuCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/orange"
+            android:background="@drawable/expandable_list_item_bg"
             android:padding="@dimen/list_item_padding"
             android:text="@string/txt_city"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/list_item_padding"
-            android:background="@color/orange"
+            android:background="@drawable/expandable_list_item_bg"
             android:padding="@dimen/list_item_padding"
             android:text="@string/txt_mensa"
             android:textAppearance="?android:attr/textAppearanceMedium" />
