@@ -158,12 +158,14 @@ public class MenuFragment extends Fragment {
 	 * @param message {@link String} message or {@code null} to hide message text view
 	 */
 	public void setMessage(String message){
-		if( message != null ){
-			txtMessage.setText(message);
-			txtMessage.setVisibility(View.VISIBLE);
-		}
-		else{
-			txtMessage.setVisibility(View.GONE);
+		if( txtMessage != null ){
+			if( message != null ){
+				txtMessage.setText(message);
+				txtMessage.setVisibility(View.VISIBLE);
+			}
+			else{
+				txtMessage.setVisibility(View.GONE);
+			}
 		}
 	}
 	
