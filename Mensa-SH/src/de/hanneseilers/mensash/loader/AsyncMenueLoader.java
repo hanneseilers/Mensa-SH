@@ -52,10 +52,13 @@ public class AsyncMenueLoader extends AsyncTask<Mensa, Integer, List<Meal>> {
 		if( result == null ){
 			ctx.setErrorMealList();
 		}
-		
-		// load menue
-		//ctx.selectDrawerItem(ctx.locations.indexOf(selectedMensa));
-		ctx.setMealList(result);
+		else if( result.size() == 0 ){
+			ctx.setNoMealList();
+		}
+		else{	
+			// load menue
+			ctx.setMealList(result);			
+		}
 		ctx.setLoadingProgress(LoadingProgress.MENUE_LOADED);
 
 	}

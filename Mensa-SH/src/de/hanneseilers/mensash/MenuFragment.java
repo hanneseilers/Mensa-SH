@@ -8,6 +8,7 @@ import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.app.Fragment;
 import org.holoeverywhere.widget.ListView;
 import org.holoeverywhere.widget.ProgressBar;
+import org.holoeverywhere.widget.TextView;
 
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
@@ -37,6 +38,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class MenuFragment extends Fragment {
 
 	private ListView mealList;
+	private TextView txtMessage;
 	private ProgressBar progressBar;
 	private Boolean progressBarVisible = false;
 	
@@ -77,6 +79,9 @@ public class MenuFragment extends Fragment {
 		
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_menu, container, false);
+		
+		// get the message text view
+		txtMessage = (TextView) view.findViewById(R.id.txtMessage);
 		
 		// get the list for cities and meals
 		mealList = (ListView) view.findViewById(R.id.mealList);
@@ -133,6 +138,10 @@ public class MenuFragment extends Fragment {
 		
 	}
 	
+	/**
+	 * Sets progress bar visibility
+	 * @param visible Show progressbar if {@code visible} = {@code true}.
+	 */
 	public void setProgressBar(Boolean visible) {
 		progressBarVisible = visible;
 		if (progressBar != null) {			
@@ -141,6 +150,20 @@ public class MenuFragment extends Fragment {
 			} else {
 				crossfade(progressBar, mealList);
 			}
+		}
+	}
+	
+	/**
+	 * Shows message on menu
+	 * @param message {@link String} message or {@code null} to hide message text view
+	 */
+	public void setMessage(String message){
+		if( message != null ){
+			txtMessage.setText(message);
+			txtMessage.setVisibility(View.VISIBLE);
+		}
+		else{
+			txtMessage.setVisibility(View.GONE);
 		}
 	}
 	

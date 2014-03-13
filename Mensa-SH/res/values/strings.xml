@@ -36,7 +36,6 @@
     <string name="txt_copyright">©2013 Hannes Eilers, Johan v. Forstner</string>
     <string name="title_activity_info">Info_Activity</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="txt_info_law_header">Rechtliche Informationen:</string>
     <string name="txt_info_logo">Mensa-SH Logo</string>
     <string name="txt_empty_string"></string>
@@ -54,5 +53,7 @@
     <string name="drawer_close">Navigation schließen</string>
     <string name="title_activity_detail">Details</string>
     <string name="img_description">image</string>
+    <string name="info_no_meals">Keine Mahlzeiten gefunden.</string>
+    <string name="info_error_meals">Fehler beim Abrufen der Mahlzeiten.</string>
 
 </resources>

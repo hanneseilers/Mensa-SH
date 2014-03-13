@@ -89,7 +89,13 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 		
 		// check if to programmaticaly load menue
 		if(ctx.countMensenInList() > 0){
-			ctx.selectMensaDrawerItem(getSelection(result));
+			if( result.size() == 1 ){
+				ctx.selectMensaDrawerItem(0);
+				ctx.closeMenu();
+			}
+			else{
+				ctx.selectMensaDrawerItem(getSelection(result));
+			}
 		}
 	}
 	
@@ -97,7 +103,7 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 	 * Returns the position to select
 	 * @return
 	 */
-	private int getSelection(List<Mensa> result){
+	private int getSelection(List<Mensa> result){		
 		// get settings
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
 		
