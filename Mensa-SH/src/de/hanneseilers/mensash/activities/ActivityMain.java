@@ -461,13 +461,13 @@ public class ActivityMain extends Activity implements MenuFragment.Callback {
 	 * Cleanup before activity is destroyed
 	 */
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+	protected void onPause() {
+		super.onPause();
 		// get settings
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		
 		// save last mensa
-		if( sharedPref.getBoolean(ActivityMain.preferenceSaveLastMensa, false) ){
+		if( sharedPref.getBoolean(ActivityMain.preferenceSaveLastMensa, true) ){
 			
 			Mensa mensa = getSelectedMensa();
 			String city = getSelectedCity();

@@ -85,7 +85,7 @@ public class AsyncCitiesLoader extends AsyncTask<Void, Integer, List<String>> {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
 		
 		// load preset city on first loading
-		if( ctx.isFirstSelection() && sharedPref.getBoolean(ActivityMain.preferenceSaveLastMensa, false)  ){
+		if( ctx.isFirstSelection() && sharedPref.getBoolean(ActivityMain.preferenceSaveLastMensa, true)  ){
 			String city = sharedPref.getString(ActivityMain.preferenceLastCity, null);
 			if( city != null ){
 				return result.indexOf(city);

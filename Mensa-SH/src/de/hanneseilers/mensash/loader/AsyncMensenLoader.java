@@ -103,7 +103,7 @@ public class AsyncMensenLoader extends AsyncTask<String, Integer, List<Mensa>> {
 		
 		String city = ctx.getSelectedCity();
 		String savedCity = sharedPref.getString(ActivityMain.preferenceLastCity, null);
-		boolean savelastMensa = sharedPref.getBoolean(ActivityMain.preferenceSaveLastMensa, false);
+		boolean savelastMensa = sharedPref.getBoolean(ActivityMain.preferenceSaveLastMensa, true);
 		
 		// load saved mensa on first load
 		if( (ctx.isFirstSelection() && savelastMensa  )
