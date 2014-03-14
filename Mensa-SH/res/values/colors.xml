@@ -3,6 +3,6 @@
 
     <item name="orange" type="color">#F08A00</item>
     <item name="light_orange" type="color">#FFAE3F</item>
-    <item name="green" type="color">#008854</item>
+    <!-- <item name="green" type="color">#008854</item> -->
 
 </resources>

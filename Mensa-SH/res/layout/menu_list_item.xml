@@ -17,7 +17,6 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/RightLayout"
-        android:layout_weight="1"
         android:orientation="vertical" >
 
         <TextView
@@ -26,7 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:singleLine="false"
-            android:text="Spaghetti Bolognese bla"
             android:textAppearance="?android:attr/textAppearance" />
 
         <TextView
@@ -34,7 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="false"
-            android:text="1,10 € / 1,20 € / 1,30 €"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 
@@ -66,6 +63,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="right"
+                android:contentDescription="@string/img_description"
                 android:src="@drawable/ic_alkohol" />
 
             <ImageView
@@ -73,6 +71,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="right"
+                android:contentDescription="@string/img_description"
                 android:src="@drawable/ic_rind" />
 
             <ImageView
@@ -80,6 +79,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="right"
+                android:contentDescription="@string/img_description"
                 android:src="@drawable/ic_schwein" />
 
             <ImageView
@@ -87,6 +87,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="right"
+                android:contentDescription="@string/img_description"
                 android:src="@drawable/ic_vegetarisch" />
 
             <ImageView
@@ -94,6 +95,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="right"
+                android:contentDescription="@string/img_description"
                 android:src="@drawable/ic_vegan" />
         </LinearLayout>
     </LinearLayout>
