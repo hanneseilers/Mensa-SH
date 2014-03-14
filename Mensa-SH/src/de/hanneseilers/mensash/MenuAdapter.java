@@ -20,15 +20,11 @@ import de.mensa.sh.core.Meal;
 public class MenuAdapter extends ArrayAdapter<Meal> {
 	  private final Context context;
 	  private final List<Meal> values;
-	  private boolean showRating;
 	  
 	  public MenuAdapter(Context context, List<Meal> values) {
 		    super(context, R.layout.menu_list_item, values);
 		    this.context = context;
 		    this.values = values;
-		    
-		    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-			showRating = sharedPref.getBoolean("SHOW_RATING", false) && sharedPref.getBoolean("ACK_DISCLAIMER", false);
 	}
 
 	  @Override
@@ -54,6 +50,9 @@ public class MenuAdapter extends ArrayAdapter<Meal> {
 	    imgPork.setVisibility(values.get(position).isPig() ? View.VISIBLE : View.GONE);
 	    imgVegetarian.setVisibility(values.get(position).isVegetarian() ? View.VISIBLE : View.GONE);
 	    imgVegan.setVisibility(values.get(position).isVegan() ? View.VISIBLE : View.GONE);
+	    
+	    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+	    boolean showRating = sharedPref.getBoolean("SHOW_RATING", false) && sharedPref.getBoolean("ACK_DISCLAIMER", false);
 	    
 	    if(!showRating) {
 	    	rating.setVisibility(View.INVISIBLE);
