@@ -57,26 +57,28 @@
         <LinearLayout
             android:id="@+id/layoutMenuCity"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"   
-            android:padding="@dimen/list_item_padding"
+            android:layout_height="wrap_content"
             android:background="@drawable/expandable_list_item_bg"
+            android:clickable="true"
             android:orientation="horizontal"
-            android:clickable="true">
-	        <TextView
-	            android:id="@+id/txtMenuCity"
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1" 
-	            android:text="@string/txt_city"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />
-	        <ImageView
-	            android:id="@+id/imgExpandCity"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:src="@drawable/ic_expand"  
-	            android:layout_gravity="center_vertical"
-	            android:contentDescription="@string/expand" />
-	    </LinearLayout>
+            android:padding="@dimen/list_item_padding" >
+
+            <TextView
+                android:id="@+id/txtMenuCity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txt_city"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ImageView
+                android:id="@+id/imgExpandCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/expand"
+                android:src="@drawable/ic_close" />
+        </LinearLayout>
 
         <ListView
             android:id="@+id/left_city_drawer_list"
@@ -92,25 +94,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/list_item_padding"
-            android:background="@drawable/expandable_list_item_bg"    
-            android:padding="@dimen/list_item_padding"
+            android:background="@drawable/expandable_list_item_bg"
+            android:clickable="true"
             android:orientation="horizontal"
-            android:clickable="true">
-	        <TextView
-	            android:id="@+id/txtMenuMensa"
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1"           	                    
-	            android:text="@string/txt_mensa"
-	            android:textAppearance="?android:attr/textAppearanceMedium" />
-	        <ImageView
-	            android:id="@+id/imgExpandMensa"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:src="@drawable/ic_expand"  
-	            android:layout_gravity="center_vertical"
-	            android:contentDescription="@string/expand" />
-	    </LinearLayout>
+            android:padding="@dimen/list_item_padding" >
+
+            <TextView
+                android:id="@+id/txtMenuMensa"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txt_mensa"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ImageView
+                android:id="@+id/imgExpandMensa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/expand"
+                android:src="@drawable/ic_expand" />
+        </LinearLayout>
 
         <ListView
             android:id="@+id/left_mensa_drawer_list"
