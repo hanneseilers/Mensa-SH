@@ -131,13 +131,15 @@ public class DetailActivity extends Activity {
 				Meal meal = (Meal) params[1];
 				int ratingInt = (Integer) params[2];	
 				view = (View) params[3];
+				String comment = "";
+				
+				if( params.length > 4 ){
+					comment = (String) params[4];
+				}
 				
 				String hash = ActivityMain.getUniqueDeviceHash(view.getContext());
-//				if(mensa==null) Log.d(TAG, "mensa==null");
-//				if(hash==null) Log.d(TAG, "hash==null");
-//				if(meal==null) Log.d(TAG, "meal==null");
 				try{
-					ret = mensa.addRating( meal, ratingInt, "", hash ); 
+					ret = mensa.addRating( meal, ratingInt, comment, hash ); 
 				}catch(NullPointerException e){
 					String msg = e.getMessage();
 					for( StackTraceElement el : e.getStackTrace() ){
@@ -152,9 +154,9 @@ public class DetailActivity extends Activity {
 		
 		@Override
 		protected void onPostExecute(Boolean result) {
-			String msg = "Bewertung nicht m�glich!";
+			String msg = getResources().getString(R.string.rating_not_send);
 			if(result){
-				msg  = "Bewertung gesendet.";
+				msg  = getResources().getString(R.string.rating_send);
 			}
 			
 			// Send rating

@@ -56,5 +56,7 @@
     <string name="info_no_meals">Keine Mahlzeiten gefunden.</string>
     <string name="info_error_meals">Fehler beim Abrufen der Mahlzeiten.</string>
     <string name="expand">öffnen</string>
+    <string name="rating_send">Bewertung gesendet</string>
+    <string name="rating_not_send">Bewertung nicht möglich!</string>
 
 </resources>
