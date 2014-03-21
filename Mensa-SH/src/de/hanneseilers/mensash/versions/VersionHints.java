@@ -30,7 +30,6 @@ public final class VersionHints{
 	private static void initHintList(Activity activity){
 		if( hintlist.size() == 0 ){
 			// add all hints to list
-			hintlist.add( new VersionHintDialog_2_0_1(activity) );
 			hintlist.add( new VersionHintDialog_2_1_0(activity) );
 			
 			hintlist.add( new Disclaimer(activity) );
