@@ -5,7 +5,6 @@ import java.util.List;
 
 import de.hanneseilers.mensash.versions.hints.Disclaimer;
 import de.hanneseilers.mensash.versions.hints.Hint;
-import de.hanneseilers.mensash.versions.hints.VersionHintDialog_2_0_1;
 import de.hanneseilers.mensash.versions.hints.VersionHintDialog_2_1_0;
 import android.app.Activity;
 import android.content.SharedPreferences;
