@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--
+    <item name="green" type="color">#708E27</item>
+    <item name="light_green" type="color">#809E2d</item>
+    <item name="blue" type="color">#005881</item>
+    <item name="light_blue" type="color">#4082a1</item>
+    -->
     <item name="orange" type="color">#F08A00</item>
     <item name="light_orange" type="color">#FFAE3F</item>
-    <!-- <item name="green" type="color">#008854</item> -->
 
 </resources>
