@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="blue" type="color">#005981</item>
+    <item name="blue_light" type="color">#4082a2</item>
+    <item name="green" type="color">#6f8e27</item>
+    <item name="highlight_gray" type="color">#ededed</item>
+    <item name="highlight_gray_light" type="color">#fafafa</item>
+    <item name="font_dark" type="color">#4b4b4d</item>
+    <item name="font_light" type="color">#ffffff</item>
+    <item name="background_white" type="color">#ffffff</item>
+
+</resources>

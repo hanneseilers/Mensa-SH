@@ -8,9 +8,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="de.hanneseilers.mensash.MainActivity$PlaceholderFragment" >
 
-    <TextView
-        android:id="@+id/section_label"
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/divLoading"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        tools:ignore="" >
+
+        <ImageView
+            android:id="@+id/imgLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/img_description_loading"
+            android:padding="@dimen/navigation_header_padding"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/txtLoading"
+            style="@style/TextView"
+            android:layout_width="wrap_content"
+            android:text="@string/loading" />
+    </LinearLayout>
 
 </RelativeLayout>

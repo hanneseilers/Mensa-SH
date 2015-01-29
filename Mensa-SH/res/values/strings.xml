@@ -2,12 +2,21 @@
 <resources>
 
     <string name="app_name">Mensa-SH</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
+    <string name="settings">Settings</string>
+    <string name="img_description_loading">loading</string>
+    <string name="loading">loading&#8230;</string>
+    <string name="navigation_drawer_open">Open mensa selection</string>
+    <string name="navigation_drawer_close">Close mensa selection</string>
+    <string name="navigation_header_city">City</string>
+    <string name="navigation_header_mensa">Mensa</string>
+    <string name="tab_none">None</string>
+
+    <string-array name="tab_weekdays">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+    </string-array>
 
 </resources>

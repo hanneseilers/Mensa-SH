@@ -1,10 +1,33 @@
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cccc"
-    android:choiceMode="singleChoice"
-    android:divider="@android:color/transparent"
-    android:dividerHeight="0dp"
-    tools:context="de.hanneseilers.mensash.NavigationDrawerFragment" />
+    android:background="@color/background_white" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/lblNavigationCity"
+            style="@style/naviagtion_header_text"
+            android:text="@string/navigation_header_city" />
+
+        <LinearLayout
+            android:id="@+id/divNavigationCity"
+            style="@style/navigation_container" >
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lblNavigationMensa"
+            style="@style/naviagtion_header_text"
+            android:text="@string/navigation_header_mensa" />
+
+        <LinearLayout
+            android:id="@+id/divNavigationMensa"
+            style="@style/navigation_container" >
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
