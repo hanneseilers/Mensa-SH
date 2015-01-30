@@ -34,7 +34,7 @@
 
         <TextView
             android:id="@+id/txtLoading"
-            style="@style/TextView"
+            style="@style/text_view"
             android:layout_width="wrap_content"
             android:text="@string/loading" />
     </LinearLayout>

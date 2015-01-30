@@ -44,34 +44,42 @@ public final class R {
          */
         public static final int navigation_drawer_width=0x7f060002;
         public static final int navigation_header_padding=0x7f060003;
+        public static final int navigation_text_padding=0x7f060004;
     }
     public static final class drawable {
         public static final int drawer_shadow=0x7f020000;
         public static final int ic_action_collapse=0x7f020001;
-        public static final int ic_action_expand=0x7f020002;
-        public static final int ic_drawer=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
+        public static final int ic_action_event=0x7f020002;
+        public static final int ic_action_expand=0x7f020003;
+        public static final int ic_drawer=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b000c;
+        public static final int action_settings=0x7f0b0010;
         public static final int container=0x7f0b0001;
         public static final int divLoading=0x7f0b0004;
         public static final int divNavigationCity=0x7f0b0009;
         public static final int divNavigationMensa=0x7f0b000b;
         public static final int drawer_layout=0x7f0b0000;
         public static final int imgLoading=0x7f0b0005;
+        public static final int imgMensaLunchTime=0x7f0b000e;
         public static final int lblNavigationCity=0x7f0b0008;
         public static final int lblNavigationMensa=0x7f0b000a;
         public static final int navigation_drawer=0x7f0b0002;
         public static final int pager=0x7f0b0003;
+        public static final int pgbNavigationLoading=0x7f0b000c;
+        public static final int pgbNavigationMensaLoading=0x7f0b000f;
         public static final int txtDay=0x7f0b0007;
         public static final int txtLoading=0x7f0b0006;
+        public static final int txtMensaName=0x7f0b000d;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int fragment_main=0x7f030001;
         public static final int fragment_menu=0x7f030002;
         public static final int fragment_navigation_drawer=0x7f030003;
+        public static final int navigation_city=0x7f030004;
+        public static final int navigation_mensa=0x7f030005;
     }
     public static final class menu {
         public static final int global=0x7f0a0000;
@@ -80,13 +88,14 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f070000;
         public static final int img_description_loading=0x7f070002;
-        public static final int loading=0x7f070003;
-        public static final int navigation_drawer_close=0x7f070005;
-        public static final int navigation_drawer_open=0x7f070004;
-        public static final int navigation_header_city=0x7f070006;
-        public static final int navigation_header_mensa=0x7f070007;
+        public static final int img_description_lunch_time=0x7f070003;
+        public static final int loading=0x7f070004;
+        public static final int navigation_drawer_close=0x7f070006;
+        public static final int navigation_drawer_open=0x7f070005;
+        public static final int navigation_header_city=0x7f070007;
+        public static final int navigation_header_mensa=0x7f070008;
         public static final int settings=0x7f070001;
-        public static final int tab_none=0x7f070008;
+        public static final int tab_none=0x7f070009;
     }
     public static final class style {
         /** 
@@ -108,9 +117,9 @@ public final class R {
         /**  the theme applied to the application or activity 
          */
         public static final int MensaSHActionBarTheme=0x7f090005;
-        public static final int TextView=0x7f090003;
-        public static final int naviagtion_header_text=0x7f090001;
+        public static final int naviagtion_header=0x7f090001;
         public static final int navigation_container=0x7f090002;
-        public static final int navigation_header=0x7f090000;
+        public static final int navigation_item=0x7f090003;
+        public static final int text_view=0x7f090000;
     }
 }

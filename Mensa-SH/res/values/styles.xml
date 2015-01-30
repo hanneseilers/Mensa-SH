@@ -1,8 +1,11 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="navigation_header"></style>
+    <style name="text_view" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/font_dark</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
-    <style name="naviagtion_header_text" parent="@android:style/TextAppearance.Medium">
+    <style name="naviagtion_header" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
@@ -20,9 +23,8 @@
         <item name="android:visibility">gone</item>
     </style>
 
-    <style name="TextView" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/font_dark</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="navigation_item" parent="@style/text_view">
+        <item name="android:padding">@dimen/navigation_text_padding</item>
     </style>
 
 </resources>

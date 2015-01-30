@@ -11,8 +11,9 @@
 
         <TextView
             android:id="@+id/lblNavigationCity"
-            style="@style/naviagtion_header_text"
-            android:text="@string/navigation_header_city" />
+            style="@style/naviagtion_header"
+            android:text="@string/navigation_header_city"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/divNavigationCity"
@@ -21,13 +22,19 @@
 
         <TextView
             android:id="@+id/lblNavigationMensa"
-            style="@style/naviagtion_header_text"
-            android:text="@string/navigation_header_mensa" />
+            style="@style/naviagtion_header"
+            android:text="@string/navigation_header_mensa"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/divNavigationMensa"
             style="@style/navigation_container" >
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pgbNavigationLoading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </ScrollView>
