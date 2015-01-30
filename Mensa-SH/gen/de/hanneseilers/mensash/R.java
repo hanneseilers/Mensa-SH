@@ -40,7 +40,6 @@ public final class R {
          Per the design guidelines, navigation drawers should be between 240dp and 320dp:
          https://developer.android.com/design/patterns/navigation-drawer.html
 
-
     
          */
         public static final int navigation_drawer_width=0x7f060002;
