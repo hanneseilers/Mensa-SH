@@ -14,13 +14,6 @@
     <string name="navigation_header_city">City</string>
     <string name="navigation_header_mensa">Mensa</string>
     <string name="tab_none">None</string>
-
-    <string-array name="tab_weekdays">
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-    </string-array>
+    <string name="date_format_pattern">EEE dd/MM</string>
 
 </resources>

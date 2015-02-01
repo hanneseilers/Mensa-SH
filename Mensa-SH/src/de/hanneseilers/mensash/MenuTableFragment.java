@@ -1,5 +1,14 @@
 package de.hanneseilers.mensash;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+
+import de.hanneseilers.mensash.async.AsyncMealsLoader;
+import de.mensa.sh.core.Meal;
+import de.mensa.sh.core.Mensa;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,9 +33,20 @@ public class MenuTableFragment extends Fragment implements
 	
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	
+	private Mensa mMensa;
+	private List<Meal> mMeals;
+	private Calendar mCalendar = Calendar.getInstance();
+	private SimpleDateFormat mDateFormat;
+	private AsyncMealsLoader mMealsLoader;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
+		// set date format
+		mDateFormat = new SimpleDateFormat( getResources().getString(R.string.date_format_pattern), Locale.getDefault() );
+		
+		// get view
 		View vView = inflater.inflate(R.layout.fragment_main, container,
 				false);
 		
@@ -41,19 +61,84 @@ public class MenuTableFragment extends Fragment implements
 		pager.setAdapter(mSectionsPagerAdapter);
 		pager.setOnPageChangeListener(this);
 		
+		// set first title
+		getActivity().getActionBar().setTitle( mSectionsPagerAdapter.getPageTitle(0) );
+		
 		return vView;
 	}
 	
-	public void setLoading(boolean loading){
+	/**
+	 * Enable loading animation
+	 * @param loading	set {@code true} to enable and {@code false} to disable loading animation.
+	 */
+	private void setLoading(boolean loading){
 		if( loading ){
+			pager.setVisibility(View.GONE);
 			divLoading.setVisibility(View.VISIBLE);
 			imgLoading.setAnimation(animLoading);
 		} else {
+			pager.setVisibility(View.VISIBLE);
 			divLoading.setVisibility(View.GONE);
 			imgLoading.setAnimation(null);
 		}
 	}
 	
+	/**
+	 * Interrupts running {@link AsyncMealsLoader}.
+	 */
+	private void interruptAsyncMealLoader(){
+		if( mMealsLoader != null ){
+			mMealsLoader.cancel(true);
+			mMealsLoader = null;
+		}
+	}
+	
+	/**
+	 * Stars a new {@link AsyncMealsLoader}.
+	 */
+	private void startAsyncMealLodaer(){
+		// interrupt running meal loader
+		interruptAsyncMealLoader();
+		
+		// load meals
+		if( mMensa != null ){
+			mMealsLoader = new AsyncMealsLoader();
+			mMealsLoader.execute(new Mensa[]{mMensa});
+			setLoading(true);
+		}
+	}
+	
+	/**
+	 * Sets current mensa and updates menu table.
+	 * @param aMensa	{@link Mensa} to set.
+	 */
+	public void setMensa(Mensa aMensa){
+		if( aMensa != null ){
+			mMensa = aMensa;
+			startAsyncMealLodaer();			
+		}
+	}
+	
+	/**
+	 * Sets list of meals.
+	 * Only for internal callback. Do not set it manually.
+	 * @param aMeals	{@link List} of {@link Meal}s to set.
+	 */
+	public void setMeals(List<Meal> aMeals){
+		if( aMeals != null ){
+			mMeals = aMeals;
+			setLoading(false);
+			mSectionsPagerAdapter.notifyDataSetChanged();
+		} else {
+			startAsyncMealLodaer();
+		}
+	}
+	
+	/**
+	 * {@link FragmentPagerAdapter} class to show menu fragments.
+	 * @author Hannes Eilers
+	 *
+	 */
 	private class SectionsPagerAdapter extends FragmentPagerAdapter{
 
 		public SectionsPagerAdapter(FragmentManager fm) {
@@ -62,22 +147,19 @@ public class MenuTableFragment extends Fragment implements
 
 		@Override
 		public android.support.v4.app.Fragment getItem(int position) {
-			return new MenuFragment(position);
+			return new MenuFragment(position, mMeals);
 		}
 		
 		@Override
 		public CharSequence getPageTitle(int position) {
-			String[] vDays = getResources().getStringArray(R.array.tab_weekdays);
-			if( position < vDays.length ){
-				return vDays[position];
-			}
-			
-			return getResources().getString(R.string.tab_none);
+			mCalendar.set( Calendar.DAY_OF_WEEK, mCalendar.getFirstDayOfWeek()
+					+ (position > 4 ? position+2: position) );
+			return mDateFormat.format(mCalendar.getTime());
 		}
 
 		@Override
 		public int getCount() {
-			return getResources().getStringArray(R.array.tab_weekdays).length;
+			return 10;
 		}
 		
 	}
@@ -85,11 +167,6 @@ public class MenuTableFragment extends Fragment implements
 	@Override
 	public void onPageSelected(int position) {
 		getActivity().getActionBar().setTitle( mSectionsPagerAdapter.getPageTitle(position) );
-		
-		// notifiy other fragments to cancel background tasks
-		for( int i=0; i < mSectionsPagerAdapter.getCount(); i++ ){
-			((MenuFragment) mSectionsPagerAdapter.getItem(i)).cancelBackgroundTasks();
-		}
 	}
 
 	@Override

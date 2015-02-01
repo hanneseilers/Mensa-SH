@@ -5,6 +5,11 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="text_view_small" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/font_dark</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="naviagtion_header" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

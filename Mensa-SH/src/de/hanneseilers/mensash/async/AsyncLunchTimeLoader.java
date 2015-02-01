@@ -3,6 +3,7 @@ package de.hanneseilers.mensash.async;
 import de.hanneseilers.mensash.MainActivity;
 import de.hanneseilers.mensash.NavigationMensa;
 import de.hanneseilers.mensash.R;
+import de.mensa.sh.core.Mensa;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,6 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+/**
+ * {@link AsyncTask} to load lunch times of a {@link Mensa}.
+ * @author Hannes Eilers
+ *
+ */
 public class AsyncLunchTimeLoader extends AsyncTask<Void, Void, String> {
 
 	private NavigationMensa mNavigationMensa;

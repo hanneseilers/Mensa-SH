@@ -47,16 +47,24 @@ public class MainActivity extends FragmentActivity {
 		(new AsyncLocationsLoader()).execute();
 	}
 	
+	/**
+	 * @return	{@link NavigationDrawerFragment} of navigation drawer.
+	 */
 	private NavigationDrawerFragment getNavigationDrawerFragment(){
 		return mNavigationDrawer;
 	}
 	
-	
+	/**
+	 * @return	{@link MenuTableFragment} of menu fragment.
+	 */
 	public MenuTableFragment getMenuTableFragment(){
 		return mMenuTableFragment;
 	}
 	
-	
+	/**
+	 * Set available mensa locations.
+	 * @param aLocations	{@link List} of {@link Mensa} locations.
+	 */
 	public void setMensaLocations(List<Mensa> aLocations){		
 		// set new mensa locations
 		synchronized (mLocations) {
@@ -91,6 +99,9 @@ public class MainActivity extends FragmentActivity {
 			
 	}
 	
+	/**
+	 * @return	{@link Map} of {@link List}s with {@link Mensa} locations, sorted by city names.
+	 */
 	public Map<String, List<Mensa>> getMensaLocations(){
 		synchronized (mLocations) {
 			return new HashMap<String, List<Mensa>>(mLocations);
@@ -99,7 +110,9 @@ public class MainActivity extends FragmentActivity {
 	
 	
 	
-	
+	/**
+	 * @return	{@link MainActivity} instance.
+	 */
 	public static MainActivity getInstance(){
 		return INSTANCE;
 	}

@@ -30,6 +30,7 @@ public class NavigationMensa extends LinearLayout implements
 		
 		// add listener
 		mImageView.setOnClickListener(this);
+		mTextView.setOnClickListener(this);
 	}
 	
 	public synchronized void setMensa(Mensa aMensa){
@@ -57,9 +58,16 @@ public class NavigationMensa extends LinearLayout implements
 
 	@Override
 	public void onClick(View v) {
-		if( mMensa != null && mImageView.getVisibility() == View.VISIBLE ){
-			setLoading(true);
-			new AsyncLunchTimeLoader(this).execute();
+		if( mMensa != null ){
+			
+			// load lunch time
+			if( v == mImageView && mImageView.getVisibility() == View.VISIBLE ){
+				setLoading(true);
+				new AsyncLunchTimeLoader(this).execute();
+			} else if( v == mTextView ){
+				MainActivity.getInstance().getMenuTableFragment().setMensa(mMensa);
+			}			
+			
 		}
 	}
 
