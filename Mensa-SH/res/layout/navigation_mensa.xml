@@ -21,11 +21,4 @@
         android:contentDescription="@string/img_description_lunch_time"
         android:src="@drawable/ic_action_event" />
 
-    <ProgressBar
-        android:id="@+id/pgbNavigationMensaLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:visibility="gone" />
-
 </LinearLayout>

@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class NavigationMensa extends LinearLayout implements
@@ -16,7 +15,6 @@ public class NavigationMensa extends LinearLayout implements
 	private Mensa mMensa;
 	private TextView mTextView;
 	private ImageView mImageView;
-	private ProgressBar mProgressBar;
 	
 	public NavigationMensa(Context context) {
 		super(context);
@@ -29,7 +27,6 @@ public class NavigationMensa extends LinearLayout implements
 		// get widgets
 		mTextView = (TextView) findViewById(R.id.txtMensaName);
 		mImageView = (ImageView) findViewById(R.id.imgMensaLunchTime);
-		mProgressBar = (ProgressBar) findViewById(R.id.pgbNavigationMensaLoading);
 		
 		// add listener
 		mImageView.setOnClickListener(this);
@@ -53,18 +50,16 @@ public class NavigationMensa extends LinearLayout implements
 	public void setLoading(boolean aLoading){
 		if( aLoading ){
 			mImageView.setVisibility(View.GONE);
-			mProgressBar.setVisibility(View.VISIBLE);
 		} else {
 			mImageView.setVisibility(View.VISIBLE);
-			mProgressBar.setVisibility(View.GONE);
 		}
 	}
 
 	@Override
 	public void onClick(View v) {
-		if( mMensa != null && mProgressBar.getVisibility() != View.VISIBLE ){
+		if( mMensa != null && mImageView.getVisibility() == View.VISIBLE ){
 			setLoading(true);
-			new AsyncLunchTimeLoader().execute(new NavigationMensa[]{this});
+			new AsyncLunchTimeLoader(this).execute();
 		}
 	}
 

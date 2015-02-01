@@ -3,6 +3,9 @@
 
     <string name="app_name">Mensa-SH</string>
     <string name="settings">Settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="send">send</string>
     <string name="img_description_loading">loading</string>
     <string name="img_description_lunch_time">Lunch time</string>
     <string name="loading">loading&#8230;</string>

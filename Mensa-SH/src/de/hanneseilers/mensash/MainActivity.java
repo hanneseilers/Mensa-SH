@@ -79,7 +79,13 @@ public class MainActivity extends FragmentActivity {
 		runOnUiThread(new Runnable() {			
 			@Override
 			public void run() {
-				getNavigationDrawerFragment().updateMenu( getMensaLocations() );	
+				if( getMensaLocations() != null && getMensaLocations().size() > 0 ){
+					// upodate locations
+					getNavigationDrawerFragment().updateMenu( getMensaLocations() );
+				} else {
+					// load locations
+					(new AsyncLocationsLoader()).execute();
+				}
 			}
 		});
 			
