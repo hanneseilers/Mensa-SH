@@ -10,6 +10,13 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="text_view_button" parent="@style/text_view_small">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:textColor">@color/button</item>
+        <item name="android:padding">@dimen/general_padding</item>
+    </style>
+
     <style name="naviagtion_header" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

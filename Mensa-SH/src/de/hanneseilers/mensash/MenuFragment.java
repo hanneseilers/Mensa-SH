@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 public class MenuFragment extends Fragment {
 	
+	private LinearLayout vRootView;
+	
 	private List<Meal> mMeals;
 	private int mDay;
 	
@@ -29,10 +31,17 @@ public class MenuFragment extends Fragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {		
 		// create root view
-		LinearLayout vRootView = new LinearLayout( getActivity() );	
+		vRootView = new LinearLayout( getActivity() );
+		vRootView.setOrientation(LinearLayout.VERTICAL);
+		updateMeals();
+		return vRootView;
+	}
+	
+	private synchronized void updateMeals(){
+		// clear meals
+		vRootView.removeAllViews();
 		
 		// create content
 		if( mMeals != null ){
@@ -42,8 +51,8 @@ public class MenuFragment extends Fragment {
 				if( vMeal.getDay() == mDay ){
 					
 					// get widgets
-					LinearLayout vMealView = (LinearLayout) inflater.inflate(R.layout.fragment_menu_meal, container,
-							false);
+					LinearLayout vMealView = (LinearLayout) getActivity().getLayoutInflater()
+							.inflate(R.layout.fragment_menu_meal, vRootView, false);
 					TextView mMealName = (TextView) vMealView.findViewById(R.id.txtMealName);
 					TextView mMealPrice = (TextView) vMealView.findViewById(R.id.txtMealPrice);
 					RatingBar mRating = (RatingBar) vMealView.findViewById(R.id.ratMealRating);
@@ -53,7 +62,7 @@ public class MenuFragment extends Fragment {
 					mMealName.setText( vMeal.getMealName() );
 					mMealPrice.setText( vMeal.getPrice() );
 					
-					if( even ){
+					if( !even ){
 						vMealView.setBackgroundColor( getResources().getColor(R.color.highlight_gray_light) );
 					}					
 					even = !even;
@@ -64,10 +73,11 @@ public class MenuFragment extends Fragment {
 				}
 			}
 		}
-		
-		System.out.println("count: " + vRootView.getChildCount());
-		
-		return vRootView;
+	}
+	
+	public void setMeals(List<Meal> aMeals){
+		mMeals = aMeals;
+		updateMeals();
 	}
 	
 }

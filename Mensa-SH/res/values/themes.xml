@@ -8,7 +8,7 @@
 
     <!-- ActionBar styles -->
     <style name="MensaSHActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/green</item>
+        <item name="android:background">@color/blue</item>
     </style>
 
 </resources>

@@ -17,19 +17,27 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MenuTableFragment extends Fragment implements
-	OnPageChangeListener{
+	OnPageChangeListener,
+	OnClickListener{
+	
+	private static final int MAX_DAYS = 10;
 
 	private LinearLayout divLoading;
-	private ImageView imgLoading;
-	private Animation animLoading;
+	private ImageView imgLoading;	
 	private ViewPager pager;
+	private TextView btnThisWeek;
+	private TextView btnNextWeek;
+	
+	private Animation animLoading;
 	
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	
@@ -53,16 +61,20 @@ public class MenuTableFragment extends Fragment implements
 		// get widgets
 		divLoading = (LinearLayout) vView.findViewById(R.id.divLoading);
 		imgLoading = (ImageView) vView.findViewById(R.id.imgLoading);		
-		animLoading = AnimationUtils.loadAnimation(getActivity(), R.anim.loading_burger);
+		btnThisWeek = (TextView) vView.findViewById(R.id.btnThisWeek);
+		btnNextWeek = (TextView) vView.findViewById(R.id.btnNextWeek);
 		pager = (ViewPager) vView.findViewById(R.id.pager);
+		
+		animLoading = AnimationUtils.loadAnimation(getActivity(), R.anim.loading_burger);
 		
 		// set pager adapter
 		mSectionsPagerAdapter = new SectionsPagerAdapter( getFragmentManager() );
 		pager.setAdapter(mSectionsPagerAdapter);
 		pager.setOnPageChangeListener(this);
 		
-		// set first title
-		getActivity().getActionBar().setTitle( mSectionsPagerAdapter.getPageTitle(0) );
+		// set listener
+		btnThisWeek.setOnClickListener(this);
+		btnNextWeek.setOnClickListener(this);
 		
 		return vView;
 	}
@@ -128,7 +140,9 @@ public class MenuTableFragment extends Fragment implements
 		if( aMeals != null ){
 			mMeals = aMeals;
 			setLoading(false);
-			mSectionsPagerAdapter.notifyDataSetChanged();
+			mSectionsPagerAdapter.setMeals(mMeals);
+			pager.setCurrentItem(0);
+			onPageSelected(0);
 		} else {
 			startAsyncMealLodaer();
 		}
@@ -141,32 +155,65 @@ public class MenuTableFragment extends Fragment implements
 	 */
 	private class SectionsPagerAdapter extends FragmentPagerAdapter{
 
+		private MenuFragment[] mFragments = new MenuFragment[MAX_DAYS];
+		
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
 
 		@Override
 		public android.support.v4.app.Fragment getItem(int position) {
-			return new MenuFragment(position, mMeals);
+			if( mFragments[position] == null ){
+				mFragments[position] = new MenuFragment(position, mMeals);
+			}
+			return mFragments[position];
 		}
 		
 		@Override
 		public CharSequence getPageTitle(int position) {
-			mCalendar.set( Calendar.DAY_OF_WEEK, mCalendar.getFirstDayOfWeek()
-					+ (position > 4 ? position+2: position) );
-			return mDateFormat.format(mCalendar.getTime());
+			mCalendar.set( Calendar.DAY_OF_WEEK, mCalendar.getFirstDayOfWeek() );
+			return mDateFormat.format( mCalendar.getTimeInMillis()
+					+ (position > 4 ? position+2 : position) * 86400000 );
 		}
 
 		@Override
 		public int getCount() {
-			return 10;
+			return MAX_DAYS;
 		}
 		
+		/**
+		 * Update menu table.
+		 * @param aMeals	{@link List} of {@link Meal}s.
+		 */
+		private void setMeals(List<Meal> aMeals){
+			for( MenuFragment vFragment : mFragments ){
+				if( vFragment != null ){
+					vFragment.setMeals(aMeals); 
+				}
+			}
+		}
+		
+	}
+	
+	private void setWeekButtons(boolean aThisWeekEnabled){
+		if( aThisWeekEnabled ){
+			btnThisWeek.setEnabled(true);
+			btnNextWeek.setEnabled(false);
+		} else {
+			btnThisWeek.setEnabled(false);
+			btnNextWeek.setEnabled(true);
+		}
 	}
 	
 	@Override
 	public void onPageSelected(int position) {
 		getActivity().getActionBar().setTitle( mSectionsPagerAdapter.getPageTitle(position) );
+		
+		if( position > 4 ){
+			setWeekButtons(true);
+		} else {
+			setWeekButtons(false);
+		}
 	}
 
 	@Override
@@ -174,5 +221,20 @@ public class MenuTableFragment extends Fragment implements
 
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {}
+
+	@Override
+	public void onClick(View v) {
+		int vPosition = pager.getCurrentItem();
+		if( v == btnThisWeek ){			
+			vPosition -= MAX_DAYS/2 ;
+			setWeekButtons(false);			
+		} else if( v == btnNextWeek ){			
+			vPosition += MAX_DAYS/2;
+			setWeekButtons(true);			
+		}
+		
+		pager.setCurrentItem(vPosition);
+		onPageSelected(vPosition);
+	}
 	
 }

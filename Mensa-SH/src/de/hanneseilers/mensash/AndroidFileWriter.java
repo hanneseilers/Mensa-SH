@@ -34,7 +34,6 @@ public class AndroidFileWriter implements FileWriterInterface {
 				}
 				
 				vReader.close();
-				System.out.println("read from cache file " + getName());
 				return vFileText;
 				
 			} catch (FileNotFoundException e) {
@@ -57,7 +56,6 @@ public class AndroidFileWriter implements FileWriterInterface {
 					OutputStreamWriter vWriter = new OutputStreamWriter( new FileOutputStream(mFile) );
 					vWriter.write(aText);
 					vWriter.close();
-					System.out.println("write to cache file " + getName());
 					return true;
 			}
 			
