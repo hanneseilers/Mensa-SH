@@ -58,39 +58,43 @@ public final class R {
         public static final int selectable_item=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0017;
-        public static final int btnNextWeek=0x7f0a0006;
-        public static final int btnThisWeek=0x7f0a0005;
+        public static final int action_settings=0x7f0a001a;
+        public static final int btnNextWeek=0x7f0a0009;
+        public static final int btnThisWeek=0x7f0a0008;
         public static final int container=0x7f0a0001;
-        public static final int divLoading=0x7f0a0008;
-        public static final int divMealInfo=0x7f0a000e;
-        public static final int divNavigationCity=0x7f0a0011;
-        public static final int divNavigationMensa=0x7f0a0013;
+        public static final int divLoading=0x7f0a000b;
+        public static final int divMealInfo=0x7f0a0011;
+        public static final int divNavigationCity=0x7f0a0014;
+        public static final int divNavigationMensa=0x7f0a0016;
         public static final int drawer_layout=0x7f0a0000;
-        public static final int imgLoading=0x7f0a0009;
-        public static final int imgMensaLunchTime=0x7f0a0016;
-        public static final int lblNavigationCity=0x7f0a0010;
-        public static final int lblNavigationMensa=0x7f0a0012;
+        public static final int imgLoading=0x7f0a000c;
+        public static final int imgMensaLunchTime=0x7f0a0019;
+        public static final int lblNavigationCity=0x7f0a0013;
+        public static final int lblNavigationMensa=0x7f0a0015;
         public static final int navigation_drawer=0x7f0a0002;
-        public static final int pager=0x7f0a0007;
+        public static final int pager=0x7f0a000a;
         public static final int pgbDialogLunchTime=0x7f0a0003;
-        public static final int pgbMealLoading=0x7f0a000d;
-        public static final int pgbNavigationLoading=0x7f0a0014;
-        public static final int ratMealRating=0x7f0a000c;
+        public static final int pgbMealLoading=0x7f0a0010;
+        public static final int pgbNavigationLoading=0x7f0a0017;
+        public static final int ratMealRating=0x7f0a000f;
+        public static final int ratRating=0x7f0a0005;
         public static final int txtDialogLunchTime=0x7f0a0004;
-        public static final int txtLoading=0x7f0a000a;
-        public static final int txtMealName=0x7f0a000b;
-        public static final int txtMealPrice=0x7f0a000f;
-        public static final int txtMensaName=0x7f0a0015;
+        public static final int txtLoading=0x7f0a000d;
+        public static final int txtMealName=0x7f0a000e;
+        public static final int txtMealPrice=0x7f0a0012;
+        public static final int txtMensaName=0x7f0a0018;
+        public static final int txtRatingDisclaimer=0x7f0a0006;
+        public static final int txtRatingDisclaimerTexte=0x7f0a0007;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int dialog_lunch_time=0x7f030001;
-        public static final int fragment_main=0x7f030002;
-        public static final int fragment_menu_meal=0x7f030003;
-        public static final int fragment_navigation_drawer=0x7f030004;
-        public static final int navigation_city=0x7f030005;
-        public static final int navigation_mensa=0x7f030006;
+        public static final int dialog_rating=0x7f030002;
+        public static final int fragment_main=0x7f030003;
+        public static final int fragment_menu_meal=0x7f030004;
+        public static final int fragment_navigation_drawer=0x7f030005;
+        public static final int navigation_city=0x7f030006;
+        public static final int navigation_mensa=0x7f030007;
     }
     public static final class menu {
         public static final int global=0x7f090000;
@@ -101,6 +105,10 @@ public final class R {
         public static final int cancel=0x7f070002;
         public static final int close=0x7f070003;
         public static final int date_format_pattern=0x7f070010;
+        /**  DISCLAIMER 
+         */
+        public static final int disclaimer=0x7f070011;
+        public static final int disclaimer_text=0x7f070012;
         public static final int img_description_loading=0x7f070005;
         public static final int img_description_lunch_time=0x7f070006;
         public static final int loading=0x7f070007;
@@ -111,13 +119,13 @@ public final class R {
         public static final int navigation_next_week=0x7f07000d;
         public static final int navigation_this_week=0x7f07000c;
         public static final int rating_unrated=0x7f07000e;
-        public static final int send=0x7f070004;
-        public static final int setting_saved_mensa=0x7f070013;
+        public static final int setting_saved_mensa=0x7f070015;
         public static final int settings=0x7f070001;
         /**  Shared prefernces key, do not modify in translations 
          */
-        public static final int settings_cache_cleared_last=0x7f070011;
-        public static final int settings_saved_city=0x7f070012;
+        public static final int settings_cache_cleared_last=0x7f070013;
+        public static final int settings_saved_city=0x7f070014;
+        public static final int submit=0x7f070004;
         public static final int tab_none=0x7f07000f;
     }
     public static final class style {
