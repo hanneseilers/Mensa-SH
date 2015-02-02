@@ -5,7 +5,8 @@
 *.ear
 # Android APK #
 *.apk
-# bin folder #
+# bin and gen folder #
 /bin
+/gen
 # allow libs folder #
 !/libs

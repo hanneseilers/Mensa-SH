@@ -15,8 +15,9 @@
     <string name="navigation_header_mensa">Mensa</string>
     <string name="navigation_this_week">This week</string>
     <string name="navigation_next_week">Next week</string>
+    <string name="rating_unrated">Unrated</string>
     <string name="tab_none">None</string>
-    <string name="date_format_pattern">EEE dd/MM</string>
+    <string name="date_format_pattern">EEEE dd/MM</string>
 
     <!-- Shared prefernces key, do not modify in translations -->
     <string name="settings_cache_cleared_last">SETTINGS_CACHE_CLEARED_LAST</string>

@@ -10,6 +10,7 @@ import java.util.Map;
 import de.hanneseilers.mensash.async.AsyncLocationsLoader;
 import de.mensa.sh.core.Cache;
 import de.mensa.sh.core.Mensa;
+import de.mensa.sh.core.Settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,6 +34,9 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);		
 		INSTANCE = this;
+		
+		// set ratings api url
+		Settings.sh_mensa_db_api_url = "http://mensash.private-factory.de/api.php";
 		
 		// clear cached file
 		clearCachedFiles(false);

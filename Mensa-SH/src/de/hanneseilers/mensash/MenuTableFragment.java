@@ -124,11 +124,18 @@ public class MenuTableFragment extends Fragment implements
 	 * Sets current mensa and updates menu table.
 	 * @param aMensa	{@link Mensa} to set.
 	 */
-	public void setMensa(Mensa aMensa){
+	public synchronized void setMensa(Mensa aMensa){
 		if( aMensa != null ){
 			mMensa = aMensa;
 			startAsyncMealLodaer();			
 		}
+	}
+	
+	/**
+	 * @return	Current {@link Mensa}.
+	 */
+	public Mensa getMensa(){
+		return mMensa;
 	}
 	
 	/**
@@ -177,7 +184,8 @@ public class MenuTableFragment extends Fragment implements
 		public CharSequence getPageTitle(int position) {
 			mCalendar.set( Calendar.DAY_OF_WEEK, mCalendar.getFirstDayOfWeek() );
 			return mDateFormat.format( mCalendar.getTimeInMillis()
-					+ (position > 4 ? position+2 : position) * 86400000 );
+					+ (position > 4 ? position+2 : position) * 86400000 )
+					+ " - " + mMensa.getName();
 		}
 
 		@Override
