@@ -1,6 +1,8 @@
 package de.hanneseilers.mensash;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +10,8 @@ import java.util.Map;
 import de.hanneseilers.mensash.async.AsyncLocationsLoader;
 import de.mensa.sh.core.Cache;
 import de.mensa.sh.core.Mensa;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -28,6 +32,9 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);		
 		INSTANCE = this;
+		
+		// clear cached file
+		clearCachedFiles(false);
 
 		// set caching settings
 		Cache.setFileWriterClass( new AndroidFileWriter() );
@@ -47,6 +54,41 @@ public class MainActivity extends FragmentActivity {
 		
 		// load locations
 		(new AsyncLocationsLoader()).execute();
+	}
+	
+	/**
+	 * Deletes cached files once every monday.
+	 * @param aForce	Set {@code true} to force deletion of cached file.
+	 */
+	private void clearCachedFiles(boolean aForce){
+		
+		// set calendar to monday
+		Calendar vCalendar = Calendar.getInstance();
+		vCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		long vCacheClearedLast = getSettings().getLong(
+				getString(R.string.settings_cache_cleared_last),
+				System.currentTimeMillis() );
+		
+		// clear cache
+		File vDirectory = getFilesDir();
+		if( vDirectory.isDirectory()
+				&& (aForce || vCacheClearedLast < vCalendar.getTimeInMillis()) ){
+			
+			for( File vFile : vDirectory.listFiles() ){
+				vFile.delete();
+			}
+				
+			// set time to settings
+			getSettings().edit().putLong(
+					getString(R.string.settings_cache_cleared_last),
+					vCalendar.getTimeInMillis()).commit();
+		}
+		
+		
+	}
+	
+	public SharedPreferences getSettings(){
+		return getPreferences(Context.MODE_PRIVATE);
 	}
 	
 	/**

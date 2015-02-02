@@ -40,7 +40,6 @@ public final class R {
          https://developer.android.com/design/patterns/navigation-drawer.html
 
 
-
     
          */
         public static final int general_padding=0x7f060002;
@@ -112,6 +111,9 @@ public final class R {
         public static final int navigation_this_week=0x7f07000c;
         public static final int send=0x7f070004;
         public static final int settings=0x7f070001;
+        /**  Shared prefernces key, do not modify in translations 
+         */
+        public static final int settings_cache_cleared_last=0x7f070010;
         public static final int tab_none=0x7f07000e;
     }
     public static final class style {
