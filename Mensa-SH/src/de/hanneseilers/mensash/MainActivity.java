@@ -17,6 +17,7 @@ public class MainActivity extends FragmentActivity {
 	
 	private static MainActivity INSTANCE = null;
 	
+	private DrawerLayout mDrawerLayout;	
 	private NavigationDrawerFragment mNavigationDrawer;
 	private MenuTableFragment mMenuTableFragment;
 	
@@ -31,11 +32,12 @@ public class MainActivity extends FragmentActivity {
 		// set caching settings
 		Cache.setFileWriterClass( new AndroidFileWriter() );
 		
-		// set navigation background
+		// get navigation drawer and background
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		FragmentManager vFragmentManager = getSupportFragmentManager();
 		mNavigationDrawer = (NavigationDrawerFragment) vFragmentManager 
 				.findFragmentById(R.id.navigation_drawer);
-		mNavigationDrawer.setDrawerShadow( (DrawerLayout) findViewById(R.id.drawer_layout) );
+		mNavigationDrawer.setDrawerShadow( mDrawerLayout );
 		
 		// set main fragment
 		mMenuTableFragment = new MenuTableFragment();
@@ -48,9 +50,16 @@ public class MainActivity extends FragmentActivity {
 	}
 	
 	/**
+	 * Closes navigation drawer.
+	 */
+	public void closeDrawer(){
+		mDrawerLayout.closeDrawers();
+	}
+	
+	/**
 	 * @return	{@link NavigationDrawerFragment} of navigation drawer.
 	 */
-	private NavigationDrawerFragment getNavigationDrawerFragment(){
+	public NavigationDrawerFragment getNavigationDrawerFragment(){
 		return mNavigationDrawer;
 	}
 	
@@ -89,7 +98,7 @@ public class MainActivity extends FragmentActivity {
 			public void run() {
 				if( getMensaLocations() != null && getMensaLocations().size() > 0 ){
 					// upodate locations
-					getNavigationDrawerFragment().updateMenu( getMensaLocations() );
+					getNavigationDrawerFragment().updateLocations( getMensaLocations() );
 				} else {
 					// load locations
 					(new AsyncLocationsLoader()).execute();

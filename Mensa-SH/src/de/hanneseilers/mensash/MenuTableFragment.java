@@ -141,8 +141,12 @@ public class MenuTableFragment extends Fragment implements
 			mMeals = aMeals;
 			setLoading(false);
 			mSectionsPagerAdapter.setMeals(mMeals);
-			pager.setCurrentItem(0);
-			onPageSelected(0);
+			
+			// select current day
+			Calendar vCalendar = Calendar.getInstance();
+			int vDay = vCalendar.get(Calendar.DAY_OF_WEEK) - vCalendar.getFirstDayOfWeek();
+			pager.setCurrentItem(vDay);
+			onPageSelected(vDay);
 		} else {
 			startAsyncMealLodaer();
 		}

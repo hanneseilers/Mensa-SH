@@ -23,6 +23,7 @@ public final class R {
         public static final int green=0x7f050002;
         public static final int highlight_gray=0x7f050003;
         public static final int highlight_gray_light=0x7f050004;
+        public static final int selectable_item=0x7f050009;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -55,6 +56,7 @@ public final class R {
         public static final int ic_action_expand=0x7f020004;
         public static final int ic_drawer=0x7f020005;
         public static final int ic_launcher=0x7f020006;
+        public static final int selectable_item=0x7f020007;
     }
     public static final class id {
         public static final int action_settings=0x7f0a0016;

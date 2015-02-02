@@ -9,10 +9,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * {@link LinearLayout} representing a navigation menu entry for a mensa.
+ * @author Hannes Eilers
+ *
+ */
 public class NavigationMensa extends LinearLayout implements
 	OnClickListener{
 	
 	private Mensa mMensa;
+	
+	private View mRootView;
 	private TextView mTextView;
 	private ImageView mImageView;
 	
@@ -20,9 +27,9 @@ public class NavigationMensa extends LinearLayout implements
 		super(context);
 		
 		// get view
-		View vView = MainActivity.getInstance().getLayoutInflater()
+		mRootView = MainActivity.getInstance().getLayoutInflater()
 				.inflate(R.layout.navigation_mensa, this, false);		
-		addView(vView);
+		addView(mRootView);
 		
 		// get widgets
 		mTextView = (TextView) findViewById(R.id.txtMensaName);
@@ -33,6 +40,10 @@ public class NavigationMensa extends LinearLayout implements
 		mTextView.setOnClickListener(this);
 	}
 	
+	/**
+	 * Set {@link Mensa} of this {@link NavigationMensa}.
+	 * @param aMensa	{@link Mensa} to set.
+	 */
 	public synchronized void setMensa(Mensa aMensa){
 		mMensa = aMensa;
 		if( mMensa != null ){
@@ -40,14 +51,33 @@ public class NavigationMensa extends LinearLayout implements
 		}
 	}
 	
+	/**
+	 * @return	{@link Mensa} of this {@link NavigationMensa}.
+	 */
 	public Mensa getMensa(){
 		return mMensa;
 	}
 	
+	/**
+	 * @return {@link TextView} of mensa name.
+	 */
 	public TextView getTextView(){
 		return mTextView;
 	}
 	
+	/**
+	 * Sets if mensa is selected
+	 * @param aSelected	Set {@code true} to highlight {@link NavigationMensa} as selected, {@code false} otherwise.
+	 */
+	public void setSelected(boolean aSelected){
+		mRootView.setSelected(aSelected);
+		mTextView.setSelected(aSelected);
+	}
+	
+	/**
+	 * Sets if to show loading progress bar.
+	 * @param aLoading	Set {@code true} to show loading progress bar, {@code false} otherwise.
+	 */
 	public void setLoading(boolean aLoading){
 		if( aLoading ){
 			mImageView.setVisibility(View.GONE);
@@ -65,7 +95,7 @@ public class NavigationMensa extends LinearLayout implements
 				setLoading(true);
 				new AsyncLunchTimeLoader(this).execute();
 			} else if( v == mTextView ){
-				MainActivity.getInstance().getMenuTableFragment().setMensa(mMensa);
+				MainActivity.getInstance().getNavigationDrawerFragment().selectMensa(this);
 			}			
 			
 		}

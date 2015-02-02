@@ -5,7 +5,6 @@ import java.util.Map;
 
 import de.mensa.sh.core.Mensa;
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -58,11 +57,18 @@ public class NavigationDrawerFragment extends Fragment implements
 		lblNavigationCity.setOnClickListener(this);
 		lblNavigationMensa.setOnClickListener(this);
 		
+		// set drawer toggle
+		
+		
 		return vView;
 	}
 	
+	/**
+	 * Updates locations.
+	 * @param aLocations	{@link Map} of {@link List}s of {@link Mensa} locations, sorted by city names.
+	 */
 	@SuppressLint("InflateParams")
-	public synchronized void updateMenu(Map<String, List<Mensa>> aLocations){
+	public synchronized void updateLocations(Map<String, List<Mensa>> aLocations){
 		divNavigationCity.removeAllViews();
 		
 		// add all cities			
@@ -88,12 +94,20 @@ public class NavigationDrawerFragment extends Fragment implements
 		
 	}
 	
+	/**
+	 * Sets shadow of a {@link DrawerLayout}.
+	 * @param aDrawerLayout	{@link DrawerLayout} to set shadow.
+	 */
 	public void setDrawerShadow(DrawerLayout aDrawerLayout){
 		// set drawer shadow
 		aDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 	}
 	
-	private void onLoadCity(String aCity){
+	/**
+	 * Loads mensa locatios of a city.
+	 * @param aCity	{@link String} of city name.
+	 */
+	private void loadCityMensas(String aCity){
 		divNavigationMensa.removeAllViews();
 		Map<String, List<Mensa>> vLocations = MainActivity.getInstance().getMensaLocations();
 		if( vLocations.containsKey(aCity) ){
@@ -109,6 +123,10 @@ public class NavigationDrawerFragment extends Fragment implements
 		showCityList(false);
 	}
 	
+	/**
+	 * Shows or hides list of cities.
+	 * @param aShow	Set {@code true} to show list of cities, {@code false} otherwise.
+	 */
 	private void showCityList(boolean aShow){
 		if( aShow ){
 			lblNavigationCity.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_action_collapse, 0);
@@ -119,6 +137,10 @@ public class NavigationDrawerFragment extends Fragment implements
 		}
 	}
 	
+	/**
+	 * Shows or hides list of mensas.
+	 * @param aShow	Set {@code true} to show mensas, {@code false} otherwise.
+	 */
 	private void showMensaList(boolean aShow){
 		if( aShow ){
 			lblNavigationMensa.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_action_collapse, 0);
@@ -127,6 +149,27 @@ public class NavigationDrawerFragment extends Fragment implements
 			lblNavigationMensa.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_action_expand, 0);
 			divNavigationMensa.setVisibility(View.GONE);
 		}
+	}
+	
+	/**
+	 * Set selected {@link NavigationMensa}.
+	 * @param aNavigationMensa	Selected {@link NavigationMensa}.
+	 */
+	public void selectMensa(NavigationMensa aNavigationMensa){		
+		// select mensa
+		for( int i=0; i < divNavigationMensa.getChildCount(); i++ ){			
+			NavigationMensa vNavigationMensa = (NavigationMensa) divNavigationMensa.getChildAt(i);
+			
+			if( vNavigationMensa == aNavigationMensa ){
+				vNavigationMensa.setSelected(true);
+			} else {
+				vNavigationMensa.setSelected(false);
+			}
+		}
+		
+		// set mensa for menu
+		MainActivity.getInstance().getMenuTableFragment().setMensa( aNavigationMensa.getMensa() );
+		MainActivity.getInstance().closeDrawer();
 	}
 
 	@Override
@@ -150,21 +193,20 @@ public class NavigationDrawerFragment extends Fragment implements
 			
 		} else if(v != null  && v instanceof TextView ) {
 			
-			// get text view
+			// get text view and load mensas of city
 			TextView vTextView = (TextView) v;
-			onLoadCity( vTextView.getText().toString() );
+			loadCityMensas( vTextView.getText().toString() );
 			
-			// mark text view
-			vTextView.setBackgroundColor( getResources().getColor(R.color.blue_light) );
-			vTextView.setTextColor( getResources().getColor(R.color.font_light) );
-			
-			// unmark all other entries
+			// select city
 			for( int i=0; i < divNavigationCity.getChildCount(); i++ ){
-				if( divNavigationCity.getChildAt(i) != vTextView ){
-					TextView vChild = (TextView) divNavigationCity.getChildAt(i);
-					vChild.setBackgroundColor( Color.TRANSPARENT );
-					vChild.setTextColor( getResources().getColor(R.color.font_dark) );
+				
+				TextView vChild = (TextView) divNavigationCity.getChildAt(i);
+				if( vChild == vTextView ){
+					vChild.setSelected(true);
+				} else {
+					vChild.setSelected(false);
 				}
+				
 			}
 			
 		}
