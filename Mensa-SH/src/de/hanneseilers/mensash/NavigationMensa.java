@@ -94,8 +94,12 @@ public class NavigationMensa extends LinearLayout implements
 			if( v == mImageView && mImageView.getVisibility() == View.VISIBLE ){
 				setLoading(true);
 				new AsyncLunchTimeLoader(this).execute();
+				
 			} else if( v == mTextView ){
+				
+				// show menu of mensa
 				MainActivity.getInstance().getNavigationDrawerFragment().selectMensa(this);
+				
 			}			
 			
 		}

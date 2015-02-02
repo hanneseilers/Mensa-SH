@@ -20,5 +20,7 @@
 
     <!-- Shared prefernces key, do not modify in translations -->
     <string name="settings_cache_cleared_last">SETTINGS_CACHE_CLEARED_LAST</string>
+    <string name="settings_saved_city">SETTINGS_SAVED_CITY</string>
+    <string name="setting_saved_mensa">SETTINGS_SAVED_MENSA</string>
 
 </resources>

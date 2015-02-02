@@ -85,13 +85,37 @@ public class NavigationDrawerFragment extends Fragment implements
 		lblNavigationMensa.setVisibility(View.VISIBLE);
 		pgbNavigationLoading.setVisibility(View.GONE);
 		
-		// select first added mensa
+		// select last city or first city
 		TextView vTextView = (TextView) divNavigationCity.getChildAt(0);
-		if( vTextView != null ){
-			showCityList(true);
-			onClick(vTextView);
+		String vCity = MainActivity.getInstance().getSettings().getString(
+				getString(R.string.settings_saved_city), null);
+		
+		if( vCity != null ){
+			for( int i=0; i < divNavigationCity.getChildCount(); i++ ){
+				
+				// saved city found
+				if( ((TextView) divNavigationCity.getChildAt(i))
+						.getText().toString().equals(vCity) ){
+					vTextView = (TextView) divNavigationCity.getChildAt(i);
+					break;
+				}
+				
+			}
+			
+			vCity = null;			
 		}
 		
+		// show navigation drawer
+		if( vCity == null ) {			
+			MainActivity.getInstance().openDrawers();
+		}
+		
+		showCityList(true);	
+		
+		// select city entry
+		if( vTextView != null ){
+			onClick(vTextView);
+		}	
 	}
 	
 	/**
@@ -118,9 +142,27 @@ public class NavigationDrawerFragment extends Fragment implements
 			}
 		}
 		
+		// save city
+		MainActivity.getInstance().getSettings().edit().putString(
+				getString(R.string.settings_saved_city),
+				aCity).commit();
+		
 		// open mensa list
 		showMensaList(true);
 		showCityList(false);
+		
+		// select saved mensa
+		String vMensaName = MainActivity.getInstance().getSettings().getString(
+				getString(R.string.setting_saved_mensa), null);
+		
+		if( vMensaName != null ){
+			for( int i=0; i < divNavigationMensa.getChildCount(); i++ ){
+				NavigationMensa vMensa = (NavigationMensa) divNavigationMensa.getChildAt(i);
+				if( vMensa != null && vMensa.getMensa().getName().equals(vMensaName) ){
+					vMensa.onClick( vMensa.getTextView() );
+				}
+			}
+		}
 	}
 	
 	/**
@@ -166,6 +208,11 @@ public class NavigationDrawerFragment extends Fragment implements
 				vNavigationMensa.setSelected(false);
 			}
 		}
+		
+		// save selected mensa name
+		MainActivity.getInstance().getSettings().edit().putString(
+				getString(R.string.setting_saved_mensa),
+				aNavigationMensa.getMensa().getName()).commit();
 		
 		// set mensa for menu
 		MainActivity.getInstance().getMenuTableFragment().setMensa( aNavigationMensa.getMensa() );
