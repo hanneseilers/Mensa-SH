@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import de.hanneseilers.mensash.async.AsyncLocationsLoader;
 import de.mensa.sh.core.Cache;
@@ -14,9 +15,11 @@ import de.mensa.sh.core.Settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.telephony.TelephonyManager;
 import android.view.Gravity;
 
 public class MainActivity extends FragmentActivity {
@@ -169,6 +172,22 @@ public class MainActivity extends FragmentActivity {
 		synchronized (mLocations) {
 			return new HashMap<String, List<Mensa>>(mLocations);
 		}
+	}
+	
+	/**
+	 * @return	{@link String} of device hash.
+	 */
+	public String getDeviceHash(){
+		final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+
+	    final String tmDevice, tmSerial, androidId;
+	    tmDevice = "" + tm.getDeviceId();
+	    tmSerial = "" + tm.getSimSerialNumber();
+	    androidId = "" + Secure.getString(getContentResolver(),Secure.ANDROID_ID);
+
+	    UUID deviceUuid = new UUID(androidId.hashCode(), ((long)tmDevice.hashCode() << 32) | tmSerial.hashCode());
+	    
+	    return deviceUuid.toString();
 	}
 	
 	

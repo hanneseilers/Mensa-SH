@@ -4,6 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/txtRatingMeal"
+        style="@style/text_view"
+        android:layout_width="match_parent" />
+
     <RatingBar
         android:id="@+id/ratRating"
         android:layout_width="wrap_content"
@@ -17,14 +22,10 @@
         style="@style/text_view_small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_action_about"
+        android:drawableStart="@drawable/ic_action_about"
+        android:gravity="center_vertical"
         android:text="@string/disclaimer"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txtRatingDisclaimerTexte"
-        style="@style/text_view_small"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/disclaimer_text" />
 
 </LinearLayout>

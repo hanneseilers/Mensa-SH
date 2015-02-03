@@ -3,7 +3,11 @@ package de.hanneseilers.mensash;
 import java.util.List;
 
 import de.hanneseilers.mensash.async.AsyncRatingsLoader;
+import de.hanneseilers.mensash.async.AsyncRatingsSender;
 import de.mensa.sh.core.Meal;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,11 +15,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class MenuFragment extends Fragment implements
 	OnClickListener{
+	
+	private static View sMealView;
+	private static Meal sMeal;
+	private static RatingBar sRatRating;
 	
 	private LinearLayout vRootView;
 	
@@ -58,11 +68,45 @@ public class MenuFragment extends Fragment implements
 							.inflate(R.layout.fragment_menu_meal, vRootView, false);
 					TextView vMealName = (TextView) vMealView.findViewById(R.id.txtMealName);
 					TextView vMealPrice = (TextView) vMealView.findViewById(R.id.txtMealPrice);
+					LinearLayout vDivMealInfo = (LinearLayout) vMealView.findViewById(R.id.divMealInfo);
 					
 					// set content
 					vMealName.setText( vMeal.getMealName() );
 					vMealPrice.setText( vMeal.getPrice() );
 					
+					// add icons
+					ImageView vImage;
+					if( vMeal.isAlc() ){
+						vImage = new ImageView(getActivity());
+						vImage.setImageDrawable( getResources().getDrawable(R.drawable.ic_alkohol) );
+						vDivMealInfo.addView( vImage );						
+					}
+					
+					if( vMeal.isCow() ){
+						vImage = new ImageView(getActivity());
+						vImage.setImageDrawable( getResources().getDrawable(R.drawable.ic_rind) );
+						vDivMealInfo.addView( vImage );						
+					}
+					
+					if( vMeal.isPig() ){
+						vImage = new ImageView(getActivity());
+						vImage.setImageDrawable( getResources().getDrawable(R.drawable.ic_schwein) );
+						vDivMealInfo.addView( vImage );						
+					}
+					
+					if( vMeal.isVegetarian() ){
+						vImage = new ImageView(getActivity());
+						vImage.setImageDrawable( getResources().getDrawable(R.drawable.ic_vegetarisch) );
+						vDivMealInfo.addView( vImage );						
+					}
+					
+					if( vMeal.isVegan() ){
+						vImage = new ImageView(getActivity());
+						vImage.setImageDrawable( getResources().getDrawable(R.drawable.ic_vegan) );
+						vDivMealInfo.addView( vImage );						
+					}
+					
+					// set background color
 					if( !even ){
 						vMealView.setBackgroundColor( getResources().getColor(R.color.highlight_gray_light) );
 					}					
@@ -75,7 +119,7 @@ public class MenuFragment extends Fragment implements
 					vRootView.addView(vMealView);
 					
 					// start ratings loader
-					new AsyncRatingsLoader().execute(new Object[]{vMeal, vMealView});
+					new AsyncRatingsLoader(vMealView, false).execute(new Meal[]{vMeal});
 					
 				}
 			}
@@ -105,13 +149,67 @@ public class MenuFragment extends Fragment implements
 		
 		return null;
 	}
+	
+	@SuppressLint("InflateParams")
+	private void showRatingDialog(View aMealView, Meal aMeal){
+		// set static variables
+		sMealView = aMealView;
+		sMeal = aMeal;
+		
+		// get widgets
+		LinearLayout vLayout = (LinearLayout) MainActivity.getInstance().getLayoutInflater()
+				.inflate(R.layout.dialog_rating, null);
+		
+		RatingBar ratMealRating = (RatingBar) sMealView.findViewById(R.id.ratMealRating);
+		TextView txtRatingMeal = (TextView) vLayout.findViewById(R.id.txtRatingMeal);
+		TextView txtRatingDisclaimer = (TextView) vLayout.findViewById(R.id.txtRatingDisclaimer);
+		sRatRating = (RatingBar) vLayout.findViewById(R.id.ratRating);
+		
+		// set content
+		txtRatingMeal.setText( sMeal.getMealName() );
+		sRatRating.setRating( ratMealRating.getRating() );
+		
+		// set disclaimer listener
+		txtRatingDisclaimer.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View arg0) {
+				showDisclaimer();
+			}
+		});
+		
+		// create dialog
+		AlertDialog.Builder vBuilder = new AlertDialog.Builder( MainActivity.getInstance() );
+		vBuilder.setTitle( getString(R.string.rating) )
+			.setView(vLayout)
+			.setPositiveButton( R.string.submit, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					new AsyncRatingsSender(sMeal, sMealView)
+						.execute( new Integer[]{(int) sRatRating.getRating()} );
+				}
+			})
+			.setNegativeButton( R.string.cancel, null);
+		
+		vBuilder.create().show();
+	}
+	
+	/**
+	 * Shows disclaimer dialog
+	 */
+	private void showDisclaimer(){
+		// create dialog
+		AlertDialog.Builder vBuilder = new AlertDialog.Builder( MainActivity.getInstance() );
+		vBuilder.setTitle( getString(R.string.disclaimer) )
+			.setMessage( getString(R.string.disclaimer_text) )
+			.setPositiveButton( R.string.close, null );		
+		vBuilder.create().show();
+	}
 
 	@Override
 	public void onClick(View vMealView) {
 		TextView vMealName = (TextView) vMealView.findViewById(R.id.txtMealName);
 		Meal vMeal = getMeal( vMealName.getText().toString() );
-		
-		System.out.println("meal: " + vMeal.getMealName() );
+		showRatingDialog(vMealView, vMeal);
 	}
 	
 }

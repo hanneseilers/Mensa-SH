@@ -5,7 +5,7 @@
     <string name="settings">Settings</string>
     <string name="cancel">Cancel</string>
     <string name="close">Close</string>
-    <string name="submit">submit</string>
+    <string name="submit">Submit</string>
     <string name="img_description_loading">loading</string>
     <string name="img_description_lunch_time">Lunch time</string>
     <string name="loading">loading&#8230;</string>
@@ -15,14 +15,16 @@
     <string name="navigation_header_mensa">Mensa</string>
     <string name="navigation_this_week">This week</string>
     <string name="navigation_next_week">Next week</string>
-    <string name="rating_unrated">Unrated</string>
+    <string name="rating">Rating</string>
+    <string name="rating_submit_success">Your rating was successfully submitted.</string>
+    <string name="rating_submit_fail">Failed to submit your rating.</string>
     <string name="tab_none">None</string>
     <string name="date_format_pattern">EEEE dd/MM</string>
 
     <!-- DISCLAIMER -->
-    <string name="disclaimer">Disclaimer:</string>
-    <string name="disclaimer_text">By sending a rate for a meal you accept, that this app submits your Android ID, an on device setup randomly generated number, is transmitted with your rating to remote servers of the app owner.
-        Your submitted data will not be given to third party person and only used for statistical analysis.</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="disclaimer_text">By sending a rate for a meal you accept that this app submits your device serial numbers (anonymised hash of device id, Android id, and SIM card id) is transmitted with your rating to remote servers of the app owner.
+        Your submitted data will not be given to third party person and is only used for statistical analysis.</string>
 
     <!-- Shared prefernces key, do not modify in translations -->
     <string name="settings_cache_cleared_last">SETTINGS_CACHE_CLEARED_LAST</string>

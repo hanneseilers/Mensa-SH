@@ -182,10 +182,14 @@ public class MenuTableFragment extends Fragment implements
 		
 		@Override
 		public CharSequence getPageTitle(int position) {
-			mCalendar.set( Calendar.DAY_OF_WEEK, mCalendar.getFirstDayOfWeek() );
-			return mDateFormat.format( mCalendar.getTimeInMillis()
-					+ (position > 4 ? position+2 : position) * 86400000 )
-					+ " - " + mMensa.getName();
+			if( mMensa != null ){
+				mCalendar.set( Calendar.DAY_OF_WEEK, mCalendar.getFirstDayOfWeek() );
+				return mDateFormat.format( mCalendar.getTimeInMillis()
+						+ (position > 4 ? position+2 : position) * 86400000 )
+						+ " - " + mMensa.getName();
+			}
+			
+			return "";
 		}
 
 		@Override
