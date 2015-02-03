@@ -27,7 +27,7 @@ public class MenuFragment extends Fragment implements
 	private static Meal sMeal;
 	private static RatingBar sRatRating;
 	
-	private LinearLayout vRootView;
+	private LinearLayout mRootView;
 	
 	private List<Meal> mMeals;
 	private int mDay;
@@ -36,25 +36,25 @@ public class MenuFragment extends Fragment implements
 	
 	public MenuFragment(int position, List<Meal> aMeals) {
 		mDay = position;
-		mMeals = aMeals;
+		mMeals = aMeals;		
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {		
 		// create root view
-		vRootView = new LinearLayout( getActivity() );
-		vRootView.setOrientation(LinearLayout.VERTICAL);
+		mRootView = new LinearLayout( getActivity() );
+		mRootView.setOrientation(LinearLayout.VERTICAL);
 		updateMeals();
-		return vRootView;
+		return mRootView;
 	}
 	
 	/**
 	 * Update meals of this day.
 	 */
 	private synchronized void updateMeals(){
-		// clear meals
-		vRootView.removeAllViews();
+		// clear meals		
+		mRootView.removeAllViews();
 		
 		// create content
 		if( mMeals != null ){
@@ -65,7 +65,7 @@ public class MenuFragment extends Fragment implements
 					
 					// get widgets
 					LinearLayout vMealView = (LinearLayout) getActivity().getLayoutInflater()
-							.inflate(R.layout.fragment_menu_meal, vRootView, false);
+							.inflate(R.layout.fragment_menu_meal, mRootView, false);
 					TextView vMealName = (TextView) vMealView.findViewById(R.id.txtMealName);
 					TextView vMealPrice = (TextView) vMealView.findViewById(R.id.txtMealPrice);
 					LinearLayout vDivMealInfo = (LinearLayout) vMealView.findViewById(R.id.divMealInfo);
@@ -116,7 +116,7 @@ public class MenuFragment extends Fragment implements
 					vMealView.setOnClickListener(this);
 					
 					// add to root view
-					vRootView.addView(vMealView);
+					mRootView.addView(vMealView);
 					
 					// start ratings loader
 					new AsyncRatingsLoader(vMealView, false).execute(new Meal[]{vMeal});

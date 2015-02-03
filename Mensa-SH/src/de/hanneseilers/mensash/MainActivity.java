@@ -31,12 +31,23 @@ public class MainActivity extends FragmentActivity {
 	private MenuTableFragment mMenuTableFragment;
 	
 	private Map<String, List<Mensa>> mLocations = new HashMap<String, List<Mensa>>();
+	
+	private DataStorageFragment mDataStorage;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);		
 		INSTANCE = this;
+		
+		// get data storage
+		mDataStorage = (DataStorageFragment) getFragmentManager().findFragmentByTag( DataStorageFragment.TAG );
+		
+		// create data storage on first time
+		if( mDataStorage == null ){
+			mDataStorage = new DataStorageFragment();
+			getFragmentManager().beginTransaction().add( mDataStorage, DataStorageFragment.TAG ).commit();
+		}
 		
 		// set ratings api url
 		Settings.sh_mensa_db_api_url = "http://mensash.private-factory.de/api.php";
@@ -172,6 +183,10 @@ public class MainActivity extends FragmentActivity {
 		synchronized (mLocations) {
 			return new HashMap<String, List<Mensa>>(mLocations);
 		}
+	}
+	
+	public DataStorageFragment getDataStorage(){
+		return mDataStorage;
 	}
 	
 	/**

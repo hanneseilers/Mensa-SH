@@ -121,12 +121,19 @@ public class MenuTableFragment extends Fragment implements
 	}
 	
 	/**
+	 * Notifies {@link FragmentPagerAdapter} that meal data changed.
+	 */
+	public void notifyDataChanged(){
+		mSectionsPagerAdapter.notifyDataSetChanged();
+	}
+	
+	/**
 	 * Sets current mensa and updates menu table.
 	 * @param aMensa	{@link Mensa} to set.
 	 */
 	public synchronized void setMensa(Mensa aMensa){
 		if( aMensa != null ){
-			mMensa = aMensa;
+			mMensa = aMensa;			
 			startAsyncMealLodaer();			
 		}
 	}
@@ -201,12 +208,18 @@ public class MenuTableFragment extends Fragment implements
 		 * Update menu table.
 		 * @param aMeals	{@link List} of {@link Meal}s.
 		 */
-		private void setMeals(List<Meal> aMeals){
-			for( MenuFragment vFragment : mFragments ){
-				if( vFragment != null ){
-					vFragment.setMeals(aMeals); 
+		private void setMeals(List<Meal> aMeals){			
+			for( int i=0; i < MAX_DAYS; i++ ){
+				if( mFragments[i] == null ){
+					mFragments[i] = new MenuFragment(i, aMeals);
+				} else {				
+					mFragments[i].setMeals(aMeals);
 				}
 			}
+			
+			// save meals
+			MainActivity.getInstance().getDataStorage()
+				.addData( getString(R.string.storage_meals) , aMeals);
 		}
 		
 	}

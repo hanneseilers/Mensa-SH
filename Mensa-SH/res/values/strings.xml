@@ -30,5 +30,8 @@
     <string name="settings_cache_cleared_last">SETTINGS_CACHE_CLEARED_LAST</string>
     <string name="settings_saved_city">SETTINGS_SAVED_CITY</string>
     <string name="setting_saved_mensa">SETTINGS_SAVED_MENSA</string>
+    <string name="storage_meals">STORAGE_MEALS</string>
+    <string name="storage_mensa">STORAGE_MENSA</string>
+    <string name="storage_locations">STORAGE_LOCATIONS</string>
 
 </resources>

@@ -134,6 +134,9 @@ public final class R {
          */
         public static final int settings_cache_cleared_last=0x7f070015;
         public static final int settings_saved_city=0x7f070016;
+        public static final int storage_locations=0x7f07001a;
+        public static final int storage_meals=0x7f070018;
+        public static final int storage_mensa=0x7f070019;
         public static final int submit=0x7f070004;
         public static final int tab_none=0x7f070011;
     }
