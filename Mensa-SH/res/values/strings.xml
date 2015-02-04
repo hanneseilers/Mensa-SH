@@ -2,61 +2,33 @@
 <resources>
 
     <string name="app_name">Mensa-SH</string>
-    <string name="txt_city">Stadt</string>
-    <string name="txt_mensa">Mensa</string>
-    <string name="txt_loading">Loading &#8230;</string>
-    <string name="txt_save_last_mensa">Letzte besuchte Mensa merken</string>
-    <string name="txt_settings">Einstellungen</string>
-    <string name="txt_cache_hold_time_title">Cache Vorhaltezeit</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="submit">Submit</string>
+    <string name="img_description_loading">loading</string>
+    <string name="img_description_lunch_time">Lunch time</string>
+    <string name="loading">loading&#8230;</string>
+    <string name="navigation_header_city">City</string>
+    <string name="navigation_header_mensa">Mensa</string>
+    <string name="navigation_this_week">This week</string>
+    <string name="navigation_next_week">Next week</string>
+    <string name="rating">Rating</string>
+    <string name="rating_click_to_rate">Click to rate</string>
+    <string name="rating_submit_success">Your rating was successfully submitted.</string>
+    <string name="rating_submit_fail">Failed to submit your rating.</string>
+    <string name="date_format_pattern">EEEE dd/MM</string>
 
-    <string-array name="cache_hold_time_entries">
-        <item>0 Std.</item>
-        <item>6 Std.</item>
-        <item>12 Std.</item>
-        <item>1 Tag</item>
-        <item>7 Tage</item>
-    </string-array>
+    <!-- DISCLAIMER -->
+    <string name="disclaimer">Disclaimer</string>
+    <string name="disclaimer_text">By sending a rate for a meal you accept that this app submits your device serial numbers (anonymised hash of device id, Android id and SIM card id) is transmitted with your rating to remote servers of the app owner.
+        Your submitted data will not be given to third party person and is only used for statistical analysis.</string>
 
-    <string name="txt_info">Info</string>
-    <string name="summary_cache_hold_time">Zeit die geladene Daten gespeichert werden</string>
-    <string name="summary_cities">Gewählte Stadt</string>
-    <string name="txt_cache_hold_time_default">24</string>
-
-    <string-array name="cache_hold_time_values">
-        <item>0</item>
-        <item>6</item>
-        <item>12</item>
-        <item>24</item>
-        <item>168</item>
-    </string-array>
-
-    <string name="txt_info_text">Mensa-SH ist eine kostenfreie Android App zur Anzeige der Mensa-Daten und -Speisepläne des Studentenwerks Schleswig-Holstein.</string>
-    <string name="txt_info_law">Die App liest die Daten von der Website des Studentenwerks Schleswig-Holstein ein. Das Studentenwerk Schleswig-Holstein ist nicht Eigentümer dieser App und für deren Inhalte nicht verantwortlich. Der Eigentümer übernimmt keinerlei Gewährleistung für die Korrektheit der dargestellten Daten oder durch die App entstandene Schäden.</string>
-    <string name="txt_open_source">Die App nutzt die folgenden Open-Source-Grafiken und -Bibliotheken: NineOldAndroids (Jake Wharton, Apache License 2.0), HoloEverywhere (Sergey Shatunov, MIT License), PagerSlidingTabStrip (Andreas Stütz, Apache License 2.0), Vegetarian Icon, (Cody Foss, The Noun Project), Bottle Icon (Anton Hakanson, The Noun Project), Pig Icon (Sascha Elmers, The Noun Project).</string>
-    <string name="txt_copyright">©2014 Hannes Eilers, Johan v. Forstner</string>
-    <string name="title_activity_info">Info_Activity</string>
-    <string name="action_settings">Settings</string>
-    <string name="txt_info_law_header">Rechtliche Informationen:</string>
-    <string name="txt_info_logo">Mensa-SH Logo</string>
-    <string name="txt_empty_string"></string>
-    <string name="txt_clear_cache">Cache löschen</string>
-    <string name="txt_cache">Caching</string>
-    <string name="txt_status">Status</string>
-    <string name="txtSend">Bewertung senden</string>
-    <string name="txtCancel">Abbrechen</string>
-    <string name="title_activity_activity_rating">ActivityRating</string>
-    <string name="txt_show_ratings">Bewertungen anzeigen</string>
-    <string name="txt_show_version_hints">Versionshinweise anzeigen</string>
-    <string name="txt_ack_disclaimer">Datenschutzerlärung angenommen</string>
-    <string name="txt_disclaimer">Datenschutz</string>
-    <string name="drawer_open">Navigation öffnen</string>
-    <string name="drawer_close">Navigation schließen</string>
-    <string name="title_activity_detail">Details</string>
-    <string name="img_description">image</string>
-    <string name="info_no_meals">Keine Mahlzeiten gefunden.</string>
-    <string name="info_error_meals">Fehler beim Abrufen der Mahlzeiten.</string>
-    <string name="expand">öffnen</string>
-    <string name="rating_send">Bewertung gesendet</string>
-    <string name="rating_not_send">Bewertung nicht möglich!</string>
+    <!-- Shared prefernces key, do not modify in translations -->
+    <string name="settings_cache_cleared_last">SETTINGS_CACHE_CLEARED_LAST</string>
+    <string name="settings_saved_city">SETTINGS_SAVED_CITY</string>
+    <string name="setting_saved_mensa">SETTINGS_SAVED_MENSA</string>
+    <string name="storage_meals">STORAGE_MEALS</string>
+    <string name="storage_mensa">STORAGE_MENSA</string>
+    <string name="storage_locations">STORAGE_LOCATIONS</string>
 
 </resources>

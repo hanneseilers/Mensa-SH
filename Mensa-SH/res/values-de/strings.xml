@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mensa-SH</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="close">Schließen</string>
+    <string name="submit">Absenden</string>
+    <string name="img_description_loading">laden</string>
+    <string name="img_description_lunch_time">Öffnungszeiten</string>
+    <string name="loading">lade&#8230;</string>
+    <string name="navigation_header_city">Stadt</string>
+    <string name="navigation_header_mensa">Mensa</string>
+    <string name="navigation_this_week">Diese Woche</string>
+    <string name="navigation_next_week">Nächste Woche</string>
+    <string name="rating">Bewertung</string>
+    <string name="rating_click_to_rate">Klick zum Bewerten</string>
+    <string name="rating_submit_success">Deine Bewertung wurde erfolgreich übertragen.</string>
+    <string name="rating_submit_fail">Deien Bewertungs konnte nicht übertragen werden.</string>
+    <string name="date_format_pattern">EEEE dd.MM</string>
+
+    <!-- DISCLAIMER -->
+    <string name="disclaimer">Datenschutzbestimmung</string>
+    <string name="disclaimer_text">Durch das Senden einer Bewertung für ein Gericht stimmst du zu, dass diese App die Seriennummern deines Gerätes (ein anonymisierter Hash-Wert aus Geräte ID, Android ID und SIM Karten ID) zusammen mit deiner Bewertung an die Server des App Besitzers übertragen werden.
+        Deine Daten werden nicht an Dritte weitergegeben und nur für statistische Auswertungen genutzt.</string>
+
+    <!-- Shared prefernces key, do not modify in translations -->
+    <string name="settings_cache_cleared_last">SETTINGS_CACHE_CLEARED_LAST</string>
+    <string name="settings_saved_city">SETTINGS_SAVED_CITY</string>
+    <string name="setting_saved_mensa">SETTINGS_SAVED_MENSA</string>
+    <string name="storage_meals">STORAGE_MEALS</string>
+    <string name="storage_mensa">STORAGE_MENSA</string>
+    <string name="storage_locations">STORAGE_LOCATIONS</string>
+
+</resources>
