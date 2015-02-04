@@ -14,5 +14,6 @@
     <dimen name="navigation_text_padding">20dp</dimen>
     <dimen name="meal_icon_height">20dp</dimen>
     <dimen name="meal_margin_bottom">5dp</dimen>
+    <dimen name="meal_margin_rating">5dp</dimen>
 
 </resources>

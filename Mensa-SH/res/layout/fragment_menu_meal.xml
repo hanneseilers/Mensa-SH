@@ -23,6 +23,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/meal_margin_rating"
+            android:layout_marginStart="@dimen/meal_margin_rating"
             android:orientation="vertical" >
 
             <RatingBar

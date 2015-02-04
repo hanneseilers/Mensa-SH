@@ -48,6 +48,7 @@ public final class R {
         public static final int general_padding=0x7f060002;
         public static final int meal_icon_height=0x7f060006;
         public static final int meal_margin_bottom=0x7f060007;
+        public static final int meal_margin_rating=0x7f060008;
         public static final int navigation_drawer_width=0x7f060003;
         public static final int navigation_header_padding=0x7f060004;
         public static final int navigation_text_padding=0x7f060005;

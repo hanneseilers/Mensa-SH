@@ -13,7 +13,7 @@
     <string name="navigation_this_week">Diese Woche</string>
     <string name="navigation_next_week">Nächste Woche</string>
     <string name="rating">Bewertung</string>
-    <string name="rating_click_to_rate">Klick zum Bewerten</string>
+    <string name="rating_click_to_rate">Klick zum\nBewerten</string>
     <string name="rating_submit_success">Deine Bewertung wurde erfolgreich übertragen.</string>
     <string name="rating_submit_fail">Deien Bewertungs konnte nicht übertragen werden.</string>
     <string name="date_format_pattern">EEEE dd.MM</string>
