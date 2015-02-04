@@ -2,15 +2,12 @@
 <resources>
 
     <string name="app_name">Mensa-SH</string>
-    <string name="settings">Settings</string>
     <string name="cancel">Cancel</string>
     <string name="close">Close</string>
     <string name="submit">Submit</string>
     <string name="img_description_loading">loading</string>
     <string name="img_description_lunch_time">Lunch time</string>
     <string name="loading">loading&#8230;</string>
-    <string name="navigation_drawer_open">Open mensa selection</string>
-    <string name="navigation_drawer_close">Close mensa selection</string>
     <string name="navigation_header_city">City</string>
     <string name="navigation_header_mensa">Mensa</string>
     <string name="navigation_this_week">This week</string>
@@ -19,7 +16,6 @@
     <string name="rating_click_to_rate">Click to rate</string>
     <string name="rating_submit_success">Your rating was successfully submitted.</string>
     <string name="rating_submit_fail">Failed to submit your rating.</string>
-    <string name="tab_none">None</string>
     <string name="date_format_pattern">EEEE dd/MM</string>
 
     <!-- DISCLAIMER -->

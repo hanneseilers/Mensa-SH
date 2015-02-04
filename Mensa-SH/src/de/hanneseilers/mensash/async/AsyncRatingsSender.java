@@ -60,7 +60,7 @@ public class AsyncRatingsSender extends AsyncTask<Integer, Void, Boolean> {
 		} else {
 			
 			Toast.makeText( MainActivity.getInstance(),
-					R.string.rating_submit_success, Toast.LENGTH_SHORT ).show();
+					R.string.rating_submit_fail, Toast.LENGTH_SHORT ).show();
 			
 		}
 	}

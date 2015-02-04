@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:background="@color/gray_background"
     android:orientation="vertical"
-    tools:context="de.hanneseilers.mensash.MainActivity$PlaceholderFragment" >
+    tools:context="de.hanneseilers.mensash.MainActivity$PlaceholderFragment"
+    tools:ignore="Overdraw" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +46,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone"
-        tools:ignore="" >
+        tools:ignore="UseCompoundDrawables" >
 
         <ImageView
             android:id="@+id/imgLoading"
