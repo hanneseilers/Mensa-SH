@@ -112,6 +112,7 @@ public final class R {
         public static final int close=0x7f070002;
         public static final int date_format_pattern=0x7f07000f;
         /**  DISCLAIMER 
+ DISCLAIMER 
          */
         public static final int disclaimer=0x7f070010;
         public static final int disclaimer_text=0x7f070011;
@@ -128,6 +129,7 @@ public final class R {
         public static final int rating_submit_success=0x7f07000d;
         public static final int setting_saved_mensa=0x7f070014;
         /**  Shared prefernces key, do not modify in translations 
+ Shared prefernces key, do not modify in translations 
          */
         public static final int settings_cache_cleared_last=0x7f070012;
         public static final int settings_saved_city=0x7f070013;

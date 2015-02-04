@@ -20,7 +20,7 @@
 
     <!-- DISCLAIMER -->
     <string name="disclaimer">Disclaimer</string>
-    <string name="disclaimer_text">By sending a rate for a meal you accept that this app submits your device serial numbers (anonymised hash of device id, Android id, and SIM card id) is transmitted with your rating to remote servers of the app owner.
+    <string name="disclaimer_text">By sending a rate for a meal you accept that this app submits your device serial numbers (anonymised hash of device id, Android id and SIM card id) is transmitted with your rating to remote servers of the app owner.
         Your submitted data will not be given to third party person and is only used for statistical analysis.</string>
 
     <!-- Shared prefernces key, do not modify in translations -->
