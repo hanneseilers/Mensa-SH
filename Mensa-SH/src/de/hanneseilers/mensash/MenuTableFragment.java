@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
@@ -161,69 +162,17 @@ public class MenuTableFragment extends Fragment implements
 			int vDay = vCalendar.get(Calendar.DAY_OF_WEEK) - vCalendar.getFirstDayOfWeek();
 			pager.setCurrentItem(vDay);
 			onPageSelected(vDay);
+			
 		} else {
 			startAsyncMealLodaer();
 		}
 	}
 	
 	/**
-	 * {@link FragmentPagerAdapter} class to show menu fragments.
-	 * @author Hannes Eilers
-	 *
+	 * Sets week navigation buttons.
+	 * @param aThisWeekEnabled	Set {@code true} to enable button to switch to this week.
+	 * 							To enable button for next week, set {@code false}.
 	 */
-	private class SectionsPagerAdapter extends FragmentPagerAdapter{
-
-		private MenuFragment[] mFragments = new MenuFragment[MAX_DAYS];
-		
-		public SectionsPagerAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public android.support.v4.app.Fragment getItem(int position) {
-			if( mFragments[position] == null ){
-				mFragments[position] = new MenuFragment(position, mMeals);
-			}
-			return mFragments[position];
-		}
-		
-		@Override
-		public CharSequence getPageTitle(int position) {
-			if( mMensa != null ){
-				mCalendar.set( Calendar.DAY_OF_WEEK, mCalendar.getFirstDayOfWeek() );
-				return mDateFormat.format( mCalendar.getTimeInMillis()
-						+ (position > 4 ? position+2 : position) * 86400000 )
-						+ " - " + mMensa.getName();
-			}
-			
-			return "";
-		}
-
-		@Override
-		public int getCount() {
-			return MAX_DAYS;
-		}
-		
-		/**
-		 * Update menu table.
-		 * @param aMeals	{@link List} of {@link Meal}s.
-		 */
-		private void setMeals(List<Meal> aMeals){			
-			for( int i=0; i < MAX_DAYS; i++ ){
-				if( mFragments[i] == null ){
-					mFragments[i] = new MenuFragment(i, aMeals);
-				} else {				
-					mFragments[i].setMeals(aMeals);
-				}
-			}
-			
-			// save meals
-			MainActivity.getInstance().getDataStorage()
-				.addData( getString(R.string.storage_meals) , aMeals);
-		}
-		
-	}
-	
 	private void setWeekButtons(boolean aThisWeekEnabled){
 		if( aThisWeekEnabled ){
 			btnThisWeek.setEnabled(true);
@@ -264,6 +213,65 @@ public class MenuTableFragment extends Fragment implements
 		
 		pager.setCurrentItem(vPosition);
 		onPageSelected(vPosition);
+	}
+	
+	/**
+	 * {@link FragmentPagerAdapter} class to show menu fragments.
+	 * @author Hannes Eilers
+	 *
+	 */
+	private class SectionsPagerAdapter extends FragmentStatePagerAdapter{
+		
+		private MenuFragment[] mFragments = new MenuFragment[MAX_DAYS];
+		
+		public SectionsPagerAdapter(FragmentManager fm) {
+			super(fm);
+		}
+		
+		@Override
+		public void destroyItem(ViewGroup container, int position, Object object) {
+			super.destroyItem(container, position, object);
+			mFragments[position] = null;
+		}
+
+		@Override
+		public android.support.v4.app.Fragment getItem(int position) {
+			if( mFragments[position] == null ){
+				mFragments[position] = new MenuFragment(position, mMeals);
+			}
+			
+			return mFragments[position];
+		}
+		
+		@Override
+		public CharSequence getPageTitle(int position) {
+			if( mMensa != null ){
+				mCalendar.set( Calendar.DAY_OF_WEEK, mCalendar.getFirstDayOfWeek() );
+				return mDateFormat.format( mCalendar.getTimeInMillis()
+						+ (position > 4 ? position+2 : position) * 86400000 )
+						+ " - " + mMensa.getName();
+			}
+			
+			return "";
+		}
+
+		@Override
+		public int getCount() {
+			return MAX_DAYS;
+		}
+		
+		/**
+		 * Update menu table.
+		 * @param aMeals	{@link List} of {@link Meal}s.
+		 */
+		private void setMeals(List<Meal> aMeals){
+			for( MenuFragment vFragment : mFragments ){
+				if( vFragment != null ){
+					vFragment.setMeals(aMeals);
+				}
+			}
+		}
+		
 	}
 	
 }

@@ -4,6 +4,8 @@
     <item name="blue" type="color">#005981</item>
     <item name="blue_light" type="color">#4082a2</item>
     <item name="green" type="color">#6f8e27</item>
+    <item name="gray" type="color">#7f7f7f</item>
+    <item name="gray_background" type="color">#f4f4f4</item>
     <item name="highlight_gray" type="color">#ededed</item>
     <item name="highlight_gray_light" type="color">#fafafa</item>
     <item name="font_dark" type="color">#4b4b4d</item>

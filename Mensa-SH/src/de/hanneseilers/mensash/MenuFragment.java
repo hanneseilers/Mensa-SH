@@ -15,9 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MenuFragment extends Fragment implements
@@ -43,10 +45,16 @@ public class MenuFragment extends Fragment implements
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {		
 		// create root view
+		ScrollView vScrollView = new ScrollView(getActivity());
+		vScrollView.setLayoutParams( new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT) );	
+		
 		mRootView = new LinearLayout( getActivity() );
 		mRootView.setOrientation(LinearLayout.VERTICAL);
+		vScrollView.addView(mRootView);
+		
 		updateMeals();
-		return mRootView;
+		
+		return vScrollView;
 	}
 	
 	/**
@@ -109,7 +117,7 @@ public class MenuFragment extends Fragment implements
 					// set background color
 					if( !even ){
 						vMealView.setBackgroundColor( getResources().getColor(R.color.highlight_gray_light) );
-					}					
+					}
 					even = !even;
 					
 					// add listener

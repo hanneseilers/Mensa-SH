@@ -19,13 +19,16 @@ public class AsyncLocationsLoader extends AsyncTask<Void, Void, List<Mensa>> {
 	@Override
 	@SuppressWarnings("unchecked")
 	protected List<Mensa> doInBackground(Void... params) {
+		// get stored data
 		List<Mensa> vLocations = (ArrayList<Mensa>) MainActivity.getInstance().getDataStorage()
 				.getData( MainActivity.getInstance().getString(R.string.storage_locations) );
+		
+		// check if to restore data
 		if( vLocations != null ){
 			return vLocations;
-		} else {
-			vLocations = Mensa.getLocations();
 		}
+		
+		vLocations = Mensa.getLocations();
 		
 		// save locations
 		MainActivity.getInstance().getDataStorage()

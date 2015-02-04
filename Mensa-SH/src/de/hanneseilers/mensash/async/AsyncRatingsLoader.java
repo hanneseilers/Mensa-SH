@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 /**
  * {@link AsyncTask} for loading meal rating.
@@ -30,9 +31,15 @@ public class AsyncRatingsLoader extends AsyncTask<Meal, Void, Integer> {
 	
 	@Override
 	protected void onPreExecute() {
+		// get widgets
+		RatingBar vRating = (RatingBar) mMealView.findViewById(R.id.ratMealRating);
+		ProgressBar vLoading = (ProgressBar) mMealView.findViewById(R.id.pgbMealLoading);
+		TextView vText = (TextView) mMealView.findViewById(R.id.txtMealClickToRate);
+		
 		// show loading
-		ProgressBar vLoading = (ProgressBar) mMealView.findViewById(R.id.pgbMealLoading);		
+		vRating.setVisibility(View.GONE);
 		vLoading.setVisibility(View.VISIBLE);
+		vText.setVisibility(View.GONE);
 	}
 	
 	@Override
@@ -52,6 +59,7 @@ public class AsyncRatingsLoader extends AsyncTask<Meal, Void, Integer> {
 		// get widgets
 		RatingBar vRating = (RatingBar) mMealView.findViewById(R.id.ratMealRating);
 		ProgressBar vLoading = (ProgressBar) mMealView.findViewById(R.id.pgbMealLoading);
+		TextView vText = (TextView) mMealView.findViewById(R.id.txtMealClickToRate);
 		
 		// show result
 		vLoading.setVisibility( View.GONE );
@@ -60,6 +68,8 @@ public class AsyncRatingsLoader extends AsyncTask<Meal, Void, Integer> {
 			
 			vRating.setRating( (float) rating );
 			vRating.setVisibility( View.VISIBLE );
+		} else {
+			vText.setVisibility(View.VISIBLE);
 		}
 		
 	}

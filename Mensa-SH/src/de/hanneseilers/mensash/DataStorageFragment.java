@@ -40,14 +40,4 @@ public class DataStorageFragment extends Fragment {
 		return mData.get(aKey);
 	}
 	
-	/**
-	 * Deletes every stored object, that is the same like the one stored for the key parameter.
-	 * @param aKey	{@link String} key.
-	 */
-	public void deleteData(String aKey){
-		if( mData.containsKey(aKey) ){
-			mData.remove( mData.get(aKey) );
-		}
-	}
-	
 }

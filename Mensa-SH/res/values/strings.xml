@@ -16,6 +16,7 @@
     <string name="navigation_this_week">This week</string>
     <string name="navigation_next_week">Next week</string>
     <string name="rating">Rating</string>
+    <string name="rating_click_to_rate">Click to rate</string>
     <string name="rating_submit_success">Your rating was successfully submitted.</string>
     <string name="rating_submit_fail">Failed to submit your rating.</string>
     <string name="tab_none">None</string>

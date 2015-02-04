@@ -14,16 +14,18 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int background_white=0x7f050007;
+        public static final int background_white=0x7f050009;
         public static final int blue=0x7f050000;
         public static final int blue_light=0x7f050001;
-        public static final int button=0x7f050008;
-        public static final int font_dark=0x7f050005;
-        public static final int font_light=0x7f050006;
+        public static final int button=0x7f05000a;
+        public static final int font_dark=0x7f050007;
+        public static final int font_light=0x7f050008;
+        public static final int gray=0x7f050003;
+        public static final int gray_background=0x7f050004;
         public static final int green=0x7f050002;
-        public static final int highlight_gray=0x7f050003;
-        public static final int highlight_gray_light=0x7f050004;
-        public static final int selectable_item=0x7f050009;
+        public static final int highlight_gray=0x7f050005;
+        public static final int highlight_gray_light=0x7f050006;
+        public static final int selectable_item=0x7f05000b;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -40,10 +42,12 @@ public final class R {
          https://developer.android.com/design/patterns/navigation-drawer.html
 
 
+
     
          */
         public static final int general_padding=0x7f060002;
         public static final int meal_icon_height=0x7f060006;
+        public static final int meal_margin_bottom=0x7f060007;
         public static final int navigation_drawer_width=0x7f060003;
         public static final int navigation_header_padding=0x7f060004;
         public static final int navigation_text_padding=0x7f060005;
@@ -65,31 +69,32 @@ public final class R {
         public static final int selectable_item=0x7f02000d;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a001a;
+        public static final int action_settings=0x7f0a001b;
         public static final int btnNextWeek=0x7f0a0009;
         public static final int btnThisWeek=0x7f0a0008;
         public static final int container=0x7f0a0001;
         public static final int divLoading=0x7f0a000b;
-        public static final int divMealInfo=0x7f0a0012;
-        public static final int divNavigationCity=0x7f0a0014;
-        public static final int divNavigationMensa=0x7f0a0016;
+        public static final int divMealInfo=0x7f0a0013;
+        public static final int divNavigationCity=0x7f0a0015;
+        public static final int divNavigationMensa=0x7f0a0017;
         public static final int drawer_layout=0x7f0a0000;
         public static final int imgLoading=0x7f0a000c;
-        public static final int imgMensaLunchTime=0x7f0a0019;
-        public static final int lblNavigationCity=0x7f0a0013;
-        public static final int lblNavigationMensa=0x7f0a0015;
+        public static final int imgMensaLunchTime=0x7f0a001a;
+        public static final int lblNavigationCity=0x7f0a0014;
+        public static final int lblNavigationMensa=0x7f0a0016;
         public static final int navigation_drawer=0x7f0a0002;
         public static final int pager=0x7f0a000a;
         public static final int pgbDialogLunchTime=0x7f0a0003;
-        public static final int pgbMealLoading=0x7f0a0010;
-        public static final int pgbNavigationLoading=0x7f0a0017;
+        public static final int pgbMealLoading=0x7f0a0011;
+        public static final int pgbNavigationLoading=0x7f0a0018;
         public static final int ratMealRating=0x7f0a000f;
         public static final int ratRating=0x7f0a0006;
         public static final int txtDialogLunchTime=0x7f0a0004;
         public static final int txtLoading=0x7f0a000d;
+        public static final int txtMealClickToRate=0x7f0a0010;
         public static final int txtMealName=0x7f0a000e;
-        public static final int txtMealPrice=0x7f0a0011;
-        public static final int txtMensaName=0x7f0a0018;
+        public static final int txtMealPrice=0x7f0a0012;
+        public static final int txtMensaName=0x7f0a0019;
         public static final int txtRatingDisclaimer=0x7f0a0007;
         public static final int txtRatingMeal=0x7f0a0005;
     }
@@ -111,11 +116,11 @@ public final class R {
         public static final int app_name=0x7f070000;
         public static final int cancel=0x7f070002;
         public static final int close=0x7f070003;
-        public static final int date_format_pattern=0x7f070012;
+        public static final int date_format_pattern=0x7f070013;
         /**  DISCLAIMER 
          */
-        public static final int disclaimer=0x7f070013;
-        public static final int disclaimer_text=0x7f070014;
+        public static final int disclaimer=0x7f070014;
+        public static final int disclaimer_text=0x7f070015;
         public static final int img_description_loading=0x7f070005;
         public static final int img_description_lunch_time=0x7f070006;
         public static final int loading=0x7f070007;
@@ -126,19 +131,20 @@ public final class R {
         public static final int navigation_next_week=0x7f07000d;
         public static final int navigation_this_week=0x7f07000c;
         public static final int rating=0x7f07000e;
-        public static final int rating_submit_fail=0x7f070010;
-        public static final int rating_submit_success=0x7f07000f;
-        public static final int setting_saved_mensa=0x7f070017;
+        public static final int rating_click_to_rate=0x7f07000f;
+        public static final int rating_submit_fail=0x7f070011;
+        public static final int rating_submit_success=0x7f070010;
+        public static final int setting_saved_mensa=0x7f070018;
         public static final int settings=0x7f070001;
         /**  Shared prefernces key, do not modify in translations 
          */
-        public static final int settings_cache_cleared_last=0x7f070015;
-        public static final int settings_saved_city=0x7f070016;
-        public static final int storage_locations=0x7f07001a;
-        public static final int storage_meals=0x7f070018;
-        public static final int storage_mensa=0x7f070019;
+        public static final int settings_cache_cleared_last=0x7f070016;
+        public static final int settings_saved_city=0x7f070017;
+        public static final int storage_locations=0x7f07001b;
+        public static final int storage_meals=0x7f070019;
+        public static final int storage_mensa=0x7f07001a;
         public static final int submit=0x7f070004;
-        public static final int tab_none=0x7f070011;
+        public static final int tab_none=0x7f070012;
     }
     public static final class style {
         /** 
@@ -153,18 +159,19 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080006;
+        public static final int AppBaseTheme=0x7f080007;
         /**  ActionBar styles 
          */
-        public static final int MensaSHActionBar=0x7f080008;
+        public static final int MensaSHActionBar=0x7f080009;
         /**  the theme applied to the application or activity 
          */
-        public static final int MensaSHActionBarTheme=0x7f080007;
-        public static final int naviagtion_header=0x7f080003;
-        public static final int navigation_container=0x7f080004;
-        public static final int navigation_item=0x7f080005;
+        public static final int MensaSHActionBarTheme=0x7f080008;
+        public static final int naviagtion_header=0x7f080004;
+        public static final int navigation_container=0x7f080005;
+        public static final int navigation_item=0x7f080006;
         public static final int text_view=0x7f080000;
-        public static final int text_view_button=0x7f080002;
+        public static final int text_view_button=0x7f080003;
         public static final int text_view_small=0x7f080001;
+        public static final int text_view_small_info=0x7f080002;
     }
 }
