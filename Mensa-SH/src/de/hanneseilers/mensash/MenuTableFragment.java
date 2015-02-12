@@ -84,7 +84,7 @@ public class MenuTableFragment extends Fragment implements
 	 * Enable loading animation
 	 * @param loading	set {@code true} to enable and {@code false} to disable loading animation.
 	 */
-	private void setLoading(boolean loading){
+	public void setLoading(boolean loading){
 		if( loading ){
 			pager.setVisibility(View.GONE);
 			divLoading.setVisibility(View.VISIBLE);

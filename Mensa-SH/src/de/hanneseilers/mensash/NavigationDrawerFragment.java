@@ -57,9 +57,6 @@ public class NavigationDrawerFragment extends Fragment implements
 		lblNavigationCity.setOnClickListener(this);
 		lblNavigationMensa.setOnClickListener(this);
 		
-		// set drawer toggle
-		
-		
 		return vView;
 	}
 	
@@ -75,9 +72,13 @@ public class NavigationDrawerFragment extends Fragment implements
 		for( String vCity : aLocations.keySet() ){
 			TextView vTextView	 = (TextView) getActivity().getLayoutInflater()
 					.inflate(R.layout.navigation_city, null);
-			vTextView.setText(vCity);
-			vTextView.setOnClickListener(this);
-			divNavigationCity.addView(vTextView);
+			try{
+				vTextView.setText(vCity);
+				vTextView.setOnClickListener(this);
+				divNavigationCity.addView(vTextView);
+			} catch(NullPointerException e){
+				e.printStackTrace();
+			}
 		}
 		
 		// show elements

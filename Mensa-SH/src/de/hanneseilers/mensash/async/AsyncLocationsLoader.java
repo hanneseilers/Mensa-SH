@@ -15,7 +15,7 @@ import android.os.AsyncTask;
  *
  */
 public class AsyncLocationsLoader extends AsyncTask<Void, Void, List<Mensa>> {
-
+	
 	@Override
 	@SuppressWarnings("unchecked")
 	protected List<Mensa> doInBackground(Void... params) {
@@ -41,6 +41,7 @@ public class AsyncLocationsLoader extends AsyncTask<Void, Void, List<Mensa>> {
 	protected void onPostExecute(List<Mensa> result) {
 		if( result != null ){
 			MainActivity.getInstance().setMensaLocations(result);
+			MainActivity.getInstance().getMenuTableFragment().setLoading(false);
 		}
 	}
 	

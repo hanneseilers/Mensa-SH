@@ -26,7 +26,7 @@ public class MainActivity extends FragmentActivity {
 	
 	private static MainActivity INSTANCE = null;
 	
-	private DrawerLayout mDrawerLayout;	
+	private DrawerLayout mDrawerLayout;
 	private NavigationDrawerFragment mNavigationDrawer;
 	private MenuTableFragment mMenuTableFragment;
 	
