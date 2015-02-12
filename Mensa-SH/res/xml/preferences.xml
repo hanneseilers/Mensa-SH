@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/preferences_category_cache_title" >
+        <ListPreference
+            android:defaultValue="86400000"
+            android:entries="@array/preferences_cache_timeout"
+            android:entryValues="@array/preferences_cache_timeout_values"
+            android:key="@string/settings_cache_timeout"
+            android:summary="@string/preferences_cache_timeout_describtion"
+            android:title="@string/preferences_cache_timeout_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

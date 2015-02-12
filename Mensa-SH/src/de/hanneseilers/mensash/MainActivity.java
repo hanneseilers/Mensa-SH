@@ -13,8 +13,10 @@ import de.mensa.sh.core.Cache;
 import de.mensa.sh.core.Mensa;
 import de.mensa.sh.core.Settings;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings.Secure;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -53,6 +55,10 @@ public class MainActivity extends FragmentActivity {
 		Settings.sh_mensa_db_api_url = "http://mensash.private-factory.de/api.php";
 		
 		// clear cached file
+		SharedPreferences vPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+		long vCacheTimeout = Long.parseLong(
+				vPreferences.getString( getString(R.string.settings_cache_timeout), "86400000") );
+		Cache.setTimeout(vCacheTimeout);
 		clearCachedFiles(false);
 
 		// set caching settings
@@ -73,6 +79,14 @@ public class MainActivity extends FragmentActivity {
 		
 		// load locations
 		(new AsyncLocationsLoader()).execute();
+	}
+	
+	/**
+	 * Shows app prefernces
+	 */
+	public void showPreferences(){
+		Intent vIntent = new Intent(this, PreferenceActivity.class);
+		startActivity(vIntent);
 	}
 	
 	/**

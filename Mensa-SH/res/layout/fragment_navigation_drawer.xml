@@ -11,8 +11,16 @@
         android:orientation="vertical" >
 
         <TextView
+            android:id="@+id/txtNavigationSettings"
+            style="@style/navigation_button"
+            android:layout_marginBottom="@dimen/navigation_button_margin_bottom"
+            android:drawableEnd="@drawable/ic_action_settings"
+            android:drawableRight="@drawable/ic_action_settings"
+            android:text="@string/settings" />
+
+        <TextView
             android:id="@+id/lblNavigationCity"
-            style="@style/naviagtion_header"
+            style="@style/navigation_header"
             android:text="@string/navigation_header_city"
             android:visibility="gone" />
 
@@ -23,7 +31,7 @@
 
         <TextView
             android:id="@+id/lblNavigationMensa"
-            style="@style/naviagtion_header"
+            style="@style/navigation_header"
             android:text="@string/navigation_header_mensa"
             android:visibility="gone" />
 

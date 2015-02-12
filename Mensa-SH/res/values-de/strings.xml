@@ -5,6 +5,7 @@
     <string name="cancel">Abbrechen</string>
     <string name="close">Schließen</string>
     <string name="submit">Absenden</string>
+    <string name="settings">Einstellungen</string>
     <string name="img_description_loading">laden</string>
     <string name="img_description_lunch_time">Öffnungszeiten</string>
     <string name="loading">lade&#8230;</string>
@@ -22,11 +23,16 @@
     <string name="disclaimer">Datenschutzbestimmung</string>
     <string name="disclaimer_text">Durch das Senden einer Bewertung für ein Gericht stimmst du zu, dass diese App die Seriennummern deines Gerätes (ein anonymisierter Hash-Wert aus Geräte ID, Android ID und SIM Karten ID) zusammen mit deiner Bewertung an die Server des App Besitzers übertragen werden.
         Deine Daten werden nicht an Dritte weitergegeben und nur für statistische Auswertungen genutzt.</string>
+    <!-- App preferences -->
+    <string name="preferences_category_cache_title">Daten caching</string>
+    <string name="preferences_cache_timeout_title">Cache timeout</string>
+    <string name="preferences_cache_timeout_describtion">Zeit nach welcher die Mensa-Daten online aktualisiert werden sollen.</string>
 
     <!-- Shared prefernces key, do not modify in translations -->
     <string name="settings_cache_cleared_last">SETTINGS_CACHE_CLEARED_LAST</string>
     <string name="settings_saved_city">SETTINGS_SAVED_CITY</string>
     <string name="setting_saved_mensa">SETTINGS_SAVED_MENSA</string>
+    <string name="settings_cache_timeout">SETTINGS_CACHE_TIMEOUT</string>
     <string name="storage_meals">STORAGE_MEALS</string>
     <string name="storage_mensa">STORAGE_MENSA</string>
     <string name="storage_locations">STORAGE_LOCATIONS</string>

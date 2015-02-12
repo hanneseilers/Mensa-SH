@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App preferences -->
+    <string-array name="preferences_cache_timeout">
+        <item name="1">1 day</item>
+        <item name="3">3 days</item>
+        <item name="7">7 days</item>
+    </string-array>
+    <string-array name="preferences_cache_timeout_values">
+        <item name="1">86400000</item>
+        <item name="3">259200000</item>
+        <item name="7">604800000</item>
+    </string-array>
+
+</resources>

@@ -28,6 +28,7 @@ import android.widget.TextView;
 public class NavigationDrawerFragment extends Fragment implements
 	OnClickListener{
 	
+	private TextView txtNavigationSettings;
 	private TextView lblNavigationCity;
 	private TextView lblNavigationMensa;
 	private LinearLayout divNavigationCity;
@@ -47,6 +48,7 @@ public class NavigationDrawerFragment extends Fragment implements
 				R.layout.fragment_navigation_drawer, container, false);	
 		
 		// get widgets
+		txtNavigationSettings = (TextView) vView.findViewById(R.id.txtNavigationSettings);
 		lblNavigationCity = (TextView) vView.findViewById(R.id.lblNavigationCity);
 		lblNavigationMensa = (TextView) vView.findViewById(R.id.lblNavigationMensa);
 		divNavigationCity = (LinearLayout) vView.findViewById(R.id.divNavigationCity);
@@ -54,6 +56,7 @@ public class NavigationDrawerFragment extends Fragment implements
 		pgbNavigationLoading = (ProgressBar) vView.findViewById(R.id.pgbNavigationLoading);
 		
 		// set listener
+		txtNavigationSettings.setOnClickListener(this);
 		lblNavigationCity.setOnClickListener(this);
 		lblNavigationMensa.setOnClickListener(this);
 		
@@ -223,7 +226,11 @@ public class NavigationDrawerFragment extends Fragment implements
 	@Override
 	public void onClick(View v) {
 		
-		if( v == lblNavigationCity ){
+		if( v == txtNavigationSettings ){
+			
+			MainActivity.getInstance().showPreferences();
+			
+		} else if( v == lblNavigationCity ){
 			
 			if( divNavigationCity.getVisibility() == View.GONE ){
 				showCityList(true);

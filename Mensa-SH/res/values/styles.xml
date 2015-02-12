@@ -21,7 +21,15 @@
         <item name="android:padding">@dimen/general_padding</item>
     </style>
 
-    <style name="naviagtion_header" parent="@android:style/TextAppearance.Medium">
+    <style name="navigation_header_apperance" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@color/blue</item>
+        <item name="android:textColor">@color/font_light</item>
+    </style>
+
+    <style name="navigation_header" parent="@style/navigation_header_apperance">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
@@ -41,6 +49,10 @@
 
     <style name="navigation_item" parent="@style/text_view">
         <item name="android:padding">@dimen/navigation_text_padding</item>
+    </style>
+
+    <style name="navigation_button" parent="@style/navigation_header_apperance">
+        <item name="android:padding">@dimen/navigation_button_padding</item>
     </style>
 
 </resources>
